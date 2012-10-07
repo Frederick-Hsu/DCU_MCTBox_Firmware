@@ -72,6 +72,15 @@
 	#define DB22	(PDLL.7)
 	#define DB23	(PDLH.6)
 	
+	#define A0	(PCM.1)
+	#define A1	(PCM.0)
+	#define A2	(PCS.1)
+	#define A3	(PCS.0)
+	#define A4	(P9H.5)
+	#define A5	(P9H.4)
+	#define A6	(P9H.3)
+	#define A7	(P9H.2)
+	
 	
 	typedef enum CONTROL_PIN_LEVEL
 	{

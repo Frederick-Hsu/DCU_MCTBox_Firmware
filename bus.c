@@ -12,9 +12,10 @@
  *
  ********************************************************************************************************/
 
+#include <string.h>
 #include "bus.h"
 #include "serial.h"
-#include <string.h>
+#include "port.h"
 
 #pragma ioreg
 	/*******************************************************************************/
@@ -229,27 +230,55 @@ void Write_Address_Bus(BYTE btAddrBus_bit7_0)
  *
  */
 {
-	PCM.1 = (btAddrBus_bit7_0 & 0x01);		// PCM1 ----- bit 0
-	PCM.0 = (btAddrBus_bit7_0 & 0x02) >> 1;		// PCM0 ----- bit 1
-	PCS.1 = (btAddrBus_bit7_0 & 0x04) >> 2;		// PCS1 ----- bit 2
-	PCS.0 = (btAddrBus_bit7_0 & 0x08) >> 3;		// PCS0 ----- bit 3
-	P9H.5 = (btAddrBus_bit7_0 & 0x10) >> 4;		// P913 ----- bit 4
-	P9H.4 = (btAddrBus_bit7_0 & 0x20) >> 5;		// P912 ----- bit 5
-	P9H.3 = (btAddrBus_bit7_0 & 0x40) >> 6;		// P911 ----- bit 6
-	P9H.2 = (btAddrBus_bit7_0 & 0x80) >> 7;		// P910 ----- bit 7
+	/*
+	 * First of all, you must change these ports to output mode by software
+	 */
+	PORT_ChangePCM1Output(0);	// For A0
+	PORT_ChangePCM0Output(0);	//     A1
+	PORT_ChangePCS1Output(0);	//     A2
+	PORT_ChangePCS0Output(0);	//     A3
+	PORT_ChangeP913Output(0);	//     A4
+	PORT_ChangeP912Output(0);	//     A5
+	PORT_ChangeP911Output(0);	//     A6
+	PORT_ChangeP910Output(0);	//     A7
+	
+	/*
+	 * Start to set the value for corresponding port.
+	 */	
+	A0 = (btAddrBus_bit7_0 & 0x01);		// PCM1 ----- bit 0
+	A1 = (btAddrBus_bit7_0 & 0x02) >> 1;		// PCM0 ----- bit 1
+	A2 = (btAddrBus_bit7_0 & 0x04) >> 2;		// PCS1 ----- bit 2
+	A3 = (btAddrBus_bit7_0 & 0x08) >> 3;		// PCS0 ----- bit 3
+	A4 = (btAddrBus_bit7_0 & 0x10) >> 4;		// P913 ----- bit 4
+	A5 = (btAddrBus_bit7_0 & 0x20) >> 5;		// P912 ----- bit 5
+	A6 = (btAddrBus_bit7_0 & 0x40) >> 6;		// P911 ----- bit 6
+	A7 = (btAddrBus_bit7_0 & 0x80) >> 7;		// P910 ----- bit 7
 	return;
 }
 
 BYTE Read_Address_Bus()
 {
-	g_btAddressBus_Bit7_0 = ((P9H.2 & 0x01) << 7) + 
-				((P9H.3 & 0x01) << 6) +
-				((P9H.4 & 0x01) << 5) +
-				((P9H.5 & 0x01) << 4) +
-				((PCS.0 & 0x01) << 3) +
-				((PCS.1 & 0x01) << 2) +
-				((PCM.0 & 0x01) << 1) +
-				((PCM.1 & 0x01));
+	/*
+	 * Change these ports to input mode by software
+	 */
+	PORT_ChangePCM1Input();		// For A0
+	PORT_ChangePCM0Input();		//     A1
+	PORT_ChangePCS1Input();		//     A2
+	PORT_ChangePCS0Input();		//     A3
+	PORT_ChangeP913Input(0);	//     A4
+	PORT_ChangeP912Input(0);	//     A5
+	PORT_ChangeP911Input(0);	//     A6
+	PORT_ChangeP910Input(0);	//     A7
+	
+	
+	g_btAddressBus_Bit7_0 = ((A7 & 0x01) << 7) + 
+				((A6 & 0x01) << 6) +
+				((A5 & 0x01) << 5) +
+				((A4 & 0x01) << 4) +
+				((A3 & 0x01) << 3) +
+				((A2 & 0x01) << 2) +
+				((A1 & 0x01) << 1) +
+				((A0 & 0x01));
 	
 	return g_btAddressBus_Bit7_0;
 }
@@ -273,18 +302,27 @@ void Set_Data_Bus_bit7_0(BYTE btLowByte_Value)
 	}
 	else
 	{
-		// LSB : bit0 : P70
-		P7L.0 = (btLowByte_Value & 0x01);
+		PORT_ChangeP70Output(0);	// For	DB00
+		PORT_ChangeP71Output(0);	//	DB01
+		PORT_ChangeP72Output(0);	//	DB02
+		PORT_ChangeP73Output(0);	//	DB03
+		PORT_ChangeP74Output(0);	//	DB04
+		PORT_ChangeP75Output(0);	//	DB05
+		PORT_ChangeP76Output(0);	//	DB06
+		PORT_ChangeP77Output(0);	//	DB07
 		
-		P7L.1 = (btLowByte_Value & 0x02) >> 1;
-		P7L.2 = (btLowByte_Value & 0x04) >> 2;
-		P7L.3 = (btLowByte_Value & 0x08) >> 3;
-		P7L.4 = (btLowByte_Value & 0x10) >> 4;
-		P7L.5 = (btLowByte_Value & 0x20) >> 5;
-		P7L.6 = (btLowByte_Value & 0x40) >> 6;
+		// LSB : bit0 : P70
+		DB00 = (btLowByte_Value & 0x01);
+		
+		DB01 = (btLowByte_Value & 0x02) >> 1;
+		DB02 = (btLowByte_Value & 0x04) >> 2;
+		DB03 = (btLowByte_Value & 0x08) >> 3;
+		DB04 = (btLowByte_Value & 0x10) >> 4;
+		DB05 = (btLowByte_Value & 0x20) >> 5;
+		DB06 = (btLowByte_Value & 0x40) >> 6;
 		
 		// MSB : bit7 : P77
-		P7L.7 = (btLowByte_Value & 0x80) >> 7;
+		DB07 = (btLowByte_Value & 0x80) >> 7;
 	}
 	return;
 }
@@ -308,18 +346,27 @@ void Set_Data_Bus_bit15_8(BYTE btMiddleByte_Value)
 	}
 	else
 	{
-		// LSB : bit8 : P78
-		P7H.0 = (btMiddleByte_Value & 0x01);
+		PORT_ChangeP78Output(0);
+		PORT_ChangeP79Output(0);
+		PORT_ChangeP710Output(0);
+		PORT_ChangeP711Output(0);
+		PORT_ChangeP712Output(0);
+		PORT_ChangeP713Output(0);
+		PORT_ChangeP714Output(0);
+		PORT_ChangeP715Output(0);
 		
-		P7H.1 = (btMiddleByte_Value & 0x02) >> 1;
-		P7H.2 = (btMiddleByte_Value & 0x04) >> 2;
-		P7H.3 = (btMiddleByte_Value & 0x08) >> 3;
-		P7H.4 = (btMiddleByte_Value & 0x10) >> 4;
-		P7H.5 = (btMiddleByte_Value & 0x20) >> 5;
-		P7H.6 = (btMiddleByte_Value & 0x40) >> 6;
+		// LSB : bit8 : P78
+		DB08 = (btMiddleByte_Value & 0x01);
+		
+		DB09 = (btMiddleByte_Value & 0x02) >> 1;
+		DB10 = (btMiddleByte_Value & 0x04) >> 2;
+		DB11 = (btMiddleByte_Value & 0x08) >> 3;
+		DB12 = (btMiddleByte_Value & 0x10) >> 4;
+		DB13 = (btMiddleByte_Value & 0x20) >> 5;
+		DB14 = (btMiddleByte_Value & 0x40) >> 6;
 		
 		// MSB : bit15 : P715
-		P7H.7 = (btMiddleByte_Value & 0x80) >> 7;
+		DB15 = (btMiddleByte_Value & 0x80) >> 7;
 	}
 	return;
 }
@@ -334,10 +381,11 @@ void Set_Data_Bus_bit23_16(BYTE btHighByte_Value)
  * ------+------+------+------+-------+-------+-------+-------+
  */
 {
+	unsigned char sUART2_Send_Mesg[512] = "Data bus value entered error.\n";
 	RW = HIGH;
 	if (btHighByte_Value > 0xFF)
 	{
-		// UARTD2_SendData("Data bus value entered error.\n", strlen("Data bus value entered error.\n")*sizeof(char));
+		UARTD2_SendData(sUART2_Send_Mesg, strlen("Data bus value entered error.\n")*sizeof(char));
 		return;
 	}
 	else
@@ -357,20 +405,27 @@ void Set_Data_Bus_bit23_16(BYTE btHighByte_Value)
 		 * ------+------+-------+-------+-------+-------+------+------+------+------+------+------+------+------+------+------+
 		 */
 		 
-		 
+		PORT_ChangePDL13Output(0);
+		PORT_ChangePDL12Output(0);
+		PORT_ChangePDL11Output(0);
+		PORT_ChangePDL10Output(0);
+		PORT_ChangePDL9Output(0);
+		PORT_ChangePDL8Output(0);
+		PORT_ChangePDL7Output(0);
+		PORT_ChangePDL6Output(0);
 		 
 		// LSB : bit16 : PDL13
-		PDLH.5 = (btHighByte_Value & 0x01);		// PDL13
+		DB16 = (btHighByte_Value & 0x01);		// PDL13
 		
-		PDLH.4 = (btHighByte_Value & 0x02) >> 1;	// PDL12
-		PDLH.3 = (btHighByte_Value & 0x04) >> 2;	// PDL11
-		PDLH.2 = (btHighByte_Value & 0x08) >> 3;	// PDL10
-		PDLH.1 = (btHighByte_Value & 0x10) >> 4;	// PDL9
-		PDLH.0 = (btHighByte_Value & 0x20) >> 5;	// PDL8
-		PDLL.7 = (btHighByte_Value & 0x40) >> 6;	// PDL7
+		DB17 = (btHighByte_Value & 0x02) >> 1;	// PDL12
+		DB18 = (btHighByte_Value & 0x04) >> 2;	// PDL11
+		DB19 = (btHighByte_Value & 0x08) >> 3;	// PDL10
+		DB20 = (btHighByte_Value & 0x10) >> 4;	// PDL9
+		DB21 = (btHighByte_Value & 0x20) >> 5;	// PDL8
+		DB22 = (btHighByte_Value & 0x40) >> 6;	// PDL7
 		
 		// MSB : bit23 : PDL6
-		PDLL.6 = (btHighByte_Value & 0x80) >> 7;	// PDL6
+		DB23 = (btHighByte_Value & 0x80) >> 7;	// PDL6
 	}
 	return;
 }
