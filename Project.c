@@ -25,6 +25,7 @@
 // #include "serial.h"
 #include "version.h"
 
+
 void PrintOut_Project_Information()
 {
 	UARTD2_SendData(THIS_PROJECT, strlen(THIS_PROJECT)*sizeof(char));

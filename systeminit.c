@@ -75,6 +75,7 @@ void  SystemInit(void)
 	CG_ReadResetSource();
 	/*Initializes the I/O ports*/
 	PORT_Init();
+	
 	/*Initializes UARTD channel 0	*/
 	UARTD0_Init();
 	
@@ -98,6 +99,7 @@ void  SystemInit(void)
 	TAA1_Init();
 	/* PCL setting */
 	PCLM = CG_PCL_DISABLE;
+	
 	EI();	/* enable interrupt */
 }
 
