@@ -117,6 +117,7 @@ enum LEVEL
 #define	MD_NOMSG			(MD_ERRORBASE + 0x0C)	/* CAN message not received */
 #define	MD_BUSY				(MD_ERRORBASE + 0x0D)	/* busy */
 
+
 /*
 *******************************************************************************
 **  Function define

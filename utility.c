@@ -58,20 +58,20 @@ int Convert_Str_To_Int(char *sDigitString, long *lDestVal)
 /************************************************************************
  * Function name: Convert_Str_To_Int
  *
- * Purpose		: Convert the hex format or decimal format string into
+ * Purpose	: Convert the hex format or decimal format string into
  *				  integer value.
  *
  * IN argument	: sDigitString
  * OUT argument	: lDestVal
- * Returns		: error number
+ * Returns	: error number
  *
- * Caution		: This function can only support the hex and decimal format
- *				: IN argument, other formats (e.g. bin or octal) are not 
- *				: supported. 
- *				: and what's more important, the hex format argument must
- *				: be signed explicitly. for example : 0x5D, 69H, 0XFE, 80h,
- *				: otherwise, it could be treated as a decimal format or 
- *				: directly an error.
+ * Caution	: This function can only support the hex and decimal format
+ *		: IN argument, other formats (e.g. bin or octal) are not 
+ *		: supported. 
+ *		: and what's more important, the hex format argument must
+ *		: be signed explicitly. for example : 0x5D, 69H, 0XFE, 80h,
+ *		: otherwise, it could be treated as a decimal format or 
+ *		: directly an error.
  ************************************************************************/
 {
 	int iError = 0;
@@ -85,9 +85,9 @@ int Convert_Str_To_Int(char *sDigitString, long *lDestVal)
 	char cTempChar[2] = "";
 
 	if ( (strncmp(sDigitString, "0x", 2) == 0) || 
-		 (strncmp(sDigitString, "0X", 2) == 0) ||
-		 (strncmp(sDigitString+strlen(sDigitString)-1, "h", 1) == 0) ||
-		 (strncmp(sDigitString+strlen(sDigitString)-1, "H", 1) == 0)		// Explicit Hex format condition
+	     (strncmp(sDigitString, "0X", 2) == 0) ||
+	     (strncmp(sDigitString+strlen(sDigitString)-1, "h", 1) == 0) ||
+	     (strncmp(sDigitString+strlen(sDigitString)-1, "H", 1) == 0)		// Explicit Hex format condition
 	   )
 	{
 		for (i=strlen(sDigitString); i>0; i--)
@@ -100,8 +100,8 @@ int Convert_Str_To_Int(char *sDigitString, long *lDestVal)
 					break;
 				}
 				if ( ((cTempChar[0] >= '0') && (cTempChar[0] <= '9')) ||
-					 ((cTempChar[0] >= 'A') && (cTempChar[0] <= 'F')) ||
-					 ((cTempChar[0] >= 'a') && (cTempChar[0] <= 'f')) )
+				     ((cTempChar[0] >= 'A') && (cTempChar[0] <= 'F')) ||
+				     ((cTempChar[0] >= 'a') && (cTempChar[0] <= 'f')) )
 				{
 					// lTempValue += atoi(cTempChar) * power(16, (i-strlen(sDigitString))*(-1));
 					lTempValue += Convert_Hex_Char_To_Int(cTempChar[0])* power(16, ((i-strlen(sDigitString))*(-1)-iLeapStep)); 

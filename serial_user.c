@@ -44,6 +44,9 @@
 /* End user code for include definition. Do not edit comment generated here */
 #include "user_define.h"
 #include "bus.h"
+#include "protocol\Parse_UART2_Message.h"
+
+#include <string.h>
 
 /*
 *******************************************************************************
@@ -57,9 +60,14 @@ extern	volatile USHORT	gUartd0RxCnt;
 extern	volatile USHORT	gUartd0RxLen;
 extern	volatile UCHAR*	gpUartd2TxAddress;
 extern	volatile USHORT	gUartd2TxCnt;
-extern	volatile UCHAR*	gpUartd2RxAddress;
+// extern	volatile UCHAR*	gpUartd2RxAddress;
+extern UCHAR* gpUartd2RxAddress;	// Modified by XUZAN@2012-11-06
+
+
 extern	volatile USHORT	gUartd2RxCnt;
-extern	volatile USHORT	gUartd2RxLen;
+// extern	volatile USHORT	gUartd2RxLen;
+extern USHORT gUartd2RxLen;
+
 extern	volatile UCHAR*	gpUartd4TxAddress;
 extern	volatile USHORT	gUartd4TxCnt;
 extern	volatile UCHAR*	gpUartd4RxAddress;
@@ -68,6 +76,8 @@ extern	volatile USHORT	gUartd4RxLen;
 /* Start user code for global definition. Do not edit comment generated here */
 /* End user code for global definition. Do not edit comment generated here */
 
+UCHAR sTemp[1024] = {0};
+int iCnt = 0;
 
 /*
 **-----------------------------------------------------------------------------
@@ -220,6 +230,12 @@ void UARTD0_ErrorCallback(UCHAR err_type)
 	/* End user code. Do not edit comment generated here */
 }
 
+
+
+
+
+
+// START : UART2_MODULE ==========================================================================================================================================
 /*
 **-----------------------------------------------------------------------------
 **
@@ -236,28 +252,64 @@ void UARTD0_ErrorCallback(UCHAR err_type)
 */
 __interrupt void MD_INTUD2R(void)
 {
-	UCHAR	rx_data;
+	#if 1
+		UCHAR	rx_data;
+		
+		
+		
 
-	rx_data = UD2RX;
-	DOUT00 = 1;	// Just for test
-	if (gUartd2RxLen > gUartd2RxCnt)
-	{
-		*gpUartd2RxAddress = rx_data;
-		gpUartd2RxAddress++;
-		gUartd2RxCnt++;
-		if (gUartd2RxLen == gUartd2RxCnt)
+		/*
+		 * To test the UART data receiving function.
+		 * Added by XU ZAN@2012-11-04
+		 */
+		// int i = 0;
+		// UCHAR rxbuf[2048] = {0};	// Added by XUZAN
+		
+		rx_data = UD2RX;
+		sTemp[iCnt] = rx_data;
+		iCnt++;
+		
+		// UARTD2_ReceiveData(rxbuf, 1);	// Added by XUZAN
+		
+		// gUartd2RxLen = 2;
+		
+		if (gUartd2RxLen > gUartd2RxCnt)
+		// if (2 > gUartd2RxCnt)
 		{
-			UARTD2_ReceiveEndCallback( );
+			*gpUartd2RxAddress = rx_data;
+			gpUartd2RxAddress++;
+			gUartd2RxCnt++;
+			
+			if (gUartd2RxLen == gUartd2RxCnt)
+			{
+				UARTD2_ReceiveEndCallback( );
+			}
+			else
+			{
+				/* NOT RUN */
+			}
 		}
 		else
 		{
+			// i = 10;
+			// return;
 			/* NOT RUN */
 		}
-	}
-	else
-	{
-		/* NOT RUN */
-	}
+	#else
+		
+		UCHAR sRxBuf[1024] = {0};
+		USHORT nRxBufLen;
+		MD_STATUS Status = MD_OK;
+		
+		Status = UARTD2_ReceiveData(sRxBuf, 256);
+	#endif
+	
+	UD2RIF = 0;
+	UD2RXE = 0;
+	UD2RXE = 1;
+	
+	return;
+	
 }
 
 /*
@@ -328,17 +380,12 @@ __interrupt void MD_INTUD2S(void)
 */
 void UARTD2_ReceiveEndCallback(void)
 {
-	int i = 0;
 	/* Start user code. Do not edit comment generated here */
+	int iResult = -1;
+	char *sUART2RxMesg;
+	memcpy(sUART2RxMesg, gpUartd2RxAddress, strlen(gpUartd2RxAddress)*sizeof(char));
+	iResult = Parse_UART2_Received_Message(sUART2RxMesg);
 	/* End user code. Do not edit comment generated here */
-	DOUT00 = 1;
-	for (i = 0; i < 100000000; i++)
-	{
-		NOP();
-	}
-	DOUT00 = 0;
-	
-	// UARTD2_SendData(gpUartd2RxAddress, sizeof(gpUartd2RxAddress));
 }
 
 /*
@@ -380,6 +427,13 @@ void UARTD2_ErrorCallback(UCHAR err_type)
 	/* Start user code. Do not edit comment generated here */
 	/* End user code. Do not edit comment generated here */
 }
+// END : UART2_MODULE ==========================================================================================================================================
+
+
+
+
+
+
 
 /*
 **-----------------------------------------------------------------------------

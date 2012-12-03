@@ -46,7 +46,7 @@ void Control_Single_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSingleSwitchCHn)
 	CS0 = HIGH;
 }
 
-void Control_Multi_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSwitchCHi, ...)	// This function need to test for debug and optimization.
+void Control_Multi_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSwitchCHi, ...)	
 {
 	va_list ap;
 	PST_Access_Ctrl_SwitchRelayMatrix next = pSwitchCHi;

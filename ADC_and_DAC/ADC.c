@@ -17,7 +17,8 @@
 #pragma ioreg
 
 
-static const float fADC_Ref_Voltage = 2.5000f;
+static const float fADC_Ref_Voltage // = 2.5000f;	// The internal reference voltage inside chip AD976A
+				    = 10.0000f;		// 2.5V or 10.0V, which is correct?	Remarked by XUZAN@2012-10-25
 
 
 
@@ -149,74 +150,62 @@ void ADC_Acquiring_AnalogInputValue(E_ADC_CH 	eADC_CHn,
 		
 		iTempAdcInValue = Read_ADCInput_DataBus_from_DB15_to_DB00();
 	}
-	Disable_ADC_CHNL_Selector_Chip_ADG1208();
+	Disable_ADC_CHNL_Selector_Chip_ADG1208();	// Disable ADC
 	
 	*iAIN_Value = iTempAdcInValue;
 	return;
 }
 
 
-void ADC_Get_8CHs_AINValue(WORD wAIN_Value[])
+void ADC_Get_8CHs_AINValue(int iAIN_Value[])
 {
-	#if 0
 	int i = 0;
 	
-	Control_Port_Mutx_From_ADC_to_Switch(CONTROL_PIN_HIGH);
-	Control_Port_Mutx_From_ADC_to_DAC(CONTROL_PIN_HIGH);
+	/*
+	 * Shielding the influence on DAC and switch output
+	 */
+	CS0 = HIGH;
+	ENDA = HIGH;
 	
 	// Initialization
-	ENAD = LOW;
-	CON = HIGH;
-	BUSY = HIGH;
+	PORT_ChangePCM3Input();		// Change BUSY port to Input mode
 	
 	for (i=0; i<8; i++)
 	{
+		CON = HIGH;
 		Select_ADC_CHn_ON(i);
-		CON = LOW;	/* Pull low the CON pin. */
-		// Delay less than 83ns, and more than 50ns.
-		NOP();	// 1 assembly instruction will cost 1 clock cycle. 1 clock_cycle_time = 32.25ns
-		NOP();
-		BUSY = LOW;	/* Pull low the BUSY pin. */
-		NOP();
-		NOP();
-		NOP();
-		CON = HIGH;	/* Pull high the CON pin. */
 		
-		Precisely_Delay_Xus(4);
-		BUSY = HIGH;	/* Pull high the BUSY pin. */
+		CON = LOW;
+		NOP();
+		NOP();
+		NOP();
+		NOP();
+		CON = HIGH;
 		
-		NOP();
-		NOP();
-		NOP();
-		wAIN_Value[i] = Read_ADC_Output_Data_Bus();
-		
-		Precisely_Delay_Xus(2);	// Delay 2us, waiting for the next acquisition.
+		do
+		{
+			NOP();
+		}
+		while (BUSY != HIGH);
+		iAIN_Value[i] = Read_ADCInput_DataBus_from_DB15_to_DB00();
 	}
 	Disable_ADC_CHNL_Selector_Chip_ADG1208();
-	CON = HIGH;
-	BUSY = HIGH;
-	#endif
+	
+	return;
 }
 
 
 void Calculate_Analog_Input_Value_for_1Ch(E_ADC_CH 	eADC_CHn, 
 					  float 	*fAnalogInputValue)
 {
-	int wADCValue = 0;
+	int iADCValue = 0;
 	float fTempValue = 0.0000f;
 	
 	
-	ADC_Acquiring_AnalogInputValue(eADC_CHn, &wADCValue);
+	ADC_Acquiring_AnalogInputValue(eADC_CHn, &iADCValue);
 	
-	if ( ((wADCValue & 0x8000)>>15) == 0x0001 )	// Under this condition, ADC Value is negative, expressed in Binary 1 complement.
-	{
-		fTempValue = ((~wADCValue + 1) * fADC_Ref_Voltage)/power(2, 16);
-		fTempValue = (-1) * fTempValue;
-	}
-	else
-	{
-		fTempValue = wADCValue * fADC_Ref_Voltage / power(2, 16);
-	}
+	fTempValue = iADCValue*fADC_Ref_Voltage/power(2, 16);
+	
 	fAnalogInputValue = &fTempValue;
 	return;
 }
@@ -226,27 +215,14 @@ void Calculate_Analog_Input_Value_for_8Chs(float fAnalogInputValues8Chs[])
 {
 	int i = 0;
 	
-	WORD wTempADCValue[8] = {0x0000};
+	int iTempADCValue[8] = {0x0000};
 	float fTempValue[8] = {0.0000f};
 	
-	ADC_Get_8CHs_AINValue(wTempADCValue);
+	ADC_Get_8CHs_AINValue(iTempADCValue);
 	
 	for (i=0; i<8; i++)
 	{
-		if ( ((wTempADCValue[i] & 0x8000)>>15) == 0x0001 )
-		{
-			fTempValue[i] = ((~wTempADCValue[i] + 1) * fADC_Ref_Voltage)/power(2, 16);
-			fTempValue[i] = (-1)*fTempValue[i];
-		}
-		else
-		{
-			fTempValue[i] = wTempADCValue[i] * fADC_Ref_Voltage / power(2, 16);
-		}
-	}
-	
-	for (i=0; i<8; i++)
-	{
-		fAnalogInputValues8Chs[i] = fTempValue[i];
+		fAnalogInputValues8Chs[i] = fTempValue[i]*fADC_Ref_Voltage/power(2, 16);
 	}
 	
 	return;

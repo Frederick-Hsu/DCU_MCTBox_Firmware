@@ -51,7 +51,7 @@
 	void ADC_Acquiring_AnalogInputValue(E_ADC_CH 	eADC_CHn, 
 					    int 	*iAIN_Value);
 	
-	void ADC_Get_8CHs_AINValue(WORD wAIN_Value[]);
+	void ADC_Get_8CHs_AINValue(int iAIN_Value[]);
 	
 	void Calculate_Analog_Input_Value_for_1Ch(E_ADC_CH 	eADC_CHn, 
 						  float 	*fAnalogInputValue);

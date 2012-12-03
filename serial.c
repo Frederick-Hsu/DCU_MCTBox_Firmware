@@ -44,10 +44,12 @@ volatile UCHAR*	gpUartd0TxAddress;	/* uartd0 transmit buffer address */
 volatile USHORT	gUartd0TxCnt;	/* uartd0 transmit data number */
 volatile UCHAR*	gpUartd0RxAddress;	/* uartd0 receive buffer address */
 volatile USHORT	gUartd0RxCnt;	/* uartd0 receive data number */
-volatile USHORT	gUartd0RxLen;	/* uartd0 receive data length */
+// volatile USHORT	gUartd0RxLen = 2;	/* uartd0 receive data length */
+USHORT	gUartd0RxLen = 2;
 volatile UCHAR*	gpUartd2TxAddress;	/* uartd2 transmit buffer address */
 volatile USHORT	gUartd2TxCnt;	/* uartd2 transmit data number */
-volatile UCHAR*	gpUartd2RxAddress;	/* uartd2 receive buffer address */
+// volatile UCHAR*	gpUartd2RxAddress;	/* uartd2 receive buffer address */
+UCHAR*	gpUartd2RxAddress;
 volatile USHORT	gUartd2RxCnt;	/* uartd2 receive data number */
 volatile USHORT	gUartd2RxLen;	/* uartd2 receive data length */
 volatile UCHAR*	gpUartd4TxAddress;	/* uartd4 transmit buffer address */
@@ -244,7 +246,11 @@ MD_STATUS UARTD0_SendData(UCHAR* txbuf, USHORT txnum)
 }
 
 
-/* START : UART2_MODULE ==========================================================================================================================================*/
+
+
+
+
+// START : UART2_MODULE ==========================================================================================================================================
 /*
  * This UART2 is used to communicate with PC.
  * 
@@ -369,18 +375,37 @@ MD_STATUS UARTD2_ReceiveData(UCHAR* rxbuf, USHORT rxnum)
 */
 {
 	MD_STATUS status = MD_OK;
+	unsigned int i = 0;
 	
-	if (rxnum < 1)
-	{
-		status = MD_ARGERROR;
-	}
-	else
-	{
-		gUartd2RxCnt = 0;
-		gUartd2RxLen = rxnum;
-		gpUartd2RxAddress = rxbuf;
-		status = MD_OK;
-	}
+	#if 1
+		if (rxnum < 1)
+		{
+			status = MD_ARGERROR;
+		}
+		else
+		{
+			gUartd2RxCnt = 0;
+			gUartd2RxLen = rxnum;
+			// gpUartd2RxAddress = rxbuf;
+			status = MD_OK;
+		}
+	#else	
+		for (i=0; i<rxnum; i++)
+		{
+			if ( (UD2STR & 0x07) != 0x00 )
+			{
+				/*
+				 * Set the Rx error flag.
+				 */
+				UD2STR &= 0xF8;
+				status = MD_ARGERROR;
+			}
+			else
+			{
+				rxbuf[i] = UD2RX;
+			}
+		}
+	#endif
 	
 	return (status);
 }
@@ -432,7 +457,7 @@ MD_STATUS UARTD2_SendData(UCHAR* txbuf, USHORT txnum)
 	
 	return (status);
 }
-/* END : UART2_MODULE ==========================================================================================================================================*/
+// END : UART2_MODULE ==========================================================================================================================================
 
 
 

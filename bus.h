@@ -178,6 +178,8 @@
 	void Set_DataBus_from_DB15_to_DB08(BYTE btMiddleByte_Value);
 	void Set_DataBus_from_DB23_to_DB16(BYTE btHighByte_Value);
 	
+	void Write_All_DataBus(unsigned int uiDBValue);
+	
 	void Write_DataBus_Single_CHn(     DWORD   dwCHn,
 				      enum LEVEL   eSpecificLevelValue);
 	

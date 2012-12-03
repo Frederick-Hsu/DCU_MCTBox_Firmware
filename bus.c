@@ -507,7 +507,20 @@ void Set_DataBus_from_DB23_to_DB16(BYTE btHighByte_Value)
 	return;
 }
 
+void Write_All_DataBus(unsigned int uiDBValue)
+{
+	BYTE btLowByteValue 	= 0x00,
+	     btMiddleByteValue 	= 0x00,
+	     btHighByteValue 	= 0x00;
 
+	btLowByteValue 		= (uiDBValue & 0x000000FF);
+	btMiddleByteValue 	= (uiDBValue & 0x0000FF00) >> 8;
+	btHighByteValue 	= (uiDBValue & 0x00FF0000) >> 16;
+	
+	Set_DataBus_from_DB07_to_DB00(btLowByteValue);
+	Set_DataBus_from_DB15_to_DB08(btMiddleByteValue);
+	Set_DataBus_from_DB23_to_DB16(btHighByteValue);
+}
 
 DWORD Read_Digital_In_Bus_Value()
 {
