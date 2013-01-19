@@ -101,6 +101,14 @@ void  main(void)
 {
 	long i = 0, j = 0;
 	
+	/*
+	 * Heap memory initialization at the beginnig of program.
+	 * Added by XUZAN@2013-01-19
+	 */
+	itn ret = 0;
+	ret = _rcopy(&_S_romp, -1);
+	p = __sysheap;
+	
 	/* First of all, do system initialization */
 	SystemInit();
 	
