@@ -1787,8 +1787,8 @@ ColumnStates:Main=True,Event=True,Coverage=True,Address=True,Out of Date Module 
       <StatusText3>VerticalSplitPercentage:0.00
 HorizontalSplitPercentage:0.00
 ActiveViewPlacement:Right
-CaretPosition:71,1
-FirstVisiblePosition:Right,45,0
+CaretPosition:61,3
+FirstVisiblePosition:Right,46,0
 RecentEncodings:
 ColumnStates:Main=True,Event=True,Coverage=True,Address=True,Out of Date Module Indicator=True,
 </StatusText3>
