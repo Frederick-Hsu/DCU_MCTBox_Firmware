@@ -253,11 +253,10 @@ void UARTD0_ErrorCallback(UCHAR err_type)
 __interrupt void MD_INTUD2R(void)
 {
 	#if 1
-		UCHAR	rx_data;
-		
-		
+		UCHAR	rx_data;	
 		
 
+		#if defined (EXPERIEMENT)
 		/*
 		 * To test the UART data receiving function.
 		 * Added by XU ZAN@2012-11-04
@@ -272,9 +271,9 @@ __interrupt void MD_INTUD2R(void)
 		// UARTD2_ReceiveData(rxbuf, 1);	// Added by XUZAN
 		
 		// gUartd2RxLen = 2;
+		#endif	/*    EXPERIEMENT    */
 		
 		if (gUartd2RxLen > gUartd2RxCnt)
-		// if (2 > gUartd2RxCnt)
 		{
 			*gpUartd2RxAddress = rx_data;
 			gpUartd2RxAddress++;
@@ -291,9 +290,6 @@ __interrupt void MD_INTUD2R(void)
 		}
 		else
 		{
-			// i = 10;
-			// return;
-			/* NOT RUN */
 		}
 	#else
 		
