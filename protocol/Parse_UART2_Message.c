@@ -136,6 +136,11 @@ int Parse_UART2_Received_Message(char *sMesg)
 	}
 	else if (strncmp(sCommand_Group, "SYST", 4) == 0)
 	{
+		/*
+		 * Handle the system level request, parse the command message from system level.
+		 *
+		 * Remarked by XUZAn@2013-01-19
+		 */
 	}
 	else
 	{
