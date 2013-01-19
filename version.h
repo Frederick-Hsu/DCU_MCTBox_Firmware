@@ -65,6 +65,11 @@
 	 * Remarked by XU ZAN @2012-07-27
 	 */
 	
+	#define MILESTONE_FLAG
+	
+	#define VIRGIN_VERSION_V0_0_0_1		"Virgin version : V0.0.0.1"
+	
+	
 	#if (VERSION_UPGRADE == YES)
 		#define CURRENT_VERSION		"Version : V0.01.1 \nBuild date : 2012-07-27\n"
 	#else
