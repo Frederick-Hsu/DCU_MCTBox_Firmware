@@ -69,6 +69,16 @@
 *******************************************************************************
 */
 /* Start user code for global definition. Do not edit comment generated here */
+
+/******************************************************************************/
+// Global variables :
+extern unsigned long _S_romp;
+
+
+/******************************************************************************/
+// Global functions prototype :
+int _rcopy(unsigned long *, long);
+
 /* End user code for global definition. Do not edit comment generated here */
 
 
