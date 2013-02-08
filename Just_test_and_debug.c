@@ -18,9 +18,11 @@
 
 /*************************************************************************/
 //  External global variables :
-#include "heap_memory_area.h"
-extern int __sysheap[SIZEOF_HEAP>>2];
-extern size_t __sizeof_sysheap;
+#if 0
+	#include "heap_memory_area.h"
+	extern int __sysheap[SIZEOF_HEAP>>2];
+	extern size_t __sizeof_sysheap;
+#endif
 
 
 
