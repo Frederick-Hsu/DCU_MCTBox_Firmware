@@ -29,6 +29,7 @@
 **  Include files
 *******************************************************************************
 */
+#include <stdio.h>
 #include "macrodriver.h"
 #include "timer.h"
 #include "serial.h"
@@ -60,6 +61,8 @@
 	// #undef	ENABLE_OCDM_DEBUG
 #endif
 
+#define SIZEOF_HEAP 0x1000
+
 #define ADC_DEBUG
 
 
@@ -70,8 +73,13 @@
 */
 /* Start user code for global definition. Do not edit comment generated here */
 
+
 /******************************************************************************/
 // Global variables :
+int __sysheap[SIZEOF_HEAP>>2];
+size_t __sizeof_sysheap = SIZEOF_HEAP;
+int *pgHeapMemoryAddr;
+
 extern unsigned long _S_romp;
 
 
@@ -103,11 +111,11 @@ void  main(void)
 	
 	/*
 	 * Heap memory initialization at the beginnig of program.
-	 * Added by XUZAN@2013-01-19
+	 * Added by XUZAN@2013-02-08
 	 */
 	int ret = 0;
 	ret = _rcopy(&_S_romp, -1);
-	// p = __sysheap;
+	pgHeapMemoryAddr = __sysheap;
 	
 	/* First of all, do system initialization */
 	SystemInit();
