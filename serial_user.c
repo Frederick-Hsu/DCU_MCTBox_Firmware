@@ -60,13 +60,11 @@ extern	volatile USHORT	gUartd0RxCnt;
 extern	volatile USHORT	gUartd0RxLen;
 extern	volatile UCHAR*	gpUartd2TxAddress;
 extern	volatile USHORT	gUartd2TxCnt;
-// extern	volatile UCHAR*	gpUartd2RxAddress;
-extern UCHAR* gpUartd2RxAddress;	// Modified by XUZAN@2012-11-06
-
+extern	volatile UCHAR*	gpUartd2RxAddress;
+// extern UCHAR* gpUartd2RxAddress;	// Modified by XUZAN@2012-11-06
 
 extern	volatile USHORT	gUartd2RxCnt;
-// extern	volatile USHORT	gUartd2RxLen;
-extern USHORT gUartd2RxLen;
+extern	volatile USHORT	gUartd2RxLen;
 
 extern	volatile UCHAR*	gpUartd4TxAddress;
 extern	volatile USHORT	gUartd4TxCnt;
@@ -74,10 +72,10 @@ extern	volatile UCHAR*	gpUartd4RxAddress;
 extern	volatile USHORT	gUartd4RxCnt;
 extern	volatile USHORT	gUartd4RxLen;
 /* Start user code for global definition. Do not edit comment generated here */
+extern UCHAR 	gRxBuf[512];
 /* End user code for global definition. Do not edit comment generated here */
 
-UCHAR sTemp[256] = {0};
-int iCnt = 0;
+
 
 /*
 **-----------------------------------------------------------------------------
@@ -236,6 +234,7 @@ void UARTD0_ErrorCallback(UCHAR err_type)
 
 
 // START : UART2_MODULE ==========================================================================================================================================
+__interrupt void MD_INTUD2R(void)
 /*
 **-----------------------------------------------------------------------------
 **
@@ -250,64 +249,58 @@ void UARTD0_ErrorCallback(UCHAR err_type)
 **
 **-----------------------------------------------------------------------------
 */
-__interrupt void MD_INTUD2R(void)
 {
-	#if 1
-		UCHAR	rx_data;	
+	UCHAR	rx_data;	
+	
+	rx_data = UD2RX;
+	
+	if (gUartd2RxLen > gUartd2RxCnt)
+	{
+		*gpUartd2RxAddress = rx_data;
+		gpUartd2RxAddress++;
+		gUartd2RxCnt++;
 		
-
-		#if defined (EXPERIEMENT)
-		/*
-		 * To test the UART data receiving function.
-		 * Added by XU ZAN@2012-11-04
-		 */
-		// int i = 0;
-		// UCHAR rxbuf[2048] = {0};	// Added by XUZAN
-		
-		rx_data = UD2RX;
-		sTemp[iCnt] = rx_data;
-		iCnt++;
-		
-		// UARTD2_ReceiveData(rxbuf, 1);	// Added by XUZAN
-		
-		// gUartd2RxLen = 2;
-		#endif	/*    EXPERIEMENT    */
-		
-		if (gUartd2RxLen > gUartd2RxCnt)
+		if ( (gUartd2RxLen == gUartd2RxCnt) || (UD2RX == '!') )	// Till the end of command string : '!' is the terminate flag char.
+		// if (gUartd2RxLen == gUartd2RxCnt)
 		{
-			*gpUartd2RxAddress = rx_data;
-			gpUartd2RxAddress++;
-			gUartd2RxCnt++;
+			UARTD2_ReceiveEndCallback( );
 			
-			if (gUartd2RxLen == gUartd2RxCnt)
-			{
-				UARTD2_ReceiveEndCallback( );
-			}
-			else
-			{
-				/* NOT RUN */
-			}
+			/*
+			 * After execute handling the command, must call UARTD2_ReceiveData() each cycle,
+			 * to prepare for receiving next command.
+			 * meanwhile, to reset the gpUartd2RxAddress pointer to its start position.
+			 * Without this reset operation, the recevied command string will be concatenated 
+			 * to previous command string.
+			 * 
+			 * Remarked by XUZAN@2013-02-21
+			 */
+			UARTD2_ReceiveData(gRxBuf, sizeof(gRxBuf));	
+			
+			UD2RIF = 0;
+			UD2RXE = 0;
+			UD2RXE = 1;	// Enable the reception operation
 		}
 		else
 		{
+			/* NOT RUN */
 		}
-	#else
-		
-		UCHAR sRxBuf[256] = {0};
-		USHORT nRxBufLen;
-		MD_STATUS Status = MD_OK;
-		
-		Status = UARTD2_ReceiveData(sRxBuf, 256);
-	#endif
-	
-	UD2RIF = 0;
-	UD2RXE = 0;
-	UD2RXE = 1;
+	}
+	else
+	{
+		UD2RIF = 0;
+		UD2RXE = 0;
+		/*
+		 * Must enable the reception operation, wait for next interrupt.
+		 * Each interrupt, MCU just receives only 1 char(i.e. 1 byte)
+		 */
+		UD2RXE = 1;	
+	}
 	
 	return;
 	
 }
 
+__interrupt void MD_INTUD2T(void)
 /*
 **-----------------------------------------------------------------------------
 **
@@ -322,7 +315,6 @@ __interrupt void MD_INTUD2R(void)
 **
 **-----------------------------------------------------------------------------
 */
-__interrupt void MD_INTUD2T(void)
 {
 	if (gUartd2TxCnt > 0)
 	{
@@ -336,6 +328,7 @@ __interrupt void MD_INTUD2T(void)
 	}
 }
 
+__interrupt void MD_INTUD2S(void)
 /*
 **-----------------------------------------------------------------------------
 **
@@ -350,7 +343,6 @@ __interrupt void MD_INTUD2T(void)
 **
 **-----------------------------------------------------------------------------
 */
-__interrupt void MD_INTUD2S(void)
 {
 	UCHAR	err_type;
 
@@ -360,6 +352,8 @@ __interrupt void MD_INTUD2S(void)
 	UARTD2_ErrorCallback( err_type );
 }
 
+
+void UARTD2_ReceiveEndCallback(void)
 /*
 **-----------------------------------------------------------------------------
 **
@@ -374,16 +368,21 @@ __interrupt void MD_INTUD2S(void)
 **
 **-----------------------------------------------------------------------------
 */
-void UARTD2_ReceiveEndCallback(void)
 {
 	/* Start user code. Do not edit comment generated here */
 	int iResult = -1;
-	char *sUART2RxMesg;
-	memcpy(sUART2RxMesg, gpUartd2RxAddress, strlen(gpUartd2RxAddress)*sizeof(char));
+	char sUART2RxMesg[512] = {0};
+
+	// sprintf(sUART2RxMesg, "%s", gRxBuf);
+	memcpy(sUART2RxMesg, gRxBuf, strlen(gRxBuf)*sizeof(UCHAR));
+	memset(gRxBuf, 0, sizeof(gRxBuf));	// Clean up the Rx-Buffer.
+	
 	iResult = Parse_UART2_Received_Message(sUART2RxMesg);
+	// memset(sUART2RxMesg, 0, 512);
 	/* End user code. Do not edit comment generated here */
 }
 
+void UARTD2_SendEndCallback(void)
 /*
 **-----------------------------------------------------------------------------
 **
@@ -398,12 +397,13 @@ void UARTD2_ReceiveEndCallback(void)
 **
 **-----------------------------------------------------------------------------
 */
-void UARTD2_SendEndCallback(void)
 {
 	/* Start user code. Do not edit comment generated here */
 	/* End user code. Do not edit comment generated here */
 }
 
+
+void UARTD2_ErrorCallback(UCHAR err_type)
 /*
 **-----------------------------------------------------------------------------
 **
@@ -418,7 +418,6 @@ void UARTD2_SendEndCallback(void)
 **
 **-----------------------------------------------------------------------------
 */
-void UARTD2_ErrorCallback(UCHAR err_type)
 {
 	/* Start user code. Do not edit comment generated here */
 	/* End user code. Do not edit comment generated here */

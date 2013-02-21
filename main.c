@@ -83,6 +83,14 @@ int *pgHeapMemoryAddr;
 
 extern unsigned long _S_romp;
 
+/*
+ * Define a global variable for storing the COM received buffer : gRxBuf
+ * and limit the max length of command : 256 chars
+ *
+ * Remarked by XUZAN@2013-02-21
+ */
+UCHAR gRxBuf[512] = {0};	// Initialize to be NULL for all array elements
+
 
 /******************************************************************************/
 // Global functions prototype :
@@ -153,7 +161,11 @@ void  main(void)
 	Test_Switch_Ctrl();
 	// Enable_All_Switches();
 	
-	
+	/*
+	 * Register the UART receiving data action,
+	 * preliminarily get ready to receive COM command.
+	 */
+	UARTD2_ReceiveData(gRxBuf, sizeof(gRxBuf));
 
 	
 	/* Start user code. Do not edit comment generated here */
@@ -164,10 +176,12 @@ void  main(void)
 			// Print_ADC_Values_8Channels();
 		#endif	/* End   TEST_DEBUG_PURPOSE    */
 		
-		for (i=0; i<5000000; i++)
+		#if 0
+		for (i=0; i<100; i++)
 		{
 			NOP();
 		}
+		#endif
 		
 	}
 	/* End user code. Do not edit comment generated here */
