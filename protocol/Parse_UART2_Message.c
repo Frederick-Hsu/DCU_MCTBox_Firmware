@@ -35,8 +35,8 @@ int Parse_UART2_Received_Message(char *sMesg)
 	
 	unsigned int uiTempSpecificCharPosition = 0;
 	
-	char sCommand_Group[64] = "",
-	     sAction_Catalog[64] = "";
+	char sCommand_Group[16] = "",
+	     sAction_Catalog[16] = "";
 	char sTempSubString[256] = {0};
 	char cTempChar = '0';
 	     
@@ -73,12 +73,10 @@ int Parse_UART2_Received_Message(char *sMesg)
 
 	if (strncmp(sCommand_Group, "ACTI", 4) == 0)
 	{
-		{
-			strncpy(sTempSubString, sMesg+uiTempSpecificCharPosition+1, uiLengthOfMesg-1);
-			uiTempSpecificCharPosition = strcspn(sTempSubString, " ");
-			strncpy(sAction_Catalog, sTempSubString, uiTempSpecificCharPosition);
-			ToUpperString(sAction_Catalog);
-		}
+		strncpy(sTempSubString, sMesg+uiTempSpecificCharPosition+1, uiLengthOfMesg-1);
+		uiTempSpecificCharPosition = strcspn(sTempSubString, " ");
+		strncpy(sAction_Catalog, sTempSubString, uiTempSpecificCharPosition);
+		ToUpperString(sAction_Catalog);
 
 		if (strncmp(sAction_Catalog, "SWIT", 4) == 0)	// Catalog : "Switch (or Relay) control" command
 		{

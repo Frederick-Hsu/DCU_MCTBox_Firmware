@@ -32,37 +32,48 @@ extern int g_iErrorCodeNo;
 int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 {
 	int iError = 0;
-	char *pCmdStringHeadPtr = sSwitch_Relay_Ctrl_cmd_Mesg;
+	// char *pCmdStringHeadPtr = sSwitch_Relay_Ctrl_cmd_Mesg;
 
-	const static int iCmdSeperator_Semicolon = ';',
-			 iCmdSeperator_Colon = ':',
-			 iCmdSeperator_Comma = ',',
-			 iCmdSeperator_Blank = ' ';
+	const static int iCmdSeparator_Semicolon = ';'	,
+			 iCmdSeparator_Colon 	 = ':'	,
+			 iCmdSeparator_Comma 	 = ','	,
+			 iCmdSeparator_Space 	 = ' '	,
+			 iCmdSeparator_Sigh	 = '!'	,
+			 iCmdSeparator_Qmark	 = '?'	;
 
-
-	unsigned int uiPosOfCmdSeperator_Colon = 0,		// ":"
-		     uiPosOfCmdSeperator_Blank = 0,		// " "
-		     uiPosOfCmdSeperator_Comma = 0,		// ","
-		     uiPosOfCmdSeperator_Semicolon = 0;		// ";"
-
-	char *pIndexOfSeperator_Semicolon = NULL,	// ";"
-	     *pIndexOfSeperator_Colon = NULL,		// ":"
-	     *pIndexOfSeperator_Blank = NULL,		// " "
-	     *pIndexOfSeperator_Comma = NULL,		// ","
-	     *pIndexOfTerminalSignChar = NULL;		// "!"
-
-	char sTemp_1CmdUnit_String[128] = {0},	// for example : <Action_Catalog> <Parameter1>:<Attribute1>;   "SWITch 0x5F:05 OFF;"
-	     sTempSubString[256] = {0},
-	     sRestSubStringOfCmdMesg[256] = {0};
-
-	// uiPosOfCmdSeperator_Semicolon = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, ";");
-
+	unsigned int uiPosOfCmdSeparator_Semicolon 	= 0,	// :
+		     uiPosOfCmdSeparator_Colon		= 0,	// " "
+		     uiPosOfCmdSeparator_Comma		= 0,	// ,
+		     uiPosOfCmdSeparator_Space 		= 0,	// ;
+		     uiPosOfCmdSeparator_Sigh		= 0,	// !
+		     uiPosOfCmdSeparator_Qmark		= 0;	// ?
+		     
+	char sTemp_1CmdUnit_String[64] = {0},
+	     sTempSubString[128] = {0};
+	
+	unsigned int uiLen = strlen(sSwitch_Relay_Ctrl_cmd_Mesg);
+	/*
+	 * Search and locate the position of these command separator.
+	 * For command separator ";" and "," it can judge the command kind.
+	 */
+	uiPosOfCmdSeparator_Semicolon = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, ";");	// Note : 
+	uiPosOfCmdSeparator_Colon = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, ":");		// If the specified separator was not found, it will 
+	uiPosOfCmdSeparator_Comma = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, ",");		// return the length of string = strlen(sCmdMesg)
+	uiPosOfCmdSeparator_Space = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, " ");		// Not the negative value.
+	uiPosOfCmdSeparator_Sigh = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, "!");		// Remarked by XUZAN@2013-02-21
+	uiPosOfCmdSeparator_Qmark = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, "?");
+	
+#if 1
+	/*
+	 * How to differentiate the command kind? 
+	 * please refer to the explanantion from file "How_to_implement_command_message_parsing.txt"
+	 */
+	
 	/*START : Kind 2=========================================================*/
-	// Corresponding to Kind 2:
-	pIndexOfSeperator_Semicolon = strchr(sSwitch_Relay_Ctrl_cmd_Mesg, iCmdSeperator_Semicolon);	// Search ";"
-	if (pIndexOfSeperator_Semicolon != NULL)
+	// Corresponding to Kind 2: Multi parameters <----> Multi attributes
+	if (uiPosOfCmdSeparator_Semicolon != uiLen)	// Search ";"
 	{
-		iError = handling_Multi_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
+		// iError = handling_Multi_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
 		if (iError)
 		{
 			g_iErrorCodeNo = iError;
@@ -70,37 +81,34 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 		}
 	}
 	/*END : Kind 2=========================================================*/
+	
+	/*START : Kind 3=========================================================*/
+	// Corresponding to Kind 3: Single parameter <----> Multi attributes
+	else if (uiPosOfCmdSeparator_Comma != uiLen)	// Search ","
+	{
+		// iError = handling_Batch_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
+		if (iError)
+		{
+			g_iErrorCodeNo = iError;
+			return g_iErrorCodeNo;
+		}
+	}
+	/*END : Kind 3=========================================================*/
+
+	/*START : Kind 1=========================================================*/
+	// Corresponding to Kind 1: Single parameter <----> Single attribute
 	else
 	{
-		/*START : Kind 3=========================================================*/
-		// Corresponding to Kind 3:
-		pIndexOfSeperator_Colon = strchr(sSwitch_Relay_Ctrl_cmd_Mesg, iCmdSeperator_Comma);	// Search ","
-		if (pIndexOfSeperator_Colon != NULL)
+		strncpy(sTemp_1CmdUnit_String, sSwitch_Relay_Ctrl_cmd_Mesg, uiLen-1);	// don't copy the last char '!'
+		// iError = handling_SwitchAction_1Command_unit(sTemp_1CmdUnit_String);
+		if (iError)
 		{
-			iError = handling_Batch_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
-			if (iError)
-			{
-				g_iErrorCodeNo = iError;
-				return g_iErrorCodeNo;
-			}
+			g_iErrorCodeNo = iError;
+			return g_iErrorCodeNo;
 		}
-		/*END : Kind 3=========================================================*/
-
-		/*START : Kind 1=========================================================*/
-		// Corresponding to Kind 1:
-		else
-		{
-			strncpy(sTemp_1CmdUnit_String, pCmdStringHeadPtr, strlen(pCmdStringHeadPtr)-1);
-			iError = handling_SwitchAction_1Command_unit(sTemp_1CmdUnit_String);
-			if (iError)
-			{
-				g_iErrorCodeNo = iError;
-				return g_iErrorCodeNo;
-			}
-		}
-		/*END : Kind 1=========================================================*/
 	}
-
+	/*END : Kind 1=========================================================*/
+#endif
 	return 0;
 }
 
@@ -203,16 +211,16 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 
 	unsigned int uiPosOfColon = 0, uiPosOfBlank = 0;
 
-	char sActionCatalogString[256] = {0}, 
-		 sSwitchMatrixBoardID[16] = {0}, 
-		 sSwitchCH[16] = {0}, 
-		 sSwitchState[16] = {0};
+	char sActionCatalogString[16] = {0}, 
+		 sSwitchMatrixBoardID[8] = {0}, 
+		 sSwitchCH[8] = {0}, 
+		 sSwitchState[8] = {0};
 
 	PST_Access_Ctrl_SwitchRelayMatrix pSwitch = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix));
 
 	long lValue = 0;
 
-	char sTempSubString[128] = {0};
+	char sTempSubString[16] = {0};
 	unsigned int uiLen_1Command_unit = strlen(s1Command_unit);
 
 	uiPosOfColon = strcspn(s1Command_unit, ":");
@@ -300,7 +308,7 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 		return g_iErrorCodeNo;
 	}
 
-	// Control_Single_Switch(pSwitch);
+	Control_Single_Switch(pSwitch);
 	free(pSwitch);
 
 	return iResult;
@@ -417,7 +425,7 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 		g_iErrorCodeNo = iResult;
 		return g_iErrorCodeNo;
 	}
-	// Control_Batch_Switch(bytSwitchBoardID, pSwitch_CH_State);
+	Control_Batch_Switch(bytSwitchBoardID, pSwitch_CH_State);
 
 	free(pSwitch_CH_State);
 	return iResult;
