@@ -44,12 +44,12 @@ volatile UCHAR*	gpUartd0TxAddress;	/* uartd0 transmit buffer address */
 volatile USHORT	gUartd0TxCnt;	/* uartd0 transmit data number */
 volatile UCHAR*	gpUartd0RxAddress;	/* uartd0 receive buffer address */
 volatile USHORT	gUartd0RxCnt;	/* uartd0 receive data number */
-// volatile USHORT	gUartd0RxLen = 2;	/* uartd0 receive data length */
-USHORT	gUartd0RxLen = 2;
+volatile USHORT	gUartd0RxLen;	/* uartd0 receive data length */
+// USHORT	gUartd0RxLen = 2;
 volatile UCHAR*	gpUartd2TxAddress;	/* uartd2 transmit buffer address */
 volatile USHORT	gUartd2TxCnt;	/* uartd2 transmit data number */
-// volatile UCHAR*	gpUartd2RxAddress;	/* uartd2 receive buffer address */
-UCHAR*	gpUartd2RxAddress;
+volatile UCHAR*	gpUartd2RxAddress;	/* uartd2 receive buffer address */
+// UCHAR*	gpUartd2RxAddress;
 volatile USHORT	gUartd2RxCnt;	/* uartd2 receive data number */
 volatile USHORT	gUartd2RxLen;	/* uartd2 receive data length */
 volatile UCHAR*	gpUartd4TxAddress;	/* uartd4 transmit buffer address */
@@ -377,19 +377,22 @@ MD_STATUS UARTD2_ReceiveData(UCHAR* rxbuf, USHORT rxnum)
 	MD_STATUS status = MD_OK;
 	unsigned int i = 0;
 	
-	#if 1
-		if (rxnum < 1)
-		{
-			status = MD_ARGERROR;
-		}
-		else
-		{
-			gUartd2RxCnt = 0;
-			gUartd2RxLen = rxnum;
-			// gpUartd2RxAddress = rxbuf;
-			status = MD_OK;
-		}
-	#else	
+	if (rxnum < 1)
+	{
+		status = MD_ARGERROR;
+	}
+	else
+	{
+		gUartd2RxCnt = 0;
+		gUartd2RxLen = rxnum;
+		gpUartd2RxAddress = rxbuf;
+		status = MD_OK;
+	}
+	
+	#if 0	/* 
+		 * Removed this block, no need.
+		 * Deleted by XUZAN@2013-02-21
+		 */
 		for (i=0; i<rxnum; i++)
 		{
 			if ( (UD2STR & 0x07) != 0x00 )
@@ -402,7 +405,15 @@ MD_STATUS UARTD2_ReceiveData(UCHAR* rxbuf, USHORT rxnum)
 			}
 			else
 			{
-				rxbuf[i] = UD2RX;
+				if (UD2RX != '!')
+				{
+					rxbuf[i] = UD2RX;
+				}
+				else
+				{
+					rxbuf[i] = UD2RX;
+					break;
+				}
 			}
 		}
 	#endif
@@ -410,6 +421,23 @@ MD_STATUS UARTD2_ReceiveData(UCHAR* rxbuf, USHORT rxnum)
 	return (status);
 }
 
+MD_STATUS UARTD2_ReceiveActiveBuf(UCHAR *sActiveRxBuf)
+{
+	MD_STATUS iResultStatus = MD_OK;
+	int iCnt = 0;
+	UCHAR sRxData[256] = {0};
+	
+	do
+	{
+		iResultStatus = UARTD2_ReceiveData(sRxData+iCnt, 1);
+		iCnt++;
+	}
+	// while (sRxData[iCnt-1] != 0x00);
+	while (sRxData[iCnt-1] != 0xFF);
+	
+	sprintf(sActiveRxBuf, "%s", sRxData);
+	return (iResultStatus);
+}
 
 MD_STATUS UARTD2_SendData(UCHAR* txbuf, USHORT txnum)
 /*

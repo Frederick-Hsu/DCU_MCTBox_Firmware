@@ -324,6 +324,9 @@ void UARTD2_Start(void);
 void UARTD2_Stop(void);
 MD_STATUS UARTD2_SendData(UCHAR* txbuf, USHORT txnum);
 MD_STATUS UARTD2_ReceiveData(UCHAR* rxbuf, USHORT rxnum);
+
+MD_STATUS UARTD2_ReceiveActiveBuf(UCHAR *sActiveRxBuf);
+
 void UARTD2_ReceiveEndCallback(void);
 void UARTD2_SendEndCallback(void);
 void UARTD2_ErrorCallback(UCHAR err_type);
