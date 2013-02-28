@@ -58,6 +58,7 @@
 	int handling_SwitchAction_1Command_unit(char* s1Command_unit);
 	int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg);
 	int handling_SwitchAction_1Attribute_unit(char* s1Attribute_unit, PSTSwitch_CHn_State pCHn_State);
+	int handling_SwitchAction_1AttributeGroup(BYTE byteBoardID, char *sSwitchGroup24Bits);
 	
 	
 #endif	/*    _PARSE_UART2_MESSAGE_H    */

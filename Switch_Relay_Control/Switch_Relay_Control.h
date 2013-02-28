@@ -20,7 +20,8 @@
 
 	
 	typedef enum SWITCH_STATE
-	{					
+	{
+	#if 1
 		OFF = 0,		
 		OPEN = 0,		
 		DISCONNECTED = 0,	
@@ -28,6 +29,11 @@
 		ON = 1,			
 		CLOSE = 1,		
 		CONNECTED = 1
+	#else
+		OFF = OPEN = DISCONNECTED = 0,
+		
+		ON = CLOSE = CONNECTED = 1
+	#endif
 	}
 	E_SWITCH_STATE;
 	

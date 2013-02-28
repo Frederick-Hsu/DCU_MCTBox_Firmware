@@ -86,43 +86,43 @@ int Parse_UART2_Received_Message(char *sMesg)
 		}
 		else if (strncmp(sAction_Catalog, "ADC", 3) == 0)	// Catalog : "ADC measuring" command
 		{
-			iResult = handling_ADC_cmd(sTempSubString);
+			// iResult = handling_ADC_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "DAC", 3) == 0)	// Catalog : "DAC driving" command
 		{
-			iResult = handling_DAC_cmd(sTempSubString);
+			// iResult = handling_DAC_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "DIN", 3) == 0)	// Catalog : "Digital IN" command
 		{
-			iResult = handling_DIN_cmd(sTempSubString);
+			// iResult = handling_DIN_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "DOUT", 4) == 0)	// Catalog : "Digital OUT" command
 		{
-			iResult = handling_DOUT_cmd(sTempSubString);
+			// iResult = handling_DOUT_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "CAN", 3) == 0)	// Catalog : "CAN bus telegram" command
 		{
-			iResult = handling_CAN_cmd(sTempSubString);
+			// iResult = handling_CAN_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "LIN", 3) == 0)	// Catalog : "LIN bus telegram" command
 		{
-			iResult = handling_LIN_cmd(sTempSubString);
+			// iResult = handling_LIN_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "PWM", 3) == 0)	// Catalog : "PWM output" command
 		{
-			iResult = handling_PWM_cmd(sTempSubString);
+			// iResult = handling_PWM_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
