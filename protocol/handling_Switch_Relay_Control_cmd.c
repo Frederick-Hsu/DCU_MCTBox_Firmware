@@ -12,23 +12,21 @@
 
 /****************************************************************************/
 // Includeds :
+#include <stdlib.h>
 #include "Parse_UART2_Message.h"
 
+#pragma ioreg
 /*************************************************************************/
 //  External global variables :
-#if 0
-	#include "..\heap_memory_area.h"
-	extern int __sysheap[SIZEOF_HEAP>>2];
-	extern size_t __sizeof_sysheap;
-#endif
+
 
 /****************************************************************************/
 // Variables :
 extern int g_iErrorCodeNo;
 
 
-
-
+/****************************************************************************/
+// Functions implementation :
 int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 {
 	int iError = 0;
@@ -73,7 +71,7 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 	// Corresponding to Kind 2: Multi parameters <----> Multi attributes
 	if (uiPosOfCmdSeparator_Semicolon != uiLen)	// Search ";"
 	{
-		// iError = handling_Multi_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
+		iError = handling_Multi_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
 		if (iError)
 		{
 			g_iErrorCodeNo = iError;
@@ -86,7 +84,7 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 	// Corresponding to Kind 3: Single parameter <----> Multi attributes
 	else if (uiPosOfCmdSeparator_Comma != uiLen)	// Search ","
 	{
-		// iError = handling_Batch_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
+		iError = handling_Batch_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
 		if (iError)
 		{
 			g_iErrorCodeNo = iError;
@@ -100,7 +98,7 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 	else
 	{
 		strncpy(sTemp_1CmdUnit_String, sSwitch_Relay_Ctrl_cmd_Mesg, uiLen-1);	// don't copy the last char '!'
-		// iError = handling_SwitchAction_1Command_unit(sTemp_1CmdUnit_String);
+		iError = handling_SwitchAction_1Command_unit(sTemp_1CmdUnit_String);
 		if (iError)
 		{
 			g_iErrorCodeNo = iError;
@@ -159,7 +157,8 @@ int handling_Multi_Switches(char* sMulti_Switch_Ctrl_Cmd_Mesg)
 		 */
 		memset(sTemp_1CmdUnit_String, 0, strlen(sTemp_1CmdUnit_String)*sizeof(char));
 		uiPosOfSemicolon = strcspn(sRestSubStringOfCmdMesg, ";");
-		if (uiPosOfSemicolon == 0)
+		
+		if (uiPosOfSemicolon == strlen(sRestSubStringOfCmdMesg)) // It means no ';', go to the end of string.
 		{
 			break;
 		}
@@ -216,13 +215,14 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 		 sSwitchCH[8] = {0}, 
 		 sSwitchState[8] = {0};
 
-	PST_Access_Ctrl_SwitchRelayMatrix pSwitch = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix));
+	// PST_Access_Ctrl_SwitchRelayMatrix pSwitch = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix));
+	ST_Access_Ctrl_SwitchRelayMatrix pSwitch = {0x00, 0, OFF};
 
 	long lValue = 0;
 
-	char sTempSubString[16] = {0};
+	char sTempSubString[64] = {0};
 	unsigned int uiLen_1Command_unit = strlen(s1Command_unit);
-
+	
 	uiPosOfColon = strcspn(s1Command_unit, ":");
 	uiPosOfBlank = strcspn(s1Command_unit, " ");	// Search the 1st blank " " character and its position.
 
@@ -239,7 +239,6 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 		/*************************************************************************************************************************/
 		// Get the switch matrix board ID from Patameter string
 		strncpy(sSwitchMatrixBoardID, (s1Command_unit+uiPosOfBlank+1), (uiPosOfColon-uiPosOfBlank-1));
-		// strncpy(sSwitchMatrixBoardID, s1Command_unit, (uiPosOfColon-uiPosOfBlank-1));
 		iResult = Convert_Str_To_Int(sSwitchMatrixBoardID, &lValue);
 
 		if (!iResult)
@@ -251,7 +250,8 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 			}
 			else
 			{
-				pSwitch->byteBoardID = (BYTE)lValue;
+				// pSwitch->byteBoardID = (BYTE)lValue;
+				pSwitch.byteBoardID = (BYTE)lValue;
 			}
 		}
 		else
@@ -265,6 +265,18 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 		// Get the switch channel and state from the Attribute string
 		strncpy(sTempSubString, s1Command_unit+uiPosOfColon+1, uiLen_1Command_unit-uiPosOfColon);
 		uiPosOfBlank = strcspn(sTempSubString, " ");
+		
+		/*
+		 * Handling the special format shown as the below example, for Kind1
+		 * $ACTIon:SWITch 0x01:XXXXX1XXXX0XX1X011X1001X!
+		 */
+		if (uiPosOfBlank == strlen(sTempSubString))
+		{
+			iResult = handling_SwitchAction_1AttributeGroup(pSwitch.byteBoardID, sTempSubString);
+			g_iErrorCodeNo = iResult;
+			return g_iErrorCodeNo;
+		}
+		
 		strncpy(sSwitchCH, sTempSubString, uiPosOfBlank);
 		strncpy(sSwitchState, (sTempSubString+uiPosOfBlank+1), (strlen(sTempSubString)-uiPosOfBlank));
 
@@ -278,7 +290,8 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 			}
 			else
 			{
-				pSwitch->dwSwitch_Relay_CHn = (DWORD)lValue;
+				// pSwitch->dwSwitch_Relay_CHn = (DWORD)lValue;
+				pSwitch.dwSwitch_Relay_CHn = (DWORD)lValue;
 			}
 		}
 		else
@@ -290,11 +303,13 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 		ToUpperString(sSwitchState);
 		if ( (strncmp(sSwitchState, "ON", 2) == 0) || (strncmp(sSwitchState, "1", 1) == 0) || (strncmp(sSwitchState, "CLOSE", 5) == 0) )
 		{
-			pSwitch->eOpen_Close_State = ON;
+			// pSwitch->eOpen_Close_State = ON;
+			pSwitch.eOpen_Close_State = ON;
 		}
 		else if ( (strncmp(sSwitchState, "OFF", 3) == 0) || (strncmp(sSwitchState, "0", 1) == 0) || (strncmp(sSwitchState, "OPEN", 4) == 0) )
 		{
-			pSwitch->eOpen_Close_State = OFF;
+			// pSwitch->eOpen_Close_State = OFF;
+			pSwitch.eOpen_Close_State = OFF;
 		}
 		else
 		{
@@ -308,8 +323,10 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 		return g_iErrorCodeNo;
 	}
 
-	Control_Single_Switch(pSwitch);
-	free(pSwitch);
+	// Control_Single_Switch(pSwitch);
+	Control_Single_Switch(&pSwitch);
+	// free(pSwitch);
+	// free(&pSwitch);
 
 	return iResult;
 }
@@ -321,16 +338,17 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 
 	char sActionCatalog[16] = {0}, 
 		 sSwitchMatrixBoardID[16] = {0},
-		 sAttributeListString[512] = {0},
+		 sAttributeListString[256] = {0},
 		 s1Attribute_unit[32] = {0},
-		 sRestSubStringOfAttributeList[512] = {0},
-		 sTempRestSubString[512] = {0};
+		 sRestSubStringOfAttributeList[256] = {0},
+		 sTempRestSubString[256] = {0};
 	
 	unsigned int uiPosOfBlank = 0,	// Position of " "
 				 uiPosOfColon = 0,	//             ":"
 				 uiPosOfComma = 0;	//             ","
 
-	PSTSwitch_CHn_State pSwitch_CH_State = (PSTSwitch_CHn_State)malloc(sizeof(STSwitch_CHn_State));
+	// PSTSwitch_CHn_State pSwitch_CH_State = (PSTSwitch_CHn_State)malloc(sizeof(STSwitch_CHn_State));
+	STSwitch_CHn_State pSwitch_CH_State = {0, OFF};
 	BYTE bytSwitchBoardID = 0;
 	long lTempValue = 0;
 	/*===================================================================================================================*/
@@ -381,31 +399,31 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 	strncpy(s1Attribute_unit, sAttributeListString, uiPosOfComma);
 	strncpy(sRestSubStringOfAttributeList, sAttributeListString+uiPosOfComma+1, strlen(sAttributeListString)-uiPosOfComma);
 	
-	iResult = handling_SwitchAction_1Attribute_unit(s1Attribute_unit, pSwitch_CH_State);
+	iResult = handling_SwitchAction_1Attribute_unit(s1Attribute_unit, &pSwitch_CH_State);
 	if (iResult)
 	{
 		g_iErrorCodeNo = iResult;
 		return g_iErrorCodeNo;
 	}
-	// Control_Batch_Switch(bytSwitchBoardID, pSwitch_CH_State);
+	Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
 
 	do 
 	{
 		memset(s1Attribute_unit, 0, strlen(s1Attribute_unit)*sizeof(char));
 		uiPosOfComma = strcspn(sRestSubStringOfAttributeList, ",");
-		if (uiPosOfComma == 0)
+		if (uiPosOfComma == strlen(sRestSubStringOfAttributeList))	// Fix the bug for the condition : when no "," was found.
 		{
 			break;
 		}
 		strncpy(s1Attribute_unit, sRestSubStringOfAttributeList, uiPosOfComma);
 
-		iResult = handling_SwitchAction_1Attribute_unit(s1Attribute_unit, pSwitch_CH_State);
+		iResult = handling_SwitchAction_1Attribute_unit(s1Attribute_unit, &pSwitch_CH_State);
 		if (iResult)
 		{
 			g_iErrorCodeNo = iResult;
 			return g_iErrorCodeNo;
 		}
-		// Control_Batch_Switch(bytSwitchBoardID, pSwitch_CH_State);
+		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
 
 		/*************************************************************************************************/
 		memset(sTempRestSubString, 0, strlen(sTempRestSubString)*sizeof(char));
@@ -419,15 +437,15 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 
 	memset(s1Attribute_unit, 0, strlen(s1Attribute_unit)*sizeof(char));
 	strncpy(s1Attribute_unit, sRestSubStringOfAttributeList, strlen(sRestSubStringOfAttributeList)-1); 
-	iResult = handling_SwitchAction_1Attribute_unit(s1Attribute_unit, pSwitch_CH_State);
+	iResult = handling_SwitchAction_1Attribute_unit(s1Attribute_unit, &pSwitch_CH_State);
 	if (iResult)
 	{
 		g_iErrorCodeNo = iResult;
 		return g_iErrorCodeNo;
 	}
-	Control_Batch_Switch(bytSwitchBoardID, pSwitch_CH_State);
+	Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
 
-	free(pSwitch_CH_State);
+	// free(&pSwitch_CH_State);
 	return iResult;
 }
 
@@ -482,3 +500,57 @@ int handling_SwitchAction_1Attribute_unit(char* s1Attribute_unit, PSTSwitch_CHn_
 	return iResult;
 }
 
+int handling_SwitchAction_1AttributeGroup(BYTE byteBoardID, char *sSwitchGroup24Bits)
+{
+	int iResult = 0;
+	
+	int iCnt = 0, iLenOfSwitchGroup = strlen(sSwitchGroup24Bits);
+	DWORD dwSwitchCHn = 0;
+	E_SWITCH_STATE eSwitchState = OFF;
+	   
+	ST_Access_Ctrl_SwitchRelayMatrix pSwitch = {0x00, 0, OFF};
+	
+	if (24 != iLenOfSwitchGroup)
+	{
+		g_iErrorCodeNo = -8;
+		return g_iErrorCodeNo;
+	}
+	
+	pSwitch.byteBoardID = byteBoardID;
+	for (iCnt=iLenOfSwitchGroup-1; iCnt>=0; iCnt--)
+	{
+		if ( ('1' == *(sSwitchGroup24Bits+iCnt)) || 
+		     ('0' == *(sSwitchGroup24Bits+iCnt)) )
+		{
+			dwSwitchCHn = 24-iCnt;
+			eSwitchState = ('1' == *(sSwitchGroup24Bits+iCnt))?ON:OFF;
+			pSwitch.dwSwitch_Relay_CHn = dwSwitchCHn;
+			pSwitch.eOpen_Close_State = eSwitchState;
+			
+			Control_Single_Switch(&pSwitch);
+		}
+	}
+	/*
+	 * Memory area ===> Heap,  Stack,   Static storing area
+	 * 
+	 * Heap                <-----  the variable's memory allocated by 'malloc' manually
+	 * Stack               <-----  the local variables of function
+	 * Static storing area <----   static variable or global variable 
+	 * 
+	 * Stack area and Heap area in the memory :
+	 * allocating a heap area ---> PST_Access_Ctrl_SwitchRelayMatrix pSwitch = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix));
+	 * allocating a stack area --> ST_Access_Ctrl_SwitchRelayMatrix pSwitch = {0x00, 0, OFF};
+	 * 
+	 * For the allocated heap area in a function, it must be freed manually by programmer
+	 * For the allocated stack area in a function, no need to free it manually, because it will be automatically freed when quiting from a function.
+	 *
+	 * Remarked by XUZAN@2013-02-27
+	 */
+	// free(&pSwitch);	
+/*****************************************/
+	return iResult;
+}
+
+/*
+ * END OF FILE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ */
