@@ -23,6 +23,7 @@
 		"Error code # 005: Switch channel error\n",
 		"Erroe code # 006: Switch state error\n",
 		"Error code # 007: Action keyword 'SWITCH' error\n",
+		"Error code # 008: Switch Group 24 bits length error\n",
 		""
 	};
 
