@@ -43,6 +43,9 @@
 		 * At last, you should disable the Address selector chip 74ALS520.
 		 * In order to keep the current state of switches.
 		 */
+		NOP();
+		NOP();
+		NOP();
 		CS0 = HIGH;
 		
 		return;

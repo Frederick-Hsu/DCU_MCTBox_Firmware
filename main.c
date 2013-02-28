@@ -126,17 +126,25 @@ void  main(void)
 	ret = _rcopy(&_S_romp, -1);
 	pgHeapMemoryAddr = __sysheap;
 	
+	#if 0
+	for (i=0; i<50000; i++)
+	{
+		NOP();
+	}
+	#endif
 	/* First of all, do system initialization */
 	SystemInit();
 	
 	
-	#if defined (ENABLE_OCDM_DEBUG)
+	#if !defined (ENABLE_OCDM_DEBUG)
 		Enable_OCDM();
 	#else
 		Disable_OCDM();
 	#endif	
 	
 	#if defined (TEST_DEBUG_PURPOSE)
+		SetInitialState_TurnOffAllSwitches();
+		
 		SetInitialState_TurnOffAllSwitches();
 	#endif	/* End   TEST_DEBUG_PURPOSE    */
 	
