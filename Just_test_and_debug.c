@@ -18,15 +18,11 @@
 
 /*************************************************************************/
 //  External global variables :
-#if 0
-	#include "heap_memory_area.h"
-	extern int __sysheap[SIZEOF_HEAP>>2];
-	extern size_t __sizeof_sysheap;
-#endif
 
 
 
-
+/*************************************************************************/
+//  Functions implementation :
 #if defined (TEST_DEBUG_PURPOSE)
 
 	void SetInitialState_TurnOffAllSwitches(void)
@@ -58,56 +54,51 @@
 	{
 		#if 1
 			int i = 0;
-			PST_Access_Ctrl_SwitchRelayMatrix pSwitch  = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix)),
-							  pSwitch1 = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix)),
+			PST_Access_Ctrl_SwitchRelayMatrix pSwitch1  = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix)),
 							  pSwitch2 = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix)),
 							  pSwitch3 = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix)),
 							  pSwitch4 = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix)),
-							  pSwitch5 = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix));
+							  pSwitch5 = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix)),
+							  pSwitch6 = (PST_Access_Ctrl_SwitchRelayMatrix)malloc(sizeof(ST_Access_Ctrl_SwitchRelayMatrix));
 			
-			pSwitch->byteBoardID = 0x01;
-			pSwitch->dwSwitch_Relay_CHn = 5;
-			pSwitch->eOpen_Close_State = CLOSE;
-			
-			/**************************************************************************/
 			pSwitch1->byteBoardID = 0x01;
-			pSwitch1->dwSwitch_Relay_CHn = 3;
+			pSwitch1->dwSwitch_Relay_CHn = 1;
 			pSwitch1->eOpen_Close_State = CLOSE;
 			
+			/**************************************************************************/
 			pSwitch2->byteBoardID = 0x01;
-			pSwitch2->dwSwitch_Relay_CHn = 23;
+			pSwitch2->dwSwitch_Relay_CHn = 3;
 			pSwitch2->eOpen_Close_State = CLOSE;
 			
 			pSwitch3->byteBoardID = 0x01;
-			pSwitch3->dwSwitch_Relay_CHn = 17;
+			pSwitch3->dwSwitch_Relay_CHn = 23;
 			pSwitch3->eOpen_Close_State = CLOSE;
 			
 			pSwitch4->byteBoardID = 0x01;
-			pSwitch4->dwSwitch_Relay_CHn = 10;
+			pSwitch4->dwSwitch_Relay_CHn = 17;
 			pSwitch4->eOpen_Close_State = CLOSE;
 			
 			pSwitch5->byteBoardID = 0x01;
-			pSwitch5->dwSwitch_Relay_CHn = 5;
-			pSwitch5->eOpen_Close_State = OPEN;
+			pSwitch5->dwSwitch_Relay_CHn = 10;
+			pSwitch5->eOpen_Close_State = CLOSE;
+			
+			pSwitch6->byteBoardID = 0x01;
+			pSwitch6->dwSwitch_Relay_CHn = 5;
+			pSwitch6->eOpen_Close_State = OPEN;
 			/**************************************************************************/
 			
 			
 			
-			Control_Single_Switch(pSwitch);
+			Control_Single_Switch(pSwitch1);
 			
+			// Control_Multi_Switch(pSwitch2, pSwitch3, pSwitch4, pSwitch5, pSwitch6);
 			
-			for (i=0; i<5000000; i++)
-			{
-				NOP();
-			}
-			Control_Multi_Switch(pSwitch1, pSwitch2, pSwitch3, pSwitch4, pSwitch5);
-			
-			free(pSwitch);
 			free(pSwitch1);
 			free(pSwitch2);
 			free(pSwitch3);
 			free(pSwitch4);
 			free(pSwitch5);
+			free(pSwitch6);
 		#endif
 		
 		
