@@ -264,7 +264,9 @@ __interrupt void MD_INTUD2R(void)
 		// if (gUartd2RxLen == gUartd2RxCnt)
 		{
 			UARTD2_ReceiveEndCallback( );
-			
+			UD2RIF = 0;
+			UD2RXE = 0;
+			UD2RXE = 1;	// Enable the reception operation
 			/*
 			 * After execute handling the command, must call UARTD2_ReceiveData() each cycle,
 			 * to prepare for receiving next command.
@@ -275,10 +277,6 @@ __interrupt void MD_INTUD2R(void)
 			 * Remarked by XUZAN@2013-02-21
 			 */
 			UARTD2_ReceiveData(gRxBuf, sizeof(gRxBuf));	
-			
-			UD2RIF = 0;
-			UD2RXE = 0;
-			UD2RXE = 1;	// Enable the reception operation
 		}
 		else
 		{
@@ -373,8 +371,9 @@ void UARTD2_ReceiveEndCallback(void)
 	int iResult = -1;
 	char sUART2RxMesg[512] = {0};
 
-	// sprintf(sUART2RxMesg, "%s", gRxBuf);
-	memcpy(sUART2RxMesg, gRxBuf, strlen(gRxBuf)*sizeof(UCHAR));
+	// sprintf(sUART2RxMesg, "%s\0", gRxBuf);
+	strcpy(sUART2RxMesg, gRxBuf);
+	// memcpy(sUART2RxMesg, gRxBuf, strlen(gRxBuf)*sizeof(UCHAR));
 	memset(gRxBuf, 0, sizeof(gRxBuf));	// Clean up the Rx-Buffer.
 	
 	iResult = Parse_UART2_Received_Message(sUART2RxMesg);
