@@ -62,9 +62,9 @@
 			Command Starding indicator : $
 			Command Ending indicator   : !
 		
-		(5) Command seperator :
-			# Colon     (:)  to seperate a command keyword from a lower level keyword
-			# Blank     ( )  to seperate a parameter from a command keyword
+		(5) Command separator :
+			# Colon     (:)  to separate a command keyword from a lower level keyword
+			# Blank     ( )  to separate a parameter from a command keyword
 			# Comma     (,)  is used if a command requires more than 1 parameter
 			# Semicolon (;)  to combine commands from the same subsystem into one message string
 		
@@ -76,7 +76,15 @@
 			SWITCH catalog : 
 				$ACTIon:SWITch 0x01:12 ON!
 				$ACTIon:SWITch 0x5F:05 OFF;SWITch 0x03:24 ON;SWITch 0x07:01 OFF;SWITch 0x80:15 ON!
-				$ACTIon:SWITch 0x04:18 OFF,09 ON,11 ON,07 OFF,21 ON!
+				$ACTIon:SWITch 0x01:05 ON;SWITch 0x01:21 ON;SWITch 0x01:01 ON;SWITch 0x01:10 ON;SWITch 0x01:07 ON;SWITch 0x01:11 ON;SWITch 0x01:16 ON;SWITch 0x01:17 ON;SWITch 0x01:23 ON!
+				$ACTIon:SWITch 0x01:05 OFF;SWITch 0x01:21 OFF;SWITch 0x01:01 OFF;SWITch 0x01:10 OFF;SWITch 0x01:07 OFF;SWITch 0x01:11 OFF;SWITch 0x01:16 OFF;SWITch 0x01:17 OFF;SWITch 0x01:23 OFF!
+				$ACTIon:SWITch 0x01:17 OFF,09 OFF,11 ON,07 OFF,21 OFF,15 OFF,23 OFF!
+				$ACTIon:SWITch 0x01:17 ON,09 ON,11 OFF,07 ON,21 ON,15 ON,23 ON!
+				$ACTIon:SWITch 0x01:XXXXX1XXXX0XX1X011X1001X!
+				$ACTIon:SWITch 0x01:XXXXX1XXXX0XX1X011X1001X;SWITch 0x01:101XX0XXXX1XX10100X1XXXX!
+				
+				$ACTIon:SWITch 0x01:000000000000000000000000!
+				$ACTIon:SWITch 0x01:111111111111111111111111!
 			
 			ADC catalog :
 				$ACTIon:ADC CH2:VOLT?!

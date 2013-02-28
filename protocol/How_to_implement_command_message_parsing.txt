@@ -17,9 +17,19 @@ Command message frame format :
 	
 	Single parameter <----> Single attribute
 		Kind 1 ===>  <Action_Catalog> <Parameter>:<Attribute><Command_Type>
+		[
+			Special format : <Action_Catalog> <Parameter>:<Attribute_Group>
+			example : $ACTIon:SWITch 0x01:XXXXX1XXXX0XX1X011X1001X!
+		]
 	
 	Multi parameters <----> Multi attributes
 		Kind 2 ===>  <Action_Catalog> <Parameter1>:<Attribute1>;[<Action_Catalog> <Parameter2>:<Attribute2>];...;[<Action_Catalog> <ParameterN>:<AttributeN>]<Command_Type>
+		[
+			Special format : <Action_Catalog> <Parameter1>:<Attribute_Group1>;[<Action_Catalog> <Parameter2>:<Attribute_Group2>;]<Action_Catalog> <Parameter2>:<Attribute_Group2>
+			example : $ACTIon:SWITch 0x01:XXXXX1XXXX0XX1X011X1001X;SWITch 0x01:101XX0XXXX1XX10100X1XXXX!
+		]
 	
 	Single parameter <----> Multi attributes
 		Kind 3 ===>  <Action_Catalog> <Parameter>:<Attribute1>,<Attribute2>,...,<AttributeN><Command_Type>
+		
+			
