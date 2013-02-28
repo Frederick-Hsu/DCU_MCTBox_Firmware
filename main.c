@@ -150,15 +150,9 @@ void  main(void)
 		NOP();
 	}
 	Display_SW_Version();
-	for (i=0; i<5000000; i++)
-	{
-		NOP();
-	}
-	
-	
 
 	
-	Test_Switch_Ctrl();
+	// Test_Switch_Ctrl();
 	// Enable_All_Switches();
 	
 	/*
