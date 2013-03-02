@@ -11,6 +11,8 @@
 *.manifest
 *.pdb
 *.idb
+*.ncb
+*.suo
 FW_Simulation_Testing/Debug/
 FW_Simulation_Testing/Release/
 DefaultBuild/
