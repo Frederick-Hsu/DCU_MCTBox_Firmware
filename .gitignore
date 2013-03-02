@@ -10,5 +10,8 @@
 *.htm
 *.manifest
 *.pdb
+*.idb
+FW_Simulation_Testing/Debug/
+FW_Simulation_Testing/Release/
 DefaultBuild/
 *.mtud
