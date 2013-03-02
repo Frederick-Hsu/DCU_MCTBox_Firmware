@@ -45,7 +45,7 @@
 		(1) Command Groups :
 			Actions			Systems
 		
-		(2) Actions Catalog :
+		(2) Actions Catalogues :
 			a.  CAN
 			b.  LIN
 			c.  ADC (alias : AIN)
