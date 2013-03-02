@@ -1,7 +1,7 @@
 /********************************************************************************************
  * Program name	: handling_Switch_Relay_Control_cmd.c
  * Description	: This file is to parse the command of controlling switch and relays, 
- *				: and more to call the corresponding function to implement them.
+ *		: and more to call the corresponding function to implement them.
  * Author		: XU ZAN
  * Date			: Sat.	Sept. 22, 2012
  * Copyright(C)		2010 --- 2012		Hella (Shanghai) Electronics Co., Ltd.
@@ -13,7 +13,8 @@
 /****************************************************************************/
 // Includeds :
 #include <stdlib.h>
-#include "Parse_UART2_Message.h"
+#include <string.h>
+#include "handling_Switch_Relay_Control_cmd.h"
 
 #pragma ioreg
 /*************************************************************************/
@@ -27,89 +28,6 @@ extern int g_iErrorCodeNo;
 
 /****************************************************************************/
 // Functions implementation :
-int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
-{
-	int iError = 0;
-	// char *pCmdStringHeadPtr = sSwitch_Relay_Ctrl_cmd_Mesg;
-
-	const static int iCmdSeparator_Semicolon = ';'	,
-			 iCmdSeparator_Colon 	 = ':'	,
-			 iCmdSeparator_Comma 	 = ','	,
-			 iCmdSeparator_Space 	 = ' '	,
-			 iCmdSeparator_Sigh	 = '!'	,
-			 iCmdSeparator_Qmark	 = '?'	;
-
-	unsigned int uiPosOfCmdSeparator_Semicolon 	= 0,	// :
-		     uiPosOfCmdSeparator_Colon		= 0,	// " "
-		     uiPosOfCmdSeparator_Comma		= 0,	// ,
-		     uiPosOfCmdSeparator_Space 		= 0,	// ;
-		     uiPosOfCmdSeparator_Sigh		= 0,	// !
-		     uiPosOfCmdSeparator_Qmark		= 0;	// ?
-		     
-	char sTemp_1CmdUnit_String[64] = {0},
-	     sTempSubString[128] = {0};
-	
-	unsigned int uiLen = strlen(sSwitch_Relay_Ctrl_cmd_Mesg);
-	/*
-	 * Search and locate the position of these command separator.
-	 * For command separator ";" and "," it can judge the command kind.
-	 */
-	uiPosOfCmdSeparator_Semicolon = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, ";");	// Note : 
-	uiPosOfCmdSeparator_Colon = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, ":");		// If the specified separator was not found, it will 
-	uiPosOfCmdSeparator_Comma = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, ",");		// return the length of string = strlen(sCmdMesg)
-	uiPosOfCmdSeparator_Space = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, " ");		// Not the negative value.
-	uiPosOfCmdSeparator_Sigh = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, "!");		// Remarked by XUZAN@2013-02-21
-	uiPosOfCmdSeparator_Qmark = strcspn(sSwitch_Relay_Ctrl_cmd_Mesg, "?");
-	
-#if 1
-	/*
-	 * How to differentiate the command kind? 
-	 * please refer to the explanantion from file "How_to_implement_command_message_parsing.txt"
-	 */
-	
-	/*START : Kind 2=========================================================*/
-	// Corresponding to Kind 2: Multi parameters <----> Multi attributes
-	if (uiPosOfCmdSeparator_Semicolon != uiLen)	// Search ";"
-	{
-		iError = handling_Multi_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
-		if (iError)
-		{
-			g_iErrorCodeNo = iError;
-			return g_iErrorCodeNo;
-		}
-	}
-	/*END : Kind 2=========================================================*/
-	
-	/*START : Kind 3=========================================================*/
-	// Corresponding to Kind 3: Single parameter <----> Multi attributes
-	else if (uiPosOfCmdSeparator_Comma != uiLen)	// Search ","
-	{
-		iError = handling_Batch_Switches(sSwitch_Relay_Ctrl_cmd_Mesg);
-		if (iError)
-		{
-			g_iErrorCodeNo = iError;
-			return g_iErrorCodeNo;
-		}
-	}
-	/*END : Kind 3=========================================================*/
-
-	/*START : Kind 1=========================================================*/
-	// Corresponding to Kind 1: Single parameter <----> Single attribute
-	else
-	{
-		strncpy(sTemp_1CmdUnit_String, sSwitch_Relay_Ctrl_cmd_Mesg, uiLen-1);	// don't copy the last char '!'
-		iError = handling_SwitchAction_1Command_unit(sTemp_1CmdUnit_String);
-		if (iError)
-		{
-			g_iErrorCodeNo = iError;
-			return g_iErrorCodeNo;
-		}
-	}
-	/*END : Kind 1=========================================================*/
-#endif
-	return 0;
-}
-
 int handling_Multi_Switches(char* sMulti_Switch_Ctrl_Cmd_Mesg)
 { 
 	int iResult = 0;
@@ -324,7 +242,9 @@ int handling_SwitchAction_1Command_unit(char* s1Command_unit)
 	}
 
 	// Control_Single_Switch(pSwitch);
-	Control_Single_Switch(&pSwitch);
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		Control_Single_Switch(&pSwitch);
+	#endif
 	// free(pSwitch);
 	// free(&pSwitch);
 
@@ -405,7 +325,9 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 		g_iErrorCodeNo = iResult;
 		return g_iErrorCodeNo;
 	}
-	Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
+	#endif
 
 	do 
 	{
@@ -423,8 +345,9 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 			g_iErrorCodeNo = iResult;
 			return g_iErrorCodeNo;
 		}
-		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
-
+		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
+		#endif
 		/*************************************************************************************************/
 		memset(sTempRestSubString, 0, strlen(sTempRestSubString)*sizeof(char));
 		strncpy(sTempRestSubString, 
@@ -443,8 +366,9 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 		g_iErrorCodeNo = iResult;
 		return g_iErrorCodeNo;
 	}
-	Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
-
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
+	#endif
 	// free(&pSwitch_CH_State);
 	return iResult;
 }
@@ -526,8 +450,9 @@ int handling_SwitchAction_1AttributeGroup(BYTE byteBoardID, char *sSwitchGroup24
 			eSwitchState = ('1' == *(sSwitchGroup24Bits+iCnt))?ON:OFF;
 			pSwitch.dwSwitch_Relay_CHn = dwSwitchCHn;
 			pSwitch.eOpen_Close_State = eSwitchState;
-			
-			Control_Single_Switch(&pSwitch);
+			#if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+				Control_Single_Switch(&pSwitch);
+			#endif
 		}
 	}
 	/*
