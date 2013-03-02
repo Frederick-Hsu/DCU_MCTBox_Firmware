@@ -17,6 +17,7 @@
 // Includes :
 #include "Parse_UART2_Message.h"
 #include "error_code.h"
+#include "handling_command.h"
 
 
 /***********************************************************************/
@@ -30,7 +31,6 @@ int g_iErrorCodeNo = 0;
 int Parse_UART2_Received_Message(char *sMesg)
 {
 	int iResult = -1;
-	size_t i = 0;
 	unsigned int uiPosOfCharInString = 0;
 	
 	unsigned int uiTempSpecificCharPosition = 0;
@@ -86,13 +86,13 @@ int Parse_UART2_Received_Message(char *sMesg)
 		}
 		else if (strncmp(sAction_Catalog, "ADC", 3) == 0)	// Catalog : "ADC measuring" command
 		{
-			// iResult = handling_ADC_cmd(sTempSubString);
+			iResult = handling_ADC_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "DAC", 3) == 0)	// Catalog : "DAC driving" command
 		{
-			// iResult = handling_DAC_cmd(sTempSubString);
+			iResult = handling_DAC_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
@@ -148,3 +148,6 @@ int Parse_UART2_Received_Message(char *sMesg)
 	return 0;
 }
 
+/*
+ * END OF FILE  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ */
