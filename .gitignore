@@ -3,5 +3,12 @@
 *.o
 *.out
 *.hex
+*.obj
+*.exe
+*.ilk
+*.dep
+*.htm
+*.manifest
+*.pdb
 DefaultBuild/
 *.mtud
