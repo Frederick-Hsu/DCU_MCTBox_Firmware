@@ -16,6 +16,26 @@
 #include "handling_ADC_DAC_cmd.h"
 
 
+/******************************************************************/
+// Functins implementation :
+int handling_Voltage_Measurement(char *sVoltageMeasurementCmdMesg)
+{
+	int iError = 0;
+
+
+/*****************************/
+	return iError;
+}
+
+int handling_Current_Measurement(char *sCurrentMeasurementCmdMesg)
+{
+	int iError = 0;
+
+
+/*****************************/
+	return iError;
+}
+
 /*
  * END OF FILE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  */

@@ -16,6 +16,8 @@
 #ifndef _HANDLING_ADC_DAC_CMD_H
 #define _HANDLING_ADC_DAC_CMD_H
 
+	int handling_Voltage_Measurement(char *sVoltageMeasurementCmdMesg);
+	int handling_Current_Measurement(char *sCurrentMeasurementCmdMesg);
 
 #endif	/*  _HANDLING_ADC_DAC_CMD_H  */
 
