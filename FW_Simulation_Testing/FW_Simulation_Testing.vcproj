@@ -264,6 +264,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="ADC_and_DAC"
+			>
+			<File
+				RelativePath="..\ADC_and_DAC\ADC_and_DAC.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ADC_and_DAC\ADC_to_Measure_Voltage_Current.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\protocol\How_to_implement_command_message_parsing.txt"
 			>
