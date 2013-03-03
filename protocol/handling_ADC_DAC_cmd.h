@@ -19,5 +19,13 @@
 	int handling_Voltage_Measurement(char *sVoltageMeasurementCmdMesg);
 	int handling_Current_Measurement(char *sCurrentMeasurementCmdMesg);
 
+	int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg, 
+									 char *sARGOUT_VoltageMeasureResponse);
+
+	int handling_MultiVoltageMeasureUnits(char *sARGIN_MultiVoltageMeasureUnits_Mesg,
+										  char *sARGOUT_MultiVoltageMeasureResponse);
+
+	int handling_8CHVoltageMeasurement(char *ARGOUT_8ChVoltageMeasureResponse);
+
 #endif	/*  _HANDLING_ADC_DAC_CMD_H  */
 

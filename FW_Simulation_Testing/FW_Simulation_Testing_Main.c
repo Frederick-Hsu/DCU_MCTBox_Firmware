@@ -23,11 +23,11 @@
 int main(int argc, char *argv[])
 {
 	char *sSimulationTestingCmdMesg // = "$ACTIon:SWITch 0x01:12 ON!";
-									// = "$ACTIon:ADC CH2:VOLT?!";
-									// = "$ACTIon:ADC *:VOLT?!";
-									// = "$ACTIon:ADC CH1:VOLT?;ADC CH3:VOLT?;ADC CH7:VOLT?!";
-									   = "$ACTIon:ADC CH5:CURRent 82.5?!";
-									// = "$ACTIon:ADC CH7:CURRent 128.35?;ADC CH8:CURRent 65.80?!";
+									// = "$ACTIon:ADC 2:VOLT?!";
+									   = "$ACTIon:ADC *:VOLT?!";
+									// = "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?!";
+									// = "$ACTIon:ADC 5:CURRent 82.5?!";
+									// = "$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?!";
 	int iResult = 0;
 
 	iResult = Parse_UART2_Received_Message(sSimulationTestingCmdMesg);

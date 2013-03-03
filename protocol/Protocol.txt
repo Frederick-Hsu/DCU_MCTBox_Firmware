@@ -87,19 +87,19 @@
 				$ACTIon:SWITch 0x01:111111111111111111111111!
 			
 			ADC catalog :
-				$ACTIon:ADC CH2:VOLT?!
+				$ACTIon:ADC 2:VOLT?!
 				$ACTIon:ADC *:VOLT?!
-				$ACTIon:ADC CH1:VOLT?;ADC CH3:VOLT?;ADC CH7:VOLT?!
-				$ACTIon:ADC CH5:CURRent 82.5?!
-				$ACTIon:ADC CH7:CURRent 128.35?;ADC CH8:CURRent 65.80?!
+				$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?!
+				$ACTIon:ADC 5:CURRent 82.5?!
+				$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?!
 			
 			DAC catalog : 
 				$ACTIon:DAC:VOLT 5!
 				$ACTIon:DAC:VOLT -12.5!
 			
 			DIN catalog : 
-				$ACTIon:DIN CH2:STATe?!
-				$ACTIon:DIN CH5:STATe?;DIN CH8:STATe?DIN CH7:STATe?;DIN CH24:STATe?!
+				$ACTIon:DIN 2:STATe?!
+				$ACTIon:DIN 5:STATe?;DIN 8:STATe?DIN 7:STATe?;DIN 24:STATe?!
 			
 			DOUT catalog : 
 				$ACTIon:DOUT 0x05:16 HIGH!

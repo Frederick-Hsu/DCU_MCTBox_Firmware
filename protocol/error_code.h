@@ -24,8 +24,10 @@
 		"Erroe code # 006: Switch state error\n",
 		"Error code # 007: Action keyword 'SWITCH' error\n",
 		"Error code # 008: Switch Group 24 bits length error\n",
-		"Error code # 009: ADC command format error, no Qmark(?).",
-		"Error code # 010: ADC command syntax error, no colon(:).",
+		"Error code # 009: ADC command format error, no Qmark(?).\n",
+		"Error code # 010: ADC command syntax error, no colon(:).\n",
+		"Error code # 011: ADC measure type error.\n",
+		"Error code # 012: ADC channel error.\n",
 		""
 	};
 
