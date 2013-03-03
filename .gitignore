@@ -3,5 +3,11 @@
 *.o
 *.out
 *.hex
-DefaultBuild/
+*.obj
+*.exe
 *.mtud
+FW_Simulation_Testing/Debug/
+FW_Simulation_Testing/Release/
+*.ncb
+*.suo
+DefaultBuild/
