@@ -113,7 +113,7 @@ int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg,
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	fADCVoltage = Measure_Single_CHn_Voltage_Value(lADCMeasureCHn-1, 10.00);
 #endif
-	sprintf(sARGOUT_VoltageMeasureResponse, "ADC %d:VOLT %.04f", lADCMeasureCHn, fADCVoltage);
+	sprintf(sARGOUT_VoltageMeasureResponse, "ADC %d:VOLT %.06f", lADCMeasureCHn, fADCVoltage);
 /*****************************/
 	return iError;
 }
@@ -127,9 +127,9 @@ int handling_8CHVoltageMeasurement(char *ARGOUT_8ChVoltageMeasureResponse)
 #endif
 	sprintf(ARGOUT_8ChVoltageMeasureResponse, 
 		#if defined (TESTING_EXPERIMENT)
-			"ADC 1:VOLT %0.04f;ADC 2:VOLT %0.04f;ADC 3:VOLT %0.04f;ADC 4:VOLT %0.04f;ADC 5:VOLT %0.04f;ADC 6:VOLT %0.04f;ADC 7:VOLT %0.04f;ADC 8:VOLT %0.04f",
+			"ADC 1:VOLT %.06f;ADC 2:VOLT %.06f;ADC 3:VOLT %.06f;ADC 4:VOLT %.06f;ADC 5:VOLT %.06f;ADC 6:VOLT %.06f;ADC 7:VOLT %.06f;ADC 8:VOLT %.06f",
 		#else
-			"ADC 1:VOLT %0.04f;\nADC 2:VOLT %0.04f;\nADC 3:VOLT %0.04f;\nADC 4:VOLT %0.04f;\nADC 5:VOLT %0.04f;\nADC 6:VOLT %0.04f;\nADC 7:VOLT %0.04f;\nADC 8:VOLT %0.04f",
+			"ADC 1:VOLT %.06f;\nADC 2:VOLT %.06f;\nADC 3:VOLT %.06f;\nADC 4:VOLT %.06f;\nADC 5:VOLT %.06f;\nADC 6:VOLT %.06f;\nADC 7:VOLT %.06f;\nADC 8:VOLT %.06f",
 		#endif
 		f8ChVoltages[0],
 		f8ChVoltages[1],
