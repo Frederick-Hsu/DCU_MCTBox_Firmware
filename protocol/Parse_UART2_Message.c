@@ -37,7 +37,7 @@ int Parse_UART2_Received_Message(char *sMesg)
 	
 	char sCommand_Group[16] = "",
 	     sAction_Catalog[16] = "";
-	char sTempSubString[256] = {0};
+	char sTempSubString[256] = {0}, sTempResponseMesg[256] = {0};
 	char cTempChar = '0';
 	     
 	char cCommand_Type[2] = "";
@@ -81,6 +81,10 @@ int Parse_UART2_Received_Message(char *sMesg)
 		if (strncmp(sAction_Catalog, "SWIT", 4) == 0)	// Catalog : "Switch (or Relay) control" command
 		{
 			iResult = handling_Switch_Relay_Control_cmd(sTempSubString);
+			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+				sprintf(sTempResponseMesg, "$%s", sTempSubString);
+				UARTD2_SendData(sTempResponseMesg, strlen(sTempResponseMesg));
+			#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
@@ -93,6 +97,10 @@ int Parse_UART2_Received_Message(char *sMesg)
 		else if (strncmp(sAction_Catalog, "DAC", 3) == 0)	// Catalog : "DAC driving" command
 		{
 			iResult = handling_DAC_cmd(sTempSubString);
+			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+				sprintf(sTempResponseMesg, "$%s", sTempSubString);
+				UARTD2_SendData(sTempResponseMesg, strlen(sTempResponseMesg));
+			#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
@@ -105,6 +113,10 @@ int Parse_UART2_Received_Message(char *sMesg)
 		else if (strncmp(sAction_Catalog, "DOUT", 4) == 0)	// Catalog : "Digital OUT" command
 		{
 			// iResult = handling_DOUT_cmd(sTempSubString);
+			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+				sprintf(sTempResponseMesg, "$%s", sTempSubString);
+				UARTD2_SendData(sTempResponseMesg, strlen(sTempResponseMesg));
+			#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
