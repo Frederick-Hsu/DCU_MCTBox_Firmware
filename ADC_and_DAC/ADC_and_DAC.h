@@ -13,7 +13,11 @@
 #ifndef _ADC_AND_DAC_H
 #define _ADC_AND_DAC_H
  
-	#include "..\macrodriver.h"
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		#include "..\macrodriver.h"
+	#else
+		#include "..\FW_Simulation_Testing\configuration.h"
+	#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 	typedef enum ADC_CHANNEL
 	{

@@ -375,7 +375,7 @@ void UARTD2_ReceiveEndCallback(void)
 	strcpy(sUART2RxMesg, gRxBuf);
 	// memcpy(sUART2RxMesg, gRxBuf, strlen(gRxBuf)*sizeof(UCHAR));
 	memset(gRxBuf, 0, sizeof(gRxBuf));	// Clean up the Rx-Buffer.
-	
+
 	iResult = Parse_UART2_Received_Message(sUART2RxMesg);
 	// memset(sUART2RxMesg, 0, 512);
 	/* End user code. Do not edit comment generated here */

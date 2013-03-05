@@ -16,7 +16,11 @@
 #ifndef _SWITCH_RELAY_CONTROL_H
 #define _SWITCH_RELAY_CONTROL_H
 
-	#include "..\macrodriver.h"
+	#if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		#include "..\macrodriver.h"
+	#else
+		#include "..\FW_Simulation_Testing\configuration.h"
+	#endif
 
 	
 	typedef enum SWITCH_STATE
@@ -79,15 +83,16 @@
 	
 	
 /*=========================================================================================================*/
-	
-	void Control_Single_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSingleSwitchCHn);
-	
-	void Control_Multi_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSwitchCHi, ...);
-	
-	void Control_Batch_Switch(BYTE 			byteBoardID,
-				  PSTSwitch_CHn_State 	pCHn_State, ...);
-	
-	void Uniformly_Control_One_Switch_Board(BYTE iBoardID, E_SWITCH_STATE eUniformState);
+	#if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		void Control_Single_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSingleSwitchCHn);
+		
+		void Control_Multi_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSwitchCHi, ...);
+		
+		void Control_Batch_Switch(BYTE 			byteBoardID,
+					  PSTSwitch_CHn_State 	pCHn_State, ...);
+		
+		void Uniformly_Control_One_Switch_Board(BYTE iBoardID, E_SWITCH_STATE eUniformState);
+	#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 
 #endif	/*    _SWITCH_RELAY_CONTROL_H    */

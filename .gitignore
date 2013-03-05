@@ -5,9 +5,15 @@
 *.hex
 *.obj
 *.exe
+*.ilk
+*.dep
+*.htm
+*.manifest
+*.pdb
+*.idb
 *.mtud
-FW_Simulation_Testing/Debug/
-FW_Simulation_Testing/Release/
 *.ncb
 *.suo
+FW_Simulation_Testing/Debug/
+FW_Simulation_Testing/Release/
 DefaultBuild/

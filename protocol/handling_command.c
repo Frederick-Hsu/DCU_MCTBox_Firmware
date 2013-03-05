@@ -10,9 +10,14 @@
 
 /****************************************************************************/
 // Includeds :
+#include <string.h>
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
+
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+	#include "..\serial.h"
+#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 
 /****************************************************************************/
@@ -35,12 +40,12 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 		  iCmdSeparator_Sigh	 = '!'	,
 		  iCmdSeparator_Qmark	 = '?'	;
 
-	unsigned int uiPosOfCmdSeparator_Semicolon 	= 0,	// :
-		     uiPosOfCmdSeparator_Colon		= 0,	// " "
-		     uiPosOfCmdSeparator_Comma		= 0,	// ,
-		     uiPosOfCmdSeparator_Space 		= 0,	// ;
-		     uiPosOfCmdSeparator_Sigh		= 0,	// !
-		     uiPosOfCmdSeparator_Qmark		= 0;	// ?
+	unsigned int uiPosOfCmdSeparator_Semicolon 	= 0,	// ";"
+		     uiPosOfCmdSeparator_Colon		= 0,	// ":"
+		     uiPosOfCmdSeparator_Comma		= 0,	// ","
+		     uiPosOfCmdSeparator_Space 		= 0,	// " "
+		     uiPosOfCmdSeparator_Sigh		= 0,	// "!"
+		     uiPosOfCmdSeparator_Qmark		= 0;	// "?"
 		     
 	char sTemp_1CmdUnit_String[64] = {0},
 	     sTempSubString[128] = {0};
@@ -110,7 +115,52 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 int handling_ADC_cmd(char* sADC_cmd_Mesg)
 {
 	int iResult = 0;
-	
+
+	unsigned int uiLen = strlen(sADC_cmd_Mesg),
+		     uiPosOfCmdSeparator_Semicolon	= strcspn(sADC_cmd_Mesg, ";"),
+		     uiPosOfCmdSeparator_Colon		= strcspn(sADC_cmd_Mesg, ":"),
+		     uiPosOfCmdSeparator_Space		= strcspn(sADC_cmd_Mesg, " "),
+		     uiPosOfCmdSeparator_Qmark		= strcspn(sADC_cmd_Mesg, "?");
+
+	char sVoltageCurrent_MeasureType[16] = {0};
+	char sADCMeasResultResponse[256] = {0};
+
+	if (uiPosOfCmdSeparator_Qmark == uiLen)
+	{
+		g_iErrorCodeNo = -9;
+		return g_iErrorCodeNo;
+	}
+	if (uiPosOfCmdSeparator_Colon == uiLen)
+	{
+		g_iErrorCodeNo = -10;
+		return g_iErrorCodeNo;
+	}
+
+	strncpy(sVoltageCurrent_MeasureType, sADC_cmd_Mesg+uiPosOfCmdSeparator_Colon+1, 4);
+	if (!strncmp(sVoltageCurrent_MeasureType, "VOLT", 4))
+	{
+		iResult = handling_Voltage_Measurement(sADC_cmd_Mesg, sADCMeasResultResponse);
+		if (!iResult)
+		{
+			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			UARTD2_SendData(sADCMeasResultResponse, strlen(sADCMeasResultResponse));
+			#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+		}
+		g_iErrorCodeNo = iResult;
+		return g_iErrorCodeNo;
+	}
+	else if (!strncmp(sVoltageCurrent_MeasureType, "CURR", 4))
+	{
+		iResult = handling_Current_Measurement(sADC_cmd_Mesg, sADCMeasResultResponse);
+		if (!iResult)
+		{
+			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			UARTD2_SendData(sADCMeasResultResponse, strlen(sADCMeasResultResponse));
+			#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+		}
+		g_iErrorCodeNo = iResult;
+		return g_iErrorCodeNo;
+	}
 	
 /***************************************/
 	return iResult;
