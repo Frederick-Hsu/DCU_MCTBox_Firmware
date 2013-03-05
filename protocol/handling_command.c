@@ -15,6 +15,10 @@
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
 
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+	#include "..\serial.h"
+#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+
 
 /****************************************************************************/
 // Variables :
@@ -119,6 +123,7 @@ int handling_ADC_cmd(char* sADC_cmd_Mesg)
 		     uiPosOfCmdSeparator_Qmark		= strcspn(sADC_cmd_Mesg, "?");
 
 	char sVoltageCurrent_MeasureType[16] = {0};
+	char sADCMeasResultResponse[256] = {0};
 
 	if (uiPosOfCmdSeparator_Qmark == uiLen)
 	{
@@ -134,13 +139,25 @@ int handling_ADC_cmd(char* sADC_cmd_Mesg)
 	strncpy(sVoltageCurrent_MeasureType, sADC_cmd_Mesg+uiPosOfCmdSeparator_Colon+1, 4);
 	if (!strncmp(sVoltageCurrent_MeasureType, "VOLT", 4))
 	{
-		iResult = handling_Voltage_Measurement(sADC_cmd_Mesg);
+		iResult = handling_Voltage_Measurement(sADC_cmd_Mesg, sADCMeasResultResponse);
+		if (!iResult)
+		{
+			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			UARTD2_SendData(sADCMeasResultResponse, strlen(sADCMeasResultResponse));
+			#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+		}
 		g_iErrorCodeNo = iResult;
 		return g_iErrorCodeNo;
 	}
 	else if (!strncmp(sVoltageCurrent_MeasureType, "CURR", 4))
 	{
-		iResult = handling_Current_Measurement(sADC_cmd_Mesg);
+		iResult = handling_Current_Measurement(sADC_cmd_Mesg, sADCMeasResultResponse);
+		if (!iResult)
+		{
+			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			UARTD2_SendData(sADCMeasResultResponse, strlen(sADCMeasResultResponse));
+			#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+		}
 		g_iErrorCodeNo = iResult;
 		return g_iErrorCodeNo;
 	}
