@@ -14,10 +14,17 @@
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
+#include "..\utility.h"
 
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	#include "..\serial.h"
+	#include "..\ADC_and_DAC\ADC_and_DAC.h"
 #endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+
+#if !defined (JUST_TESTING_PURPOSE)
+	#include <math.h>
+#endif	/*  #if defined (JUST_TESTINGPURPOSE)  */
+
 
 
 /****************************************************************************/
@@ -170,6 +177,47 @@ int handling_ADC_cmd(char* sADC_cmd_Mesg)
 int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 {
 	int iResult = 0;
+
+	unsigned int uiLen = strlen(sDAC_cmd_Mesg),
+				 uiPosOfCmdSeparator_Colon = strcspn(sDAC_cmd_Mesg, ":"),
+				 uiPosOfCmdSeparator_Space = strcspn(sDAC_cmd_Mesg, " ");
+
+	char sDAC_OutputType[16] = {0}, sDAC_OutputVoltageValue[16] = {0};
+	float fOutputVoltage = 0.0000f;
+
+	strncpy(sDAC_OutputType, 
+			sDAC_cmd_Mesg+uiPosOfCmdSeparator_Colon+1, 
+			uiPosOfCmdSeparator_Space-uiPosOfCmdSeparator_Colon-1);
+
+	ToUpperString(sDAC_OutputType);
+	if (strncmp(sDAC_OutputType, "VOLT", 4))
+	{
+		g_iErrorCodeNo = -14;
+		return g_iErrorCodeNo;
+	}
+	strncpy(sDAC_OutputVoltageValue, sDAC_cmd_Mesg+uiPosOfCmdSeparator_Space+1, uiLen-uiPosOfCmdSeparator_Space-2);
+
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+	fOutputVoltage = atoff(sDAC_OutputVoltageValue);
+#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+	/*
+	 * Insert a judgement code here, you must judge the DAC outputing voltage value whether DAC can support.
+	 * Otherwise, you could not get the voltage which you desired to output.
+
+	if ((fOutputVoltage<=fMaxVoltage) && (fOutputVoltage>=fMinVoltage))
+	{
+		g_iErrorCodeNo = -15;
+		return g_iErrorCodeNo;
+	}
+	 *
+	 */
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+	#if defined (JUST_TESTING_PURPOSE)
+		DAC_Output_Real_Voltage(fOutputVoltage);
+	#else
+		DAC_Output_Voltage(abs(floorf(fOutputVoltage)));
+	#endif	/*  JUST_TESTING_PURPOSE  */
+#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 	
 /***************************************/
 	return iResult;
