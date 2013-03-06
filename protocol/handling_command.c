@@ -179,6 +179,32 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 {
 	int iError = 0;
 
+	unsigned int uiLen = strlen(sDIN_cmd_Mesg),
+				 uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
+				 uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
+	char sDIN_CHnStateResponse[256] = {0};
+
+	if (uiPosOfCmdSeparator_Qmark == uiLen)
+	{
+		g_iErrorCodeNo = -13;
+		return g_iErrorCodeNo;
+	}
+	if (uiPosOfCmdSeparator_Semicolon != uiLen)
+	{
+		iError = handling_SingleCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	}
+	else
+	{
+		iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	}
+	if (iError)
+	{
+		g_iErrorCodeNo = iError;
+		return iError;
+	}
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		UARTD2_SendData(sDIN_CHnStateResponse, strlen(sDIN_CHnStateResponse));
+	#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 /***************************/
 	return iError;
