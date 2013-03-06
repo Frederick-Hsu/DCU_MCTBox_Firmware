@@ -75,6 +75,10 @@ float DAC_Output_Voltage(BYTE byteDigital_Input)
 	return fDAC_Voltage;
 }
 
+void DAC_Output_Real_Voltage(float fRealVoltageValue)
+{
+	return;
+}
 float DAC_CommonMode_Output(BYTE bDigitalIn)
 {
 	float fDACOutput = 0.0000f;
