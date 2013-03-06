@@ -17,6 +17,9 @@
 #define	ADC_OUTPUT_FORMAT_FLOAT		2
 #define	ADC_OUTPUT_FORMAT			ADC_OUTPUT_FORMAT_FLOAT
 
+#define TESTING_EXPERIMENT
+// #undef TESTING_EXPERIMENT
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
