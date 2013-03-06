@@ -106,13 +106,13 @@ int Parse_UART2_Received_Message(char *sMesg)
 		}
 		else if (strncmp(sAction_Catalog, "DIN", 3) == 0)	// Catalog : "Digital IN" command
 		{
-			// iResult = handling_DIN_cmd(sTempSubString);
+			iResult = handling_DIN_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
 		else if (strncmp(sAction_Catalog, "DOUT", 4) == 0)	// Catalog : "Digital OUT" command
 		{
-			// iResult = handling_DOUT_cmd(sTempSubString);
+			iResult = handling_DOUT_cmd(sTempSubString);
 			#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 				sprintf(sTempResponseMesg, "$%s", sTempSubString);
 				UARTD2_SendData(sTempResponseMesg, strlen(sTempResponseMesg));
