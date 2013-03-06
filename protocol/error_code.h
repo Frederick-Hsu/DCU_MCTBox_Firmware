@@ -28,6 +28,7 @@
 		"Error code # 010: ADC command syntax error, no colon(:).\n",
 		"Error code # 011: ADC measure type error.\n",
 		"Error code # 012: ADC channel error.\n",
+		"Error code # 013: Digital-IN command format error, no Qmark(?).\n",
 		""
 	};
 
