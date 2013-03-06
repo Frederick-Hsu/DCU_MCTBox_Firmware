@@ -15,7 +15,7 @@
 
 #define	ADC_OUTPUT_FORMAT_INTEGER	1
 #define	ADC_OUTPUT_FORMAT_FLOAT		2
-#define	ADC_OUTPUT_FORMAT			ADC_OUTPUT_FORMAT_INTEGER
+#define	ADC_OUTPUT_FORMAT			ADC_OUTPUT_FORMAT_FLOAT
 
 #include <string.h>
 #include <stdio.h>
@@ -36,7 +36,7 @@ int handling_Voltage_Measurement(char *sVoltageMeasurementCmdMesg, char *sARGOUT
 				 uiPosOfCmdSeparator_Colon	= strcspn(sVoltageMeasurementCmdMesg, ":"),
 				 uiPosOfCmdSeparator_Semicolon	= strcspn(sVoltageMeasurementCmdMesg, ";"),
 				 uiPosOfCmdSeparator_Space	= strcspn(sVoltageMeasurementCmdMesg, " ");
-	char sADCVoltageMeasureResponseMesg[256] = {0};
+	char sADCVoltageMeasureResponseMesg[8*48] = {0};
 
 	if (uiPosOfCmdSeparator_Semicolon != uiLen)
 	{
@@ -92,8 +92,8 @@ int handling_MultiVoltageMeasureUnits(char *sARGIN_MultiVoltageMeasureUnits_Mesg
 	char sRestSubstringOfCmdMesg[256]		= {0},
 	     sTempResetSubstring[256]			= {0},
 	     s1VoltageMeasureUnitString[32]		= {0},
-	     sVoltageMeasureResultResponse[256]		= {0},
-	     s1VoltageMeasureUnitResultResponse[8][32]	= {0};
+	     sVoltageMeasureResultResponse[8*48]		= {0},
+	     s1VoltageMeasureUnitResultResponse[8][48]	= {0};
 	int  iCnt = 0;
 
 	strncpy(s1VoltageMeasureUnitString, sARGIN_MultiVoltageMeasureUnits_Mesg, uiPosOfCmdSeparator_Semicolon);
@@ -215,7 +215,7 @@ int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg,
 	#endif
 #endif
 	#if (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_FLOAT)
-	sprintf(sARGOUT_VoltageMeasureResponse, "ADC %d:VOLT %.06f", lADCMeasureCHn, fADCVoltage);
+	sprintf(sARGOUT_VoltageMeasureResponse, "ADC %d:VOLT %.09f", lADCMeasureCHn, fADCVoltage);
 	#elif (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_INTEGER)
 		sprintf(sARGOUT_VoltageMeasureResponse, "ADC %d:VOLT %d", lADCMeasureCHn, iADCValue);
 	#endif
@@ -241,9 +241,9 @@ int handling_8CHVoltageMeasurement(char *ARGOUT_8ChVoltageMeasureResponse)
 	#if (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_FLOAT)
 		sprintf(ARGOUT_8ChVoltageMeasureResponse, 
 			#if defined (TESTING_EXPERIMENT)
-				"ADC 1:VOLT %.06f;ADC 2:VOLT %.06f;ADC 3:VOLT %.06f;ADC 4:VOLT %.06f;ADC 5:VOLT %.06f;ADC 6:VOLT %.06f;ADC 7:VOLT %.06f;ADC 8:VOLT %.06f",
+				"ADC 1:VOLT %.09f;ADC 2:VOLT %.09f;ADC 3:VOLT %.09f;ADC 4:VOLT %.09f;ADC 5:VOLT %.09f;ADC 6:VOLT %.09f;ADC 7:VOLT %.09f;ADC 8:VOLT %.09f",
 			#else
-				"ADC 1:VOLT %.06f;\nADC 2:VOLT %.06f;\nADC 3:VOLT %.06f;\nADC 4:VOLT %.06f;\nADC 5:VOLT %.06f;\nADC 6:VOLT %.06f;\nADC 7:VOLT %.06f;\nADC 8:VOLT %.06f",
+				"ADC 1:VOLT %.09f;\nADC 2:VOLT %.09f;\nADC 3:VOLT %.09f;\nADC 4:VOLT %.09f;\nADC 5:VOLT %.09f;\nADC 6:VOLT %.09f;\nADC 7:VOLT %.09f;\nADC 8:VOLT %.09f",
 			#endif
 			f8ChVoltages[0],
 			f8ChVoltages[1],
