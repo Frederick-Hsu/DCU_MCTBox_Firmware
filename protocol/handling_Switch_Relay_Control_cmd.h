@@ -1,6 +1,6 @@
 /**********************************************************************************************
  * File name	: handling_Switch_Relay_Control_cmd.h
- * Description	: Declare functions prototype, 
+ * Description	: Declare functions prototype,
  *		  dedicatedly for handling_Switch_Relay_Control_cmd module, this file is only
  *		  used to serve for Switch_Relay_Control command parsing & handling task.
  * Creator	: XU ZAN [HSE-OT]
@@ -15,9 +15,9 @@
 
 	/*===================================================================*/
 	//  Includes :
-	#include "..\Switch_Relay_Control\Switch_Relay_Control.h"
-	
-	
+	#include "../Switch_Relay_Control/Switch_Relay_Control.h"
+
+
 	/*===================================================================*/
 	//  Function prototypes :
 	int handling_Multi_Switches(char* sMulti_Switch_Ctrl_Cmd__Mesg);

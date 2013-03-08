@@ -1,10 +1,10 @@
 /***************************************************************************************
  * Project		: FW_Simulation_Testing
- * 
+ *
  * File name	: configuration.h
- * Description	: Configure some macros and type-definitions in this file, to make the 
+ * Description	: Configure some macros and type-definitions in this file, to make the
  *				: simulation-debugging available & possible in Visual Studio environment
- *				: Because these program files are built in Renesas CubeSuite+ MCU 
+ *				: Because these program files are built in Renesas CubeSuite+ MCU
  *				: firmware compiling environment.
  * Creator		: XU ZAN [HSE-OT]
  * Creation date: Sat.	March 2, 2013

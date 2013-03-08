@@ -1,7 +1,7 @@
 /***********************************************************************************************************************
  * Project		: Renesas_MCU_uPD70F3376_Switch_Matrix_Controller
  *				: Firmware simulation testing project.
- * 
+ *
  * File name	: FW_Simulation_Testing_Main.c
  * Description	: Simulate to test the firmware of Renesas_MCU_uPD70F3376_Switch_Matrix_Controller.
  *				: This file is the portal of firmware simulation testing project.
@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-#include "..\protocol\Parse_UART2_Message.h"
+#include "../protocol/Parse_UART2_Message.h"
 
 
 /*******************************************************

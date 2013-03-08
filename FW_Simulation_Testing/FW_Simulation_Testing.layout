@@ -2,60 +2,12 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug Win32" />
 	<File name="../ADC_and_DAC/ADC_and_DAC.h" open="1" top="0" tabpos="2">
-		<Cursor position="2343" topLine="5" />
+		<Cursor position="678" topLine="0" />
 	</File>
-	<File name="../ADC_and_DAC/ADC_to_Measure_Voltage_Current.h" open="1" top="0" tabpos="3">
-		<Cursor position="0" topLine="0" />
+	<File name="FW_Simulation_Testing_Main.c" open="1" top="1" tabpos="1">
+		<Cursor position="1076" topLine="0" />
 	</File>
-	<File name="FW_Simulation_Testing_Main.c" open="1" top="1" tabpos="4">
-		<Cursor position="752" topLine="0" />
-	</File>
-	<File name="configuration.h" open="1" top="0" tabpos="5">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../Switch_Relay_Control/Switch_Relay_Control.h" open="1" top="0" tabpos="14">
-		<Cursor position="2695" topLine="30" />
-	</File>
-	<File name="../protocol/How_to_implement_command_message_parsing.txt" open="1" top="0" tabpos="15">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/Parse_UART2_Message.c" open="1" top="0" tabpos="17">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/Parse_UART2_Message.h" open="1" top="0" tabpos="6">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/Protocol.txt" open="1" top="0" tabpos="16">
-		<Cursor position="4010" topLine="57" />
-	</File>
-	<File name="../protocol/error_code.h" open="1" top="0" tabpos="7">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_ADC_DAC_cmd.c" open="1" top="0" tabpos="18">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_ADC_DAC_cmd.h" open="1" top="0" tabpos="9">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_CAN_cmd.c" open="1" top="0" tabpos="19">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_CAN_cmd.h" open="1" top="0" tabpos="8">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_DIO_cmd.h" open="1" top="0" tabpos="10">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_Switch_Relay_Control_cmd.h" open="1" top="0" tabpos="11">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_System_cmd.h" open="1" top="0" tabpos="12">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../protocol/handling_command.h" open="1" top="0" tabpos="13">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="../utility.c" open="1" top="0" tabpos="1">
-		<Cursor position="2293" topLine="25" />
+	<File name="configuration.h" open="1" top="0" tabpos="3">
+		<Cursor position="851" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
