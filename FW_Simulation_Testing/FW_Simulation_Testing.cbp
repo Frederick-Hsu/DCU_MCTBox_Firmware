@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="FW_Simulation_Testing" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="protocol/;" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="FW_Simulation_Testing" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug Win32" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DFW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO" />
+					<Add option="-W" />
+					<Add option="-g" />
+					<Add option="-O0" />
+				</Compiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="FW_Simulation_Testing" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release Win32" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DFW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO" />
+					<Add option="-W" />
+					<Add option="-O2" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="FW_Simulation_Testing_Main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="configuration.h" />
+		<Unit filename="../protocol/How_to_implement_command_message_parsing.txt">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/Parse_UART2_Message.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/Protocol.txt">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/error_code.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_ADC_DAC_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_CAN_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_DIO_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_Switch_Relay_Control_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_System_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_command.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
