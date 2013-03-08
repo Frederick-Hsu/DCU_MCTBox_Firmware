@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug Win32" />
-	<File name="../ADC_and_DAC/ADC_and_DAC.h" open="1" top="0" tabpos="2">
+	<File name="../ADC_and_DAC/ADC_and_DAC.h" open="0" top="0" tabpos="2">
 		<Cursor position="678" topLine="0" />
 	</File>
-	<File name="FW_Simulation_Testing_Main.c" open="1" top="1" tabpos="1">
-		<Cursor position="1076" topLine="0" />
+	<File name="FW_Simulation_Testing_Main.c" open="1" top="0" tabpos="1">
+		<Cursor position="796" topLine="0" />
 	</File>
-	<File name="configuration.h" open="1" top="0" tabpos="3">
-		<Cursor position="851" topLine="0" />
+	<File name="configuration.h" open="0" top="0" tabpos="3">
+		<Cursor position="1126" topLine="0" />
+	</File>
+	<File name="../Switch_Relay_Control/Switch_Relay_Control.h" open="0" top="0" tabpos="0">
+		<Cursor position="513" topLine="0" />
+	</File>
+	<File name="../protocol/Protocol.txt" open="1" top="0" tabpos="2">
+		<Cursor position="3934" topLine="53" />
+	</File>
+	<File name="../protocol/handling_ADC_DAC_cmd.c" open="0" top="0" tabpos="0">
+		<Cursor position="797" topLine="0" />
+	</File>
+	<File name="../protocol/handling_DIO_cmd.c" open="0" top="0" tabpos="0">
+		<Cursor position="712" topLine="0" />
+	</File>
+	<File name="../protocol/handling_Switch_Relay_Control_cmd.h" open="0" top="0" tabpos="0">
+		<Cursor position="1336" topLine="0" />
+	</File>
+	<File name="../protocol/handling_command.c" open="1" top="1" tabpos="3">
+		<Cursor position="939" topLine="11" />
 	</File>
 </CodeBlocks_layout_file>
