@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="FW_Simulation_Testing" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="Switch_Relay_Control/;Reference_documentations/;ADC_and_DAC/;DIO/;protocol/;" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="FW_Simulation_Testing" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug Win32" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add option="-W" />
+					<Add option="-DFW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO" />
+				</Compiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="FW_Simulation_Testing" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release Win32" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DFW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO" />
+					<Add option="-W" />
+					<Add option="-O2" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DFW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO" />
+		</Compiler>
+		<Unit filename="../ADC_and_DAC/ADC_and_DAC.h">
+			<Option virtualFolder="ADC_and_DAC/" />
+		</Unit>
+		<Unit filename="../ADC_and_DAC/ADC_to_Measure_Voltage_Current.h">
+			<Option virtualFolder="ADC_and_DAC/" />
+		</Unit>
+		<Unit filename="../DIO/Digital_IN.h">
+			<Option virtualFolder="DIO/" />
+		</Unit>
+		<Unit filename="../DIO/Digital_OUT.h">
+			<Option virtualFolder="DIO/" />
+		</Unit>
+		<Unit filename="FW_Simulation_Testing_Main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="configuration.h" />
+		<Unit filename="../Reference_documentations/Micrcontroller board.pdf">
+			<Option virtualFolder="Reference_documentations/" />
+		</Unit>
+		<Unit filename="../Reference_documentations/Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf">
+			<Option virtualFolder="Reference_documentations/" />
+		</Unit>
+		<Unit filename="../Reference_documentations/Switch Relay Board.pdf">
+			<Option virtualFolder="Reference_documentations/" />
+		</Unit>
+		<Unit filename="../Switch_Relay_Control/Switch_Relay_Control.h">
+			<Option virtualFolder="Switch_Relay_Control/" />
+		</Unit>
+		<Unit filename="../protocol/How_to_implement_command_message_parsing.txt">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/Parse_UART2_Message.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/Parse_UART2_Message.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/Protocol.txt">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/error_code.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_ADC_DAC_cmd.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_ADC_DAC_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_CAN_cmd.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_CAN_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_DIO_cmd.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_DIO_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_Switch_Relay_Control_cmd.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_Switch_Relay_Control_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_System_cmd.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_System_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_command.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_command.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../utility.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../utility.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

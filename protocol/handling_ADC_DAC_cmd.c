@@ -1,9 +1,9 @@
 /**********************************************************************************************
  * File name	: handling_ADC_DAC_cmd.c
  *
- * Description	: Implement functions, 
+ * Description	: Implement functions,
  *		  dedicatedly for handling_ADC_DAC_cmd module, this file is only
- *		  used to serve for 'ADC measuring voltage and DAC outputing voltage' 
+ *		  used to serve for 'ADC measuring voltage and DAC outputing voltage'
  *		  command parsing & handling task.
  *
  * Creator	: XU ZAN [HSE-OT]
@@ -24,8 +24,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "handling_ADC_DAC_cmd.h"
-#include "..\utility.h"
-#include "..\ADC_and_DAC\ADC_to_Measure_Voltage_Current.h"
+#include "../utility.h"
+#include "../ADC_and_DAC/ADC_to_Measure_Voltage_Current.h"
 
 extern int g_iErrorCodeNo;
 
@@ -112,7 +112,7 @@ int handling_MultiVoltageMeasureUnits(char *sARGIN_MultiVoltageMeasureUnits_Mesg
 	#else
 		strcat(sVoltageMeasureResultResponse, ";\n");
 	#endif
-	
+
 	strncpy(sRestSubstringOfCmdMesg, sARGIN_MultiVoltageMeasureUnits_Mesg+uiPosOfCmdSeparator_Semicolon+1, uiLen-uiPosOfCmdSeparator_Semicolon);
 	do
 	{
@@ -138,8 +138,8 @@ int handling_MultiVoltageMeasureUnits(char *sARGIN_MultiVoltageMeasureUnits_Mesg
 		#endif
 
 		memset(sTempResetSubstring, 0, 256*sizeof(char));
-		strncpy(sTempResetSubstring, 
-				sRestSubstringOfCmdMesg+uiPosOfCmdSeparator_Semicolon+1, 
+		strncpy(sTempResetSubstring,
+				sRestSubstringOfCmdMesg+uiPosOfCmdSeparator_Semicolon+1,
 				strlen(sRestSubstringOfCmdMesg)-uiPosOfCmdSeparator_Semicolon);
 		memset(sRestSubstringOfCmdMesg, 0, 256*sizeof(char));
 		sprintf(sRestSubstringOfCmdMesg, "%s", sTempResetSubstring);
@@ -163,7 +163,7 @@ int handling_MultiVoltageMeasureUnits(char *sARGIN_MultiVoltageMeasureUnits_Mesg
 	return iError;
 }
 
-int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg, 
+int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg,
 				 char *sARGOUT_VoltageMeasureResponse)
 {
 	int iError = 0;
@@ -194,8 +194,8 @@ int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg,
 		g_iErrorCodeNo = -11;
 		return g_iErrorCodeNo;
 	}
-	strncpy(sADCMeasureCHn, 
-		(sARGIN_1VoltageMeasureUnit_Mesg+uiPosOfCmdSeparator_Space+1), 
+	strncpy(sADCMeasureCHn,
+		(sARGIN_1VoltageMeasureUnit_Mesg+uiPosOfCmdSeparator_Space+1),
 		(uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1));
 	if (!strcmp(sADCMeasureCHn, "*"))
 	{
@@ -218,9 +218,9 @@ int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg,
 	#endif
 #endif
 	#if (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_FLOAT)
-	sprintf(sARGOUT_VoltageMeasureResponse, "ADC %d:VOLT %.09f", lADCMeasureCHn, fADCVoltage);
+	sprintf(sARGOUT_VoltageMeasureResponse, "ADC %ld:VOLT %.09f", lADCMeasureCHn, fADCVoltage);
 	#elif (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_INTEGER)
-		sprintf(sARGOUT_VoltageMeasureResponse, "ADC %d:VOLT %d", lADCMeasureCHn, iADCValue);
+		sprintf(sARGOUT_VoltageMeasureResponse, "ADC %ld:VOLT %d", lADCMeasureCHn, iADCValue);
 	#endif
 /*****************************/
 	return iError;
@@ -242,7 +242,7 @@ int handling_8CHVoltageMeasurement(char *ARGOUT_8ChVoltageMeasureResponse)
 	#endif
 #endif
 	#if (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_FLOAT)
-		sprintf(ARGOUT_8ChVoltageMeasureResponse, 
+		sprintf(ARGOUT_8ChVoltageMeasureResponse,
 			#if defined (TESTING_EXPERIMENT)
 				"ADC 1:VOLT %.09f;ADC 2:VOLT %.09f;ADC 3:VOLT %.09f;ADC 4:VOLT %.09f;ADC 5:VOLT %.09f;ADC 6:VOLT %.09f;ADC 7:VOLT %.09f;ADC 8:VOLT %.09f",
 			#else
@@ -257,7 +257,7 @@ int handling_8CHVoltageMeasurement(char *ARGOUT_8ChVoltageMeasureResponse)
 			f8ChVoltages[6],
 			f8ChVoltages[7]);
 	#elif (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_INTEGER)
-		sprintf(ARGOUT_8ChVoltageMeasureResponse, 
+		sprintf(ARGOUT_8ChVoltageMeasureResponse,
 			#if defined (TESTING_EXPERIMENT)
 				"ADC 1:VOLT %d;ADC 2:VOLT %d;ADC 3:VOLT %d;ADC 4:VOLT %d;ADC 5:VOLT %d;ADC 6:VOLT %d;ADC 7:VOLT %d;ADC 8:VOLT %d",
 			#else
@@ -295,8 +295,8 @@ int handling_1CurrentMeasureUnit(char *sARGIN_1CurrentMeasureUnit_Mesg,
 		g_iErrorCodeNo = -9;
 		return g_iErrorCodeNo;
 	}
-	strncpy(sADC_CHn, 
-		sARGIN_1CurrentMeasureUnit_Mesg+uiPosOfCmdSeparator_Space+1, 
+	strncpy(sADC_CHn,
+		sARGIN_1CurrentMeasureUnit_Mesg+uiPosOfCmdSeparator_Space+1,
 		uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1);
 	Convert_Str_To_Int(sADC_CHn, &iADC_CHn);
 	if ((iADC_CHn<1) || (iADC_CHn>8))
@@ -305,8 +305,8 @@ int handling_1CurrentMeasureUnit(char *sARGIN_1CurrentMeasureUnit_Mesg,
 		return g_iErrorCodeNo;
 	}
 
-	strncpy(sCurrentAttribute, 
-		sARGIN_1CurrentMeasureUnit_Mesg+uiPosOfCmdSeparator_Colon+1, 
+	strncpy(sCurrentAttribute,
+		sARGIN_1CurrentMeasureUnit_Mesg+uiPosOfCmdSeparator_Colon+1,
 		uiPosOfCmdSeparator_Qmark-uiPosOfCmdSeparator_Colon);
 	ToUpperString(sCurrentAttribute);
 	if (strncmp(sCurrentAttribute, "CURR", 4))
@@ -316,14 +316,14 @@ int handling_1CurrentMeasureUnit(char *sARGIN_1CurrentMeasureUnit_Mesg,
 	}
 	uiPosOfCmdSeparator_Space = strcspn(sCurrentAttribute, " ");
 	uiPosOfCmdSeparator_Qmark = strcspn(sCurrentAttribute, "?");
-	strncpy(sSamplingResistorInOhm, 
-		sCurrentAttribute+uiPosOfCmdSeparator_Space+1, 
+	strncpy(sSamplingResistorInOhm,
+		sCurrentAttribute+uiPosOfCmdSeparator_Space+1,
 		uiPosOfCmdSeparator_Qmark-uiPosOfCmdSeparator_Space-1);
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	dSamplingResistorInOhm = atoff(sSamplingResistorInOhm);
 	dCurrentValue = Measure_Single_CHn_Current(iADC_CHn-1, 10.00, dSamplingResistorInOhm);
 #endif
-	sprintf(sARGOUT_CurrentMeasureResponse, "ADC %d:CURR %.09f", iADC_CHn, dCurrentValue);
+	sprintf(sARGOUT_CurrentMeasureResponse, "ADC %ld:CURR %.09f", iADC_CHn, dCurrentValue);
 /**************************/
 	return iError;
 }
@@ -374,8 +374,8 @@ int handling_MultiCurrentMeasureUnits(char *sARGIN_MultiCurrentMeasureUnits_Mesg
 		#endif
 
 		memset(sTempRestSubstring, 0, 256*sizeof(char));
-		strncpy(sTempRestSubstring, 
-				sRestSubstringOfCmdMesg+uiPosOfCmdSeparator_Semicolon+1, 
+		strncpy(sTempRestSubstring,
+				sRestSubstringOfCmdMesg+uiPosOfCmdSeparator_Semicolon+1,
 				strlen(sRestSubstringOfCmdMesg)-uiPosOfCmdSeparator_Semicolon);
 		memset(sRestSubstringOfCmdMesg, 0, 256*sizeof(char));
 		sprintf(sRestSubstringOfCmdMesg, "%s", sTempRestSubstring);
