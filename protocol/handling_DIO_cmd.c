@@ -17,6 +17,7 @@
 /***********************************************************************/
 // Includes :
 #include <string.h>
+#include <stdio.h>
 #include "handling_DIO_cmd.h"
 #include "../utility.h"
 
@@ -68,11 +69,11 @@ int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg,
 
         if (stCurrentDinCh.eCHm_State == HIGH)
         {
-                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %d:State HIGH", lDinCHn);
+                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State HIGH", lDinCHn);
         }
         else if (stCurrentDinCh.eCHm_State == LOW)
         {
-                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %d:State LOW", lDinCHn);
+                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State LOW", lDinCHn);
         }
 
 /*******************************/

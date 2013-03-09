@@ -11,6 +11,7 @@
 /****************************************************************************/
 // Includeds :
 #include <string.h>
+#include <stdio.h>
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
@@ -231,7 +232,7 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
                              uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
                              uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
 
-	char sDIN_CHnStateResponse[256] = {0};
+	char sDIN_CHnStateResponse[256] = {0}, sDinCmdResponse[256] = {0};
 
 	if (uiPosOfCmdSeparator_Qmark == uiLen)
 	{
@@ -251,8 +252,9 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 		g_iErrorCodeNo = iError;
 		return iError;
 	}
+	sprintf(sDinCmdResponse, "$%s!", sDIN_CHnStateResponse);
 	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-		UARTD2_SendData(sDIN_CHnStateResponse, strlen(sDIN_CHnStateResponse));
+		UARTD2_SendData(sDinCmdResponse, strlen(sDinCmdResponse));
 	#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 /***************************/
