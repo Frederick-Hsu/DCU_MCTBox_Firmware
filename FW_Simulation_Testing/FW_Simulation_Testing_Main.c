@@ -23,14 +23,16 @@
 int main(int argc, char *argv[])
 {
 	char *sSimulationTestingCmdMesg = // "$ACTIon:SWITch 0x01:12 ON!";
-									  // "$ACTIon:ADC 2:VOLT?!";
-									  // "$ACTIon:ADC *:VOLT?!";
-									  // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?;ADC 5:VOLT?;ADC 6:VOLT?;ADC 4:VOLT?!";
-									  // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?!";
-									  // "$ACTIon:ADC 5:CURRent 82.5?!";
-									  // "$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?;ADC 6:CURRent 4581.2380?!";
-                                                                          // "$ACTIon:DAC:VOLT -12.5!";
-                                                                             "$ACTIon:DIN 2:STATe?!";
+                                          // "$ACTIon:ADC 2:VOLT?!";
+                                          // "$ACTIon:ADC *:VOLT?!";
+                                          // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?;ADC 5:VOLT?;ADC 6:VOLT?;ADC 4:VOLT?!";
+                                          // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?!";
+                                          // "$ACTIon:ADC 5:CURRent 82.5?!";
+                                          // "$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?;ADC 6:CURRent 4581.2380?!";
+                                          // "$ACTIon:DAC:VOLT -12.5!";
+                                          // "$ACTIon:DIN 2:STATe?!";
+                                          // "$ACTIon:DIN 5:STATe?;DIN 8:STATe?;DIN 7:STATe?;DIN 24:STATe?!";
+                                             "$ACTIon:DOUT 0x05:16 HIGH!";
 	int iResult = 0;
 
 	iResult = Parse_UART2_Received_Message(sSimulationTestingCmdMesg);

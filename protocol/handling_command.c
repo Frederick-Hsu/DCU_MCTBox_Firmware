@@ -266,7 +266,26 @@ int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 {
 	int iError = 0;
 
+	unsigned int uiLen = strlen(sDOUT_cmd_Mesg),
+                     uiPosOfCmdSeparator_Semicolon = strcspn(sDOUT_cmd_Mesg, ";"),
+                     uiPosOfCmdSeparator_Colon = strcspn(sDOUT_cmd_Mesg, ":"),
+                     uiPosOfCmdSeparator_Space = strcspn(sDOUT_cmd_Mesg, " ");
 
+        if ((uiPosOfCmdSeparator_Colon == uiLen) ||
+            (uiPosOfCmdSeparator_Space == uiLen) )
+        {
+                g_iErrorCodeNo = -19;
+                return g_iErrorCodeNo;
+        }
+
+        if (uiPosOfCmdSeparator_Semicolon != uiLen)
+        {
+                iError = handling_Single_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
+        }
+        else
+        {
+                iError = handling_Multi_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
+        }
 /***************************/
 	return iError;
 }
