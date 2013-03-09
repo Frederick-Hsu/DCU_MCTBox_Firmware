@@ -2,7 +2,7 @@
  * Module		: DIO command-handling module
  *
  * File name	: handling_DIO_cmd.h
- * Description	: In this module, its purpose is to dedicatedly parse and handle 
+ * Description	: In this module, its purpose is to dedicatedly parse and handle
  *				: Digital-IN & Digital-OUT catalog of commands.
  *				: this file declares the functions prototype.
  * Creator		: XU ZAN [HSE-OT]
@@ -15,11 +15,11 @@
 #ifndef _HANDLING_DIO_CMD_H
 #define _HANDLING_DIO_CMD_H
 
-	int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg, 
-								  char	*sARGOUT_DinSingleChStateResponseMesg);
+	int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg,
+                                      char	*sARGOUT_DinSingleChStateResponseMesg);
 
-	int handling_MultiCH_DIN_cmd(char *ARGIN_DinMultiChCmdMesg,
-								 char *ARGOUT_DinMultiChStateResponseMesg);
+	int handling_MultiCH_DIN_cmd(char       *ARGIN_DinMultiChCmdMesg,
+                                     char       *ARGOUT_DinMultiChStateResponseMesg);
 
 #endif	/*  _HANDLING_DIO_CMD_H  */
 

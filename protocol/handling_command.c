@@ -228,8 +228,9 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	int iError = 0;
 
 	unsigned int uiLen = strlen(sDIN_cmd_Mesg),
-				 uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
-				 uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
+                             uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
+                             uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
+
 	char sDIN_CHnStateResponse[256] = {0};
 
 	if (uiPosOfCmdSeparator_Qmark == uiLen)
@@ -239,11 +240,11 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	}
 	if (uiPosOfCmdSeparator_Semicolon != uiLen)
 	{
-		iError = handling_SingleCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	        iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
 	else
 	{
-		iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	        iError = handling_SingleCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
 	if (iError)
 	{
