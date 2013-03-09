@@ -14,9 +14,9 @@
 	 * All rights reserved.
 	 *
 	 ********************************************************************************************************************************************************/
-		
-	
-		
+
+
+
 	=========================================================================================================================================================
 	=																			=
 	=		========			    		   ==											=
@@ -30,21 +30,21 @@
 	=	       ====		==		  ==========	     =====	    =========	     =======	     =========	     =====		=
 	=																			=
 	=========================================================================================================================================================
-	
-	
+
+
 								USER  MANUAL  GUIDE
 									and
 								DESIGN  REGULATIONS
-	
-	
+
+
 	How to design the protocol?
-	
+
 		Design regulation : Reference to the syntax of GPIB IEEE-488.2 SCPI command programming language.
 				    =============================================================================
-	
+
 		(1) Command Groups :
 			Actions			Systems
-		
+
 		(2) Actions Catalogues :
 			a.  CAN
 			b.  LIN
@@ -54,26 +54,26 @@
 			f.  DOUT
 			g.  Switch
 			h.  PWM*
-		
+
 		(3) Command type :
 			i. Request		ii. Query (append "?" at the end of cmmand)
-		
+
 		(4) Command prefix and suffix :
 			Command Starding indicator : $
 			Command Ending indicator   : !
-		
+
 		(5) Command separator :
 			# Colon     (:)  to separate a command keyword from a lower level keyword
 			# Blank     ( )  to separate a parameter from a command keyword
 			# Comma     (,)  is used if a command requires more than 1 parameter
 			# Semicolon (;)  to combine commands from the same subsystem into one message string
-		
-		
-		
+
+
+
 	Enumerate alomost all command here :
-	
+
 		ACTIon :
-			SWITCH catalog : 
+			SWITCH catalog :
 				$ACTIon:SWITch 0x01:12 ON!
 				$ACTIon:SWITch 0x5F:05 OFF;SWITch 0x03:24 ON;SWITch 0x07:01 OFF;SWITch 0x80:15 ON!
 				$ACTIon:SWITch 0x01:05 ON;SWITch 0x01:21 ON;SWITch 0x01:01 ON;SWITch 0x01:10 ON;SWITch 0x01:07 ON;SWITch 0x01:11 ON;SWITch 0x01:16 ON;SWITch 0x01:17 ON;SWITch 0x01:23 ON!
@@ -82,35 +82,36 @@
 				$ACTIon:SWITch 0x01:17 ON,09 ON,11 OFF,07 ON,21 ON,15 ON,23 ON!
 				$ACTIon:SWITch 0x01:XXXXX1XXXX0XX1X011X1001X!
 				$ACTIon:SWITch 0x01:XXXXX1XXXX0XX1X011X1001X;SWITch 0x01:101XX0XXXX1XX10100X1XXXX!
-				
+
 				$ACTIon:SWITch 0x01:000000000000000000000000!
 				$ACTIon:SWITch 0x01:111111111111111111111111!
-			
+
 			ADC catalog :
 				$ACTIon:ADC 2:VOLT?!
 				$ACTIon:ADC *:VOLT?!
 				$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?!
 				$ACTIon:ADC 5:CURRent 82.5?!
 				$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?!
-			
-			DAC catalog : 
+
+			DAC catalog :
 				$ACTIon:DAC:VOLT 5!
 				$ACTIon:DAC:VOLT -12.5!
-			
-			DIN catalog : 
+
+			DIN catalog :
 				$ACTIon:DIN 2:STATe?!
-				$ACTIon:DIN 5:STATe?;DIN 8:STATe?DIN 7:STATe?;DIN 24:STATe?!
-			
-			DOUT catalog : 
+				$ACTIon:DIN 5:STATe?;DIN 8:STATe?;DIN 7:STATe?;DIN 24:STATe?!
+
+			DOUT catalog :
 				$ACTIon:DOUT 0x05:16 HIGH!
 				$ACTIon:DOUT 0x08:21 LOW;DOUT 0x03:19 LOW;DOUT 0x10:04 HIGH!
-			
+				$ACTIon:DOUT 0x01:XXXXXXX1X0X10XX111X000X1!
+
 			PWM catalog :
 				$ACTIon:PWM CH#:Freq DutyCycle!
 
-		
-		
-		SYSTem : 
+
+
+		SYSTem :
 			Error catalog :
 				$SYSTem:ERR?!
 				$SYSTem:IDN?!

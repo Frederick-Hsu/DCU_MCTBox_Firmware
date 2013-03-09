@@ -1,16 +1,17 @@
 # depslib dependency file v1.0
-1362817793 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/FW_Simulation_Testing/FW_Simulation_Testing_Main.c
+1362825537 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/FW_Simulation_Testing/FW_Simulation_Testing_Main.c
 	<stdio.h>
 	"../protocol/Parse_UART2_Message.h"
 
 1362817793 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/Parse_UART2_Message.h
 
-1362817793 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/Parse_UART2_Message.c
+1362823644 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/Parse_UART2_Message.c
+	<string.h>
 	"Parse_UART2_Message.h"
 	"error_code.h"
 	"handling_command.h"
 
-1362817793 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/error_code.h
+1362826519 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/error_code.h
 
 1362817793 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_command.h
 
@@ -41,14 +42,16 @@
 1362817633 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_CAN_cmd.c
 	"Parse_UART2_Message.h"
 
-1362818039 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_DIO_cmd.c
+1362827094 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_DIO_cmd.c
 	<string.h>
 	<stdio.h>
 	"handling_DIO_cmd.h"
 	"../utility.h"
 	"../DIO/Digital_IN.h"
 
-1362817793 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_DIO_cmd.h
+1362827160 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_DIO_cmd.h
+	"../macrodriver.h"
+	"../FW_Simulation_Testing/configuration.h"
 
 1362817793 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_Switch_Relay_Control_cmd.c
 	<stdlib.h>
@@ -64,8 +67,9 @@
 
 1362817633 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_System_cmd.c
 
-1362817793 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_command.c
+1362825116 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_command.c
 	<string.h>
+	<stdio.h>
 	"handling_command.h"
 	"handling_Switch_Relay_Control_cmd.h"
 	"handling_ADC_DAC_cmd.h"

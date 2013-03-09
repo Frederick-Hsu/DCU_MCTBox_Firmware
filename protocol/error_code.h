@@ -33,6 +33,9 @@
 		"Error code # 015: DAC output voltage is beyond the range. Not support.\n",
 		"Error code # 016: Digital-IN channel number error.\n",
 		"Error code # 017: Digital-IN unknown command.\n",
+		"Error code # 018: Digital-IN command format error.\n",
+		"Error code # 019: Digital-OUT command format error.\n",
+		"Error code # 020: Digital-OUT board ID error.\n",
 		""
 	};
 
