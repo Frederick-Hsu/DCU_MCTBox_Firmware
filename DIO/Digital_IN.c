@@ -17,8 +17,8 @@
 
 	void Read_DIN_CHn_State(P_DIN_CHm_STATE pDInCHmState)
 	{
-		unsigned int uiDIN_CHn = 24;
-		enum LEVEL eDIN_CHm_LEVEL;
+		unsigned int uiDIN_CHn = 30;
+		enum LEVEL eDIN_CHm_LEVEL = 10;
 
 		unsigned char sErrMesg[] = "The Digital IN channel is wrong.\n CH state is unknown.\n";
 

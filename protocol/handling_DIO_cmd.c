@@ -43,7 +43,7 @@ int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg,
         char sDinCHn[8] = {0}, sDinState[16] = {0};
         long  lDinCHn = 25;
 
-        DIN_CHm_STATE stCurrentDinCh = {DIN_CH0, LOW};
+        DIN_CHm_STATE stCurrentDinCh = {25, 5};
 
         strncpy(sDinCHn, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Space+1, uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1);
         strncpy(sDinState, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Colon+1, uiPosOfCmdSeparator_Qmark-uiPosOfCmdSeparator_Colon-1);
@@ -68,11 +68,11 @@ int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg,
 
         if (stCurrentDinCh.eCHm_State == HIGH)
         {
-                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %d:State HIGH", lDinCHn-1);
+                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %d:State HIGH", lDinCHn);
         }
         else if (stCurrentDinCh.eCHm_State == LOW)
         {
-                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %d:State LOW", lDinCHn-1);
+                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %d:State LOW", lDinCHn);
         }
 
 /*******************************/
