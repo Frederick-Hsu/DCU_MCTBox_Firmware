@@ -29,7 +29,8 @@ int main(int argc, char *argv[])
 									  // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?!";
 									  // "$ACTIon:ADC 5:CURRent 82.5?!";
 									  // "$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?;ADC 6:CURRent 4581.2380?!";
-                                                                             "$ACTIon:DAC:VOLT -12.5!";
+                                                                          // "$ACTIon:DAC:VOLT -12.5!";
+                                                                             "$ACTIon:DIN 2:STATe?!";
 	int iResult = 0;
 
 	iResult = Parse_UART2_Received_Message(sSimulationTestingCmdMesg);
