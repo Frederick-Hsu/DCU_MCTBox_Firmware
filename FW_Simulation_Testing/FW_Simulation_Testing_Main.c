@@ -1,13 +1,13 @@
 /***********************************************************************************************************************
- * Project		: Renesas_MCU_uPD70F3376_Switch_Matrix_Controller
- *				: Firmware simulation testing project.
+ * Project	: Renesas_MCU_uPD70F3376_Switch_Matrix_Controller
+ *		: Firmware simulation testing project.
  *
  * File name	: FW_Simulation_Testing_Main.c
  * Description	: Simulate to test the firmware of Renesas_MCU_uPD70F3376_Switch_Matrix_Controller.
- *				: This file is the portal of firmware simulation testing project.
- * Creator		: XU ZAN [HSE-OT]
+ *		: This file is the portal of firmware simulation testing project.
+ * Creator	: XU ZAN [HSE-OT]
  * Creation date: Sat.	March 2, 2013
- * Copyright(C)		2010 --- 2013	Hella Shanghai Electronics Co., Ltd.
+ * Copyright(C)         2010 --- 2013	Hella Shanghai Electronics Co., Ltd.
  * All rights reserved.
  *
  ***********************************************************************************************************************/
@@ -32,7 +32,8 @@ int main(int argc, char *argv[])
                                           // "$ACTIon:DAC:VOLT -12.5!";
                                           // "$ACTIon:DIN 2:STATe?!";
                                           // "$ACTIon:DIN 5:STATe?;DIN 8:STATe?;DIN 7:STATe?;DIN 24:STATe?!";
-                                             "$ACTIon:DOUT 0x05:16 HIGH!";
+                                          // "$ACTIon:DOUT 0x05:16 HIGH!";
+                                             "$ACTIon:DOUT 0x08:21 LOW;DOUT 0x03:19 LOW;DOUT 0x10:04 HIGH!";
 	int iResult = 0;
 
 	iResult = Parse_UART2_Received_Message(sSimulationTestingCmdMesg);
