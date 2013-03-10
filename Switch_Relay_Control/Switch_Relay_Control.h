@@ -17,7 +17,7 @@
 #define _SWITCH_RELAY_CONTROL_H
 
 	#if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-		#include "..\macrodriver.h"
+		#include "../macrodriver.h"
 	#else
 		#include "../FW_Simulation_Testing/configuration.h"
 	#endif
@@ -29,10 +29,12 @@
 		OFF = 0,
 		OPEN = 0,
 		DISCONNECTED = 0,
+		LO = 0,
 
 		ON = 1,
 		CLOSE = 1,
-		CONNECTED = 1
+		CONNECTED = 1,
+		HI = 1
 	#else
 		OFF = OPEN = DISCONNECTED = 0,
 
