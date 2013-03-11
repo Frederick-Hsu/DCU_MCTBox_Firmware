@@ -36,6 +36,8 @@
 		"Error code # 018: Digital-IN command format error.\n",
 		"Error code # 019: Digital-OUT command format error.\n",
 		"Error code # 020: Digital-OUT board ID error.\n",
+		"Error code # 021: Digital-OUT channel number error.\n",
+		"Error code # 022: Digital-OUT channel state error.\n",
 		""
 	};
 
