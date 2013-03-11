@@ -167,10 +167,6 @@
 				RelativePath=".\FW_Simulation_Testing_Main.c"
 				>
 			</File>
-			<File
-				RelativePath="..\utility.c"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="&#22836;&#25991;&#20214;"
@@ -179,10 +175,6 @@
 			>
 			<File
 				RelativePath=".\configuration.h"
-				>
-			</File>
-			<File
-				RelativePath="..\utility.h"
 				>
 			</File>
 		</Filter>
@@ -248,11 +240,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\protocol\How_to_implement_command_message_parsing.txt"
+				>
+			</File>
+			<File
 				RelativePath="..\protocol\Parse_UART2_Message.c"
 				>
 			</File>
 			<File
 				RelativePath="..\protocol\Parse_UART2_Message.h"
+				>
+			</File>
+			<File
+				RelativePath="..\protocol\Protocol.txt"
 				>
 			</File>
 		</Filter>
@@ -277,11 +277,11 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\protocol\How_to_implement_command_message_parsing.txt"
+			RelativePath="..\utility.c"
 			>
 		</File>
 		<File
-			RelativePath="..\protocol\Protocol.txt"
+			RelativePath="..\utility.h"
 			>
 		</File>
 	</Files>

@@ -152,6 +152,9 @@ int Parse_UART2_Received_Message(char *sMesg)
 		 *
 		 * Remarked by XUZAn@2013-01-19
 		 */
+		iResult = handling_System_cmd(sMesg);
+		g_iErrorCodeNo = iResult;
+		return iResult;
 	}
 	else
 	{
