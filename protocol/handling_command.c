@@ -289,6 +289,14 @@ int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 /***************************/
 	return iError;
 }
+
+int handling_System_cmd(char *sSystem_cmd_Mesg)
+{
+	int iError = 0;
+
+/***************************/
+	return iError;
+}
 /*
  * END OF FILE  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  */
