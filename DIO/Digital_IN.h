@@ -11,7 +11,11 @@
 #ifndef _DIGITAL_IN_H
 #define _DIGITAL_IN_H
 
-	#include "..\macrodriver.h"
+        #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+                #include "../macrodriver.h"
+        #else
+                #include "../FW_Simulation_Testing/configuration.h"
+        #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 	typedef enum Digital_IN_CHm
 	{
@@ -41,19 +45,20 @@
 		DIN_CH23 = 23
 	}
 	DIGITAL_IN_CHm;
-	
+
 	typedef struct Digital_IN_CHm_State
 	{
 		DIGITAL_IN_CHm 	eCHm;
 		enum LEVEL 	eCHm_State;
 	}
 	DIN_CHm_STATE, *P_DIN_CHm_STATE;
-	
-	
-	void Read_DIN_CHn_State(P_DIN_CHm_STATE pDInCHmState);
-	void Read_DIN_Multi_CHs_State(P_DIN_CHm_STATE pCHiState, ...);
-	
-	
+
+        #if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+                void Read_DIN_CHn_State(P_DIN_CHm_STATE pDInCHmState);
+                void Read_DIN_Multi_CHs_State(P_DIN_CHm_STATE pCHiState, ...);
+        #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+
+
 
 
 #endif	/*    _DIGITAL_IN_H    */

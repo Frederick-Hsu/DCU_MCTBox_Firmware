@@ -30,6 +30,8 @@
 
 	int handling_PWM_cmd(char* sPWM_cmd_Mesg);
 
+	int handling_System_cmd(char *sSystem_cmd_Mesg);
+
 	/***********************************************************************************/
 
 #endif	/*  _HANDLING_COMMAND_H  */

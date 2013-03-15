@@ -72,6 +72,9 @@
 		<Unit filename="../protocol/Parse_UART2_Message.h">
 			<Option virtualFolder="protocol/" />
 		</Unit>
+		<Unit filename="../protocol/Protocol.pdf">
+			<Option virtualFolder="protocol/" />
+		</Unit>
 		<Unit filename="../protocol/Protocol.txt">
 			<Option virtualFolder="protocol/" />
 		</Unit>

@@ -2,8 +2,8 @@
  * Program name	: Parse_UART2_Message.c
  *
  * Description	: Implementation file.
- *		  The 2 files (header file and source file) is used to parse the message, 
- *		  which UART2 (i.e. the serial port COM2 communicating with PC) received, 
+ *		  The 2 files (header file and source file) is used to parse the message,
+ *		  which UART2 (i.e. the serial port COM2 communicating with PC) received,
  *		  then catalog into various kinds of command/instruction types.
  *
  * Author	: XU ZAN
@@ -15,6 +15,7 @@
 
 /***********************************************************************/
 // Includes :
+#include <string.h>
 #include "Parse_UART2_Message.h"
 #include "error_code.h"
 #include "handling_command.h"
@@ -32,18 +33,18 @@ int Parse_UART2_Received_Message(char *sMesg)
 {
 	int iResult = -1;
 	unsigned int uiPosOfCharInString = 0;
-	
+
 	unsigned int uiTempSpecificCharPosition = 0;
-	
+
 	char sCommand_Group[16] = "",
 	     sAction_Catalog[16] = "";
 	char sTempSubString[256] = {0}, sTempResponseMesg[256] = {0};
 	char cTempChar = '0';
-	     
+
 	char cCommand_Type[2] = "";
-	
+
 	unsigned int uiLengthOfMesg = strlen(sMesg);
-	
+
 	/*
 	 * Firstly, it is a must to check the prefix '$' and suffix '!' of the command message.
 	 * Remarked by XU ZAN @2012-09-16
@@ -54,7 +55,7 @@ int Parse_UART2_Received_Message(char *sMesg)
 		/*
 		 * Please take good care about the error handling.
 		 * Each error shoule be assign a specific error code number.
-		 * 
+		 *
 		 * Added by XU ZAN @2012-09-20
 		 */
 		g_iErrorCodeNo = -1;
@@ -63,7 +64,7 @@ int Parse_UART2_Received_Message(char *sMesg)
 
 	/* Check the command type : Request or Query(?) */
 	strncpy(cCommand_Type, (sMesg + uiLengthOfMesg - 2), 1);
-	
+
 	{
 		uiTempSpecificCharPosition = strcspn(sMesg, ":");	// To get the position of 1st specific character colon(:)
 
@@ -151,11 +152,14 @@ int Parse_UART2_Received_Message(char *sMesg)
 		 *
 		 * Remarked by XUZAn@2013-01-19
 		 */
+		iResult = handling_System_cmd(sMesg);
+		g_iErrorCodeNo = iResult;
+		return iResult;
 	}
 	else
 	{
 	}
-	
+
 /***********************************/
 	return 0;
 }

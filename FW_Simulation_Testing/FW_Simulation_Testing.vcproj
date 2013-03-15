@@ -159,40 +159,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="&#28304;&#25991;&#20214;"
-			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
-			>
-			<File
-				RelativePath=".\FW_Simulation_Testing_Main.c"
-				>
-			</File>
-			<File
-				RelativePath="..\utility.c"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="&#22836;&#25991;&#20214;"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-			>
-			<File
-				RelativePath=".\configuration.h"
-				>
-			</File>
-			<File
-				RelativePath="..\utility.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="&#36164;&#28304;&#25991;&#20214;"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-		</Filter>
-		<Filter
 			Name="protocol"
 			>
 			<File
@@ -248,11 +214,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\protocol\How_to_implement_command_message_parsing.txt"
+				>
+			</File>
+			<File
 				RelativePath="..\protocol\Parse_UART2_Message.c"
 				>
 			</File>
 			<File
 				RelativePath="..\protocol\Parse_UART2_Message.h"
+				>
+			</File>
+			<File
+				RelativePath="..\protocol\Protocol.txt"
 				>
 			</File>
 		</Filter>
@@ -276,12 +250,24 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="FW_Simulation_Testing"
+			>
+			<File
+				RelativePath=".\configuration.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FW_Simulation_Testing_Main.c"
+				>
+			</File>
+		</Filter>
 		<File
-			RelativePath="..\protocol\How_to_implement_command_message_parsing.txt"
+			RelativePath="..\utility.c"
 			>
 		</File>
 		<File
-			RelativePath="..\protocol\Protocol.txt"
+			RelativePath="..\utility.h"
 			>
 		</File>
 	</Files>

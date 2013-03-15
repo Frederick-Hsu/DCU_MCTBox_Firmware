@@ -11,8 +11,8 @@
 #ifndef _DIGITAL_OUT_H
 #define _DIGITAL_OUT_H
 
-	#include "..\Switch_Relay_Control\Switch_Relay_Control.h"
-	
+	#include "../Switch_Relay_Control/Switch_Relay_Control.h"
+
 	void DOUT_Single_CHn(PST_Access_Ctrl_SwitchRelayMatrix pSingle_DOUT_CHn);
 	void DOUT_Multi_CHn(PST_Access_Ctrl_SwitchRelayMatrix pSingle_DOUT_CHi, ...);
 

@@ -11,6 +11,7 @@
 /****************************************************************************/
 // Includeds :
 #include <string.h>
+#include <stdio.h>
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
@@ -228,9 +229,10 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	int iError = 0;
 
 	unsigned int uiLen = strlen(sDIN_cmd_Mesg),
-				 uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
-				 uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
-	char sDIN_CHnStateResponse[256] = {0};
+                             uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
+                             uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
+
+	char sDIN_CHnStateResponse[256] = {0}, sDinCmdResponse[256] = {0};
 
 	if (uiPosOfCmdSeparator_Qmark == uiLen)
 	{
@@ -239,19 +241,20 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	}
 	if (uiPosOfCmdSeparator_Semicolon != uiLen)
 	{
-		iError = handling_SingleCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	        iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
 	else
 	{
-		iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	        iError = handling_SingleCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
 	if (iError)
 	{
 		g_iErrorCodeNo = iError;
 		return iError;
 	}
+	sprintf(sDinCmdResponse, "$%s!", sDIN_CHnStateResponse);
 	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-		UARTD2_SendData(sDIN_CHnStateResponse, strlen(sDIN_CHnStateResponse));
+		UARTD2_SendData(sDinCmdResponse, strlen(sDinCmdResponse));
 	#endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 /***************************/
@@ -263,6 +266,33 @@ int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 {
 	int iError = 0;
 
+	unsigned int uiLen = strlen(sDOUT_cmd_Mesg),
+                     uiPosOfCmdSeparator_Semicolon = strcspn(sDOUT_cmd_Mesg, ";"),
+                     uiPosOfCmdSeparator_Colon = strcspn(sDOUT_cmd_Mesg, ":"),
+                     uiPosOfCmdSeparator_Space = strcspn(sDOUT_cmd_Mesg, " ");
+
+        if ((uiPosOfCmdSeparator_Colon == uiLen) ||
+            (uiPosOfCmdSeparator_Space == uiLen) )
+        {
+                g_iErrorCodeNo = -19;
+                return g_iErrorCodeNo;
+        }
+
+        if (uiPosOfCmdSeparator_Semicolon != uiLen)
+        {
+                iError = handling_Multi_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
+        }
+        else
+        {
+                iError = handling_Single_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
+        }
+/***************************/
+	return iError;
+}
+
+int handling_System_cmd(char *sSystem_cmd_Mesg)
+{
+	int iError = 0;
 
 /***************************/
 	return iError;

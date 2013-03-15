@@ -1,13 +1,13 @@
 /***********************************************************************************************************************
- * Project		: Renesas_MCU_uPD70F3376_Switch_Matrix_Controller
- *				: Firmware simulation testing project.
+ * Project	: Renesas_MCU_uPD70F3376_Switch_Matrix_Controller
+ *		: Firmware simulation testing project.
  *
  * File name	: FW_Simulation_Testing_Main.c
  * Description	: Simulate to test the firmware of Renesas_MCU_uPD70F3376_Switch_Matrix_Controller.
- *				: This file is the portal of firmware simulation testing project.
- * Creator		: XU ZAN [HSE-OT]
+ *		: This file is the portal of firmware simulation testing project.
+ * Creator	: XU ZAN [HSE-OT]
  * Creation date: Sat.	March 2, 2013
- * Copyright(C)		2010 --- 2013	Hella Shanghai Electronics Co., Ltd.
+ * Copyright(C)         2010 --- 2013	Hella Shanghai Electronics Co., Ltd.
  * All rights reserved.
  *
  ***********************************************************************************************************************/
@@ -23,13 +23,17 @@
 int main(int argc, char *argv[])
 {
 	char *sSimulationTestingCmdMesg = // "$ACTIon:SWITch 0x01:12 ON!";
-									  // "$ACTIon:ADC 2:VOLT?!";
-									  // "$ACTIon:ADC *:VOLT?!";
-									  // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?;ADC 5:VOLT?;ADC 6:VOLT?;ADC 4:VOLT?!";
-									  // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?!";
-									  // "$ACTIon:ADC 5:CURRent 82.5?!";
-									  // "$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?;ADC 6:CURRent 4581.2380?!";
-                                                                             "$ACTIon:DAC:VOLT -12.5!";
+                                          // "$ACTIon:ADC 2:VOLT?!";
+                                          // "$ACTIon:ADC *:VOLT?!";
+                                          // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?;ADC 5:VOLT?;ADC 6:VOLT?;ADC 4:VOLT?!";
+                                          // "$ACTIon:ADC 1:VOLT?;ADC 3:VOLT?!";
+                                          // "$ACTIon:ADC 5:CURRent 82.5?!";
+                                          // "$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?;ADC 6:CURRent 4581.2380?!";
+                                          // "$ACTIon:DAC:VOLT -12.5!";
+                                          // "$ACTIon:DIN 2:STATe?!";
+                                          // "$ACTIon:DIN 5:STATe?;DIN 8:STATe?;DIN 7:STATe?;DIN 24:STATe?!";
+                                          // "$ACTIon:DOUT 0x05:16 HIGH!";
+                                             "$ACTIon:DOUT 0x08:21 LOW;DOUT 0x03:19 LOW;DOUT 0x10:04 HIGH!";
 	int iResult = 0;
 
 	iResult = Parse_UART2_Received_Message(sSimulationTestingCmdMesg);
