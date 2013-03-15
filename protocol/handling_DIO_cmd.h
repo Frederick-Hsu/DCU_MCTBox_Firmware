@@ -15,6 +15,11 @@
 #ifndef _HANDLING_DIO_CMD_H
 #define _HANDLING_DIO_CMD_H
 
+	int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg, 
+								  char	*sARGOUT_DinSingleChStateResponseMesg);
+
+	int handling_MultiCH_DIN_cmd(char *ARGIN_DinMultiChCmdMesg,
+								 char *ARGOUT_DinMultiChStateResponseMesg);
 
 #endif	/*  _HANDLING_DIO_CMD_H  */
 

@@ -28,6 +28,7 @@
 		"Error code # 010: ADC command syntax error, no colon(:).\n",
 		"Error code # 011: ADC measure type error.\n",
 		"Error code # 012: ADC channel error.\n",
+		"Error code # 013: Digital-IN command format error, no Qmark(?).\n",
 		"Error code # 014: DAC output type error. Only support voltage outputing.\n",
 		"Error code # 015: DAC output voltage is beyond the range. Not support.\n",
 		""
