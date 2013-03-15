@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FW_Simulation_Testing", "FW_Simulation_Testing.vcxproj", "{2B0F5C51-4DC1-4142-ABA3-BBEA98B5696D}"
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FW_Simulation_Testing", "FW_Simulation_Testing.vcproj", "{2B0F5C51-4DC1-4142-ABA3-BBEA98B5696D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
