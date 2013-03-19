@@ -15,8 +15,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "handling_Switch_Relay_Control_cmd.h"
+#include "../utility.h"
 
-#pragma ioreg
 /*************************************************************************/
 //  External global variables :
 

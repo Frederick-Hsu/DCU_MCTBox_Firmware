@@ -33,8 +33,16 @@ int main(int argc, char *argv[])
                                           // "$ACTIon:DIN 2:STATe?!";
                                           // "$ACTIon:DIN 5:STATe?;DIN 8:STATe?;DIN 7:STATe?;DIN 24:STATe?!";
                                           // "$ACTIon:DOUT 0x05:16 HIGH!";
-                                             "$ACTIon:DOUT 0x08:21 LOW;DOUT 0x03:19 LOW;DOUT 0x10:04 HIGH!";
-	int iResult = 0;
+                                          // "$ACTIon:DOUT 0x08:21 LOW;DOUT 0x03:19 LOW;DOUT 0x10:04 HIGH!";
+
+                                          /*==========================================================================================*/
+
+                                          // "$SWITch 0x01:12 ON!";
+                                          // "$DOUT 0x01:21 HIGH;DOUT 0x01:19 HIGH;DOUT 0x01:04 HIGH;DOUT 0x01:07 HIGH;DOUT 0x01:14 HIGH;DOUT 0x01:21 HIGH!";
+                                             "$DOUT 0x01:XXXXXXX1X0X10XX111X000X1!";
+                                          // "$ADC 2:VOLT?!";
+                                          // "$SYSTem:ERR?!";
+        int iResult = 0;
 
 	iResult = Parse_UART2_Received_Message(sSimulationTestingCmdMesg);
 
