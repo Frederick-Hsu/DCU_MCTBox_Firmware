@@ -15,6 +15,7 @@
 *.ncb
 *.suo
 *.user
+*.opensdf
 FW_Simulation_Testing/UpgradeLog.XML
 FW_Simulation_Testing/FW_Simulation_Testing.vcxproj.filters
 FW_Simulation_Testing/FW_Simulation_Testing.sdf
