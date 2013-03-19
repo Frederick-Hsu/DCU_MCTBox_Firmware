@@ -190,16 +190,15 @@ int handling_Single_DOUT_CHn_cmd(char *sDoutSingleChCmdUnitMesg)
         }
         stCurrentDoutPort.byteBoardID = lDoutBoardID;
 
-        strncpy(sAttribute, sDoutSingleChCmdUnitMesg+uiPosOfCmdSeparator_Colon+1, uiLen-2);
+        strncpy(sAttribute, sDoutSingleChCmdUnitMesg+uiPosOfCmdSeparator_Colon+1, uiLen-uiPosOfCmdSeparator_Colon-1);
         uiPosOfCmdSeparator_Space = strcspn(sAttribute, " ");
         if (uiPosOfCmdSeparator_Space == strlen(sAttribute))
         {
                 iError = handling_Dout_1AttributeGroup(lDoutBoardID, sAttribute);
                 g_iErrorCodeNo = iError;
-                if (iError)
-                        return iError;
+				return iError;
         }
-        strncpy(sChNr, sAttribute, uiPosOfCmdSeparator_Space-1);
+        strncpy(sChNr, sAttribute, uiPosOfCmdSeparator_Space);
         iError = Convert_Str_To_Int(sChNr, &lChNr);
         if (iError)
                 return iError;
@@ -210,7 +209,7 @@ int handling_Single_DOUT_CHn_cmd(char *sDoutSingleChCmdUnitMesg)
         }
         stCurrentDoutPort.dwSwitch_Relay_CHn = lChNr;
 
-        strncpy(sChnState, sAttribute+uiPosOfCmdSeparator_Space+1, strlen(sAttribute)-uiPosOfCmdSeparator_Space-2);
+        strncpy(sChnState, sAttribute+uiPosOfCmdSeparator_Space+1, strlen(sAttribute)-uiPosOfCmdSeparator_Space-1);
         ToUpperString(sChnState);
         if (!strncmp(sChnState, "HIGH", 4) ||
             !strncmp(sChnState, "HI", 2)   ||
@@ -298,22 +297,33 @@ int handling_Dout_1AttributeGroup(BYTE bDoutBoardID, char *sDoutChnGroup24Bits)
         int iError = 0;
 
         int iCnt = -1;
-        unsigned int uiLen = strlen(sDoutChnGroup24Bits);
-        ST_Access_Ctrl_SwitchRelayMatrix DoutPort = {0x00, 0, LOW};
+        unsigned int uiLen = strlen(sDoutChnGroup24Bits),
+					 uiPosOfCmdSeparator_Sigh = strcspn(sDoutChnGroup24Bits, "!");
+		
+		char sTrueAttributeGroup24Bits[48] = {0};
+        
+		ST_Access_Ctrl_SwitchRelayMatrix DoutPort = {0x00, 0, LOW};
 
+		if (uiPosOfCmdSeparator_Sigh != uiLen)
+		{
+			strncpy(sTrueAttributeGroup24Bits, sDoutChnGroup24Bits, 24);
+		}
+
+#if 0
         if (24 != uiLen)
         {
                 g_iErrorCodeNo = -19;
                 return g_iErrorCodeNo;
         }
+#endif
         DoutPort.byteBoardID = bDoutBoardID;
 
-        for (iCnt=uiLen-1; iCnt>=0; iCnt--)
+        for (iCnt=strlen(sTrueAttributeGroup24Bits)-1; iCnt>=0; iCnt--)
         {
-                if (('1' == *(sDoutChnGroup24Bits+iCnt)) || ('0' == *(sDoutChnGroup24Bits+iCnt)))
+                if (('1' == *(sTrueAttributeGroup24Bits+iCnt)) || ('0' == *(sTrueAttributeGroup24Bits+iCnt)))
                 {
                         DoutPort.dwSwitch_Relay_CHn = 24-iCnt;
-                        DoutPort.eOpen_Close_State = ('1' == *(sDoutChnGroup24Bits+iCnt))? HIGH : LOW;
+                        DoutPort.eOpen_Close_State = ('1' == *(sTrueAttributeGroup24Bits+iCnt))? HIGH : LOW;
                         #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
                         DOUT_Single_CHn(&DoutPort);
                         #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
