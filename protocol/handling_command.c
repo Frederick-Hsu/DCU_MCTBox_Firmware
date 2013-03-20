@@ -280,12 +280,20 @@ int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 
         if (uiPosOfCmdSeparator_Semicolon != uiLen)
         {
-                iError = handling_Single_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
+                iError = handling_Multi_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
         }
         else
         {
-                iError = handling_Multi_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
+                iError = handling_Single_DOUT_CHn_cmd(sDOUT_cmd_Mesg);
         }
+/***************************/
+	return iError;
+}
+
+int handling_System_cmd(char *sSystem_cmd_Mesg)
+{
+	int iError = 0;
+
 /***************************/
 	return iError;
 }
