@@ -200,6 +200,12 @@
       <ParentItem>270dc9de-9c0f-4a91-8962-9901492f4c6f</ParentItem>
       <Property>06ee4024-7a26-4cd5-bbf1-2a417652e973</Property>
     </Instance>
+    <Instance Guid="c75435aa-eb1a-46de-a1d2-543c6e8f4cf9">
+      <Name>Reference_documentations</Name>
+      <Type>Category</Type>
+      <ParentItem>270dc9de-9c0f-4a91-8962-9901492f4c6f</ParentItem>
+      <Property>532fbbe4-05cf-429d-90e7-143872a7add6</Property>
+    </Instance>
     <Instance Guid="21415519-0af0-4f80-9cfe-bbd4bec48fc7">
       <Name>crte.s</Name>
       <Type>File</Type>
@@ -619,6 +625,41 @@
       <ParentItem>cfc0ea65-384c-44a8-af6e-94be42ae2dd6</ParentItem>
       <Property>42aa7123-30ca-4f0e-9296-5816fdeaaaca</Property>
     </Instance>
+    <Instance Guid="ab2481a1-bce0-4be5-b952-a8b8d847a794">
+      <Name>IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf</Name>
+      <Type>File</Type>
+      <RelativePath>Reference_documentations\IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf</RelativePath>
+      <ParentItem>c75435aa-eb1a-46de-a1d2-543c6e8f4cf9</ParentItem>
+      <Property>455df243-1102-45e6-97f9-c86d314a5b4e</Property>
+    </Instance>
+    <Instance Guid="8a392560-914d-4875-9be2-617bfb086a10">
+      <Name>Micrcontroller board.pdf</Name>
+      <Type>File</Type>
+      <RelativePath>Reference_documentations\Micrcontroller board.pdf</RelativePath>
+      <ParentItem>c75435aa-eb1a-46de-a1d2-543c6e8f4cf9</ParentItem>
+      <Property>6b31fe36-bcf6-4dec-a9bc-b882d968b006</Property>
+    </Instance>
+    <Instance Guid="0da1bece-952e-4597-8241-194986eaeacc">
+      <Name>NI-Tutorial-3388-en.pdf</Name>
+      <Type>File</Type>
+      <RelativePath>Reference_documentations\NI-Tutorial-3388-en.pdf</RelativePath>
+      <ParentItem>c75435aa-eb1a-46de-a1d2-543c6e8f4cf9</ParentItem>
+      <Property>a37e1ad4-454e-41d5-bd29-2d3755cd33b0</Property>
+    </Instance>
+    <Instance Guid="50b53e43-6e84-4880-817d-5f2c3b69e78a">
+      <Name>Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf</Name>
+      <Type>File</Type>
+      <RelativePath>Reference_documentations\Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf</RelativePath>
+      <ParentItem>c75435aa-eb1a-46de-a1d2-543c6e8f4cf9</ParentItem>
+      <Property>351c4320-ebcc-402b-bda1-853d6f215b93</Property>
+    </Instance>
+    <Instance Guid="d869ca02-1949-48ee-8c99-7b50d0ae0577">
+      <Name>Switch Relay Board.pdf</Name>
+      <Type>File</Type>
+      <RelativePath>Reference_documentations\Switch Relay Board.pdf</RelativePath>
+      <ParentItem>c75435aa-eb1a-46de-a1d2-543c6e8f4cf9</ParentItem>
+      <Property>423a0fb7-8100-49ce-aae7-0b50d168383a</Property>
+    </Instance>
   </Class>
   <Class Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
     <Instance Guid="fb98844b-2c27-4275-9804-f6e63e204da0">
@@ -833,6 +874,21 @@
     <Instance Guid="42aa7123-30ca-4f0e-9296-5816fdeaaaca">
       <MemoCount>0</MemoCount>
     </Instance>
+    <Instance Guid="455df243-1102-45e6-97f9-c86d314a5b4e">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="6b31fe36-bcf6-4dec-a9bc-b882d968b006">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="a37e1ad4-454e-41d5-bd29-2d3755cd33b0">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="351c4320-ebcc-402b-bda1-853d6f215b93">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="423a0fb7-8100-49ce-aae7-0b50d168383a">
+      <MemoCount>0</MemoCount>
+    </Instance>
   </Class>
   <Class Guid="78a5c5cd-76cb-4bcc-a031-3020011fbc9a">
     <Instance Guid="6cfdcd04-a477-447e-9a22-0eaa67fed857">
@@ -863,6 +919,12 @@
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="57ddb3da-8fef-41fd-8d4a-3e9a72d732ce">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="3c9dca1c-8a8b-46d9-a310-d669eb45b0c2">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="532fbbe4-05cf-429d-90e7-143872a7add6">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
@@ -2174,6 +2236,26 @@ DIO
     <Instance Guid="19bfed63-fa25-4794-8ff6-74dc70618552">
       <ItemAddTime>634986124691884435</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="ab2481a1-bce0-4be5-b952-a8b8d847a794">
+      <ItemAddTime>634989624629643785</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="8a392560-914d-4875-9be2-617bfb086a10">
+      <ItemAddTime>634989624629643785</ItemAddTime>
+      <ItemAddTimeCount>1</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="0da1bece-952e-4597-8241-194986eaeacc">
+      <ItemAddTime>634989624629643785</ItemAddTime>
+      <ItemAddTimeCount>2</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="50b53e43-6e84-4880-817d-5f2c3b69e78a">
+      <ItemAddTime>634989624629643785</ItemAddTime>
+      <ItemAddTimeCount>3</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="d869ca02-1949-48ee-8c99-7b50d0ae0577">
+      <ItemAddTime>634989624629643785</ItemAddTime>
+      <ItemAddTimeCount>4</ItemAddTimeCount>
     </Instance>
     <Instance Guid="2317529b-91c1-49b6-8351-6d8f51718b0d">
       <TimeTagModified-SourceItem0--0>-8588529555936463208</TimeTagModified-SourceItem0--0>

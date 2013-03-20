@@ -110,6 +110,11 @@
   <ItemGroup>
     <None Include="..\protocol\How_to_implement_command_message_parsing.txt" />
     <None Include="..\protocol\Protocol.txt" />
+    <None Include="..\Reference_documentations\IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf" />
+    <None Include="..\Reference_documentations\Micrcontroller board.pdf" />
+    <None Include="..\Reference_documentations\NI-Tutorial-3388-en.pdf" />
+    <None Include="..\Reference_documentations\Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf" />
+    <None Include="..\Reference_documentations\Switch Relay Board.pdf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

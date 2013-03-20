@@ -19,6 +19,12 @@
 #include "Parse_UART2_Message.h"
 #include "error_code.h"
 #include "handling_command.h"
+#include "../utility.h"
+
+
+/***********************************************************************/
+// Macros :
+// #define REMOVE_PREFIX_ACTION_KEY_WORD
 
 
 /***********************************************************************/
@@ -34,7 +40,8 @@ int Parse_UART2_Received_Message(char *sMesg)
 	int iResult = -1;
 	unsigned int uiPosOfCharInString = 0;
 
-	unsigned int uiTempSpecificCharPosition = 0;
+	unsigned int uiPosOfCmdSeparator_Colon = strcspn(sMesg, ":"),
+				 uiPosOfCmdSeparator_Space = strcspn(sMesg, " ");
 
 	char sCommand_Group[16] = "",
 	     sAction_Catalog[16] = "";
@@ -65,20 +72,20 @@ int Parse_UART2_Received_Message(char *sMesg)
 	/* Check the command type : Request or Query(?) */
 	strncpy(cCommand_Type, (sMesg + uiLengthOfMesg - 2), 1);
 
-	{
-		uiTempSpecificCharPosition = strcspn(sMesg, ":");	// To get the position of 1st specific character colon(:)
-
-		strncpy(sCommand_Group, sMesg+1, uiTempSpecificCharPosition-1);
-		ToUpperString(sCommand_Group);
-	}
-
+#if defined (REMOVE_PREFIX_ACTION_KEY_WORD)
+	strncpy(sCommand_Group, sMesg+1, uiPosOfCmdSeparator_Colon-1);
+	ToUpperString(sCommand_Group);
 	if (strncmp(sCommand_Group, "ACTI", 4) == 0)
 	{
-		strncpy(sTempSubString, sMesg+uiTempSpecificCharPosition+1, uiLengthOfMesg-1);
-		uiTempSpecificCharPosition = strcspn(sTempSubString, " ");
-		strncpy(sAction_Catalog, sTempSubString, uiTempSpecificCharPosition);
+		strncpy(sTempSubString, sMesg+uiPosOfCmdSeparator_Colon+1, uiLengthOfMesg-1);
+		uiPosOfCmdSeparator_Space = strcspn(sTempSubString, " ");
+		strncpy(sAction_Catalog, sTempSubString, uiPosOfCmdSeparator_Space);
 		ToUpperString(sAction_Catalog);
-
+#else
+		strncpy(sAction_Catalog, sMesg+1, uiPosOfCmdSeparator_Colon-1);
+		ToUpperString(sAction_Catalog);
+		strncpy(sTempSubString, sMesg+1, uiLengthOfMesg-1);
+#endif	/*  REMOVE_PREFIX_ACTION_KEY_WORD  */
 		if (strncmp(sAction_Catalog, "SWIT", 4) == 0)	// Catalog : "Switch (or Relay) control" command
 		{
 			iResult = handling_Switch_Relay_Control_cmd(sTempSubString);
@@ -139,6 +146,7 @@ int Parse_UART2_Received_Message(char *sMesg)
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
+#if defined (REMOVE_PREFIX_ACTION_KEY_WORD)
 		else
 		{
 			g_iErrorCodeNo = -2;
@@ -156,8 +164,18 @@ int Parse_UART2_Received_Message(char *sMesg)
 		g_iErrorCodeNo = iResult;
 		return iResult;
 	}
+#else
+		else if (strncmp(sAction_Catalog, "SYST", 4) == 0)
+		{
+			iResult = handling_System_cmd(sMesg);
+			g_iErrorCodeNo = iResult;
+			return iResult;
+		}
+#endif
 	else
 	{
+		g_iErrorCodeNo = -2;
+		return -2;
 	}
 
 /***********************************/

@@ -86,6 +86,20 @@
 				$ACTIon:SWITch 0x01:000000000000000000000000!
 				$ACTIon:SWITch 0x01:111111111111111111111111!
 
+				===========================================================================================================
+				$SWITch 0x01:12 ON!
+				$SWITch 0x5F:05 OFF;SWITch 0x03:24 ON;SWITch 0x07:01 OFF;SWITch 0x80:15 ON!
+				$SWITch 0x01:05 ON;SWITch 0x01:21 ON;SWITch 0x01:01 ON;SWITch 0x01:10 ON;SWITch 0x01:07 ON;SWITch 0x01:11 ON;SWITch 0x01:16 ON;SWITch 0x01:17 ON;SWITch 0x01:23 ON!
+				$SWITch 0x01:05 OFF;SWITch 0x01:21 OFF;SWITch 0x01:01 OFF;SWITch 0x01:10 OFF;SWITch 0x01:07 OFF;SWITch 0x01:11 OFF;SWITch 0x01:16 OFF;SWITch 0x01:17 OFF;SWITch 0x01:23 OFF!
+				$SWITch 0x01:17 OFF,09 OFF,11 ON,07 OFF,21 OFF,15 OFF,23 OFF!
+				$SWITch 0x01:17 ON,09 ON,11 OFF,07 ON,21 ON,15 ON,23 ON!
+				$SWITch 0x01:XXXXX1XXXX0XX1X011X1001X!
+				$SWITch 0x01:XXXXX1XXXX0XX1X011X1001X;SWITch 0x01:101XX0XXXX1XX10100X1XXXX!
+
+				$SWITch 0x01:000000000000000000000000!
+				$SWITch 0x01:111111111111111111111111!
+				===========================================================================================================
+
 			ADC catalog :
 				$ACTIon:ADC 2:VOLT?!
 				$ACTIon:ADC *:VOLT?!
@@ -93,21 +107,56 @@
 				$ACTIon:ADC 5:CURRent 82.5?!
 				$ACTIon:ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?!
 
+				===========================================================================================================
+				$ADC 2:VOLT?!
+				$ADC *:VOLT?!
+				$ADC 1:VOLT?;ADC 3:VOLT?;ADC 7:VOLT?!
+				$ADC 5:CURRent 82.5?!
+				$ADC 7:CURRent 128.35?;ADC 8:CURRent 65.80?!
+				===========================================================================================================
+
 			DAC catalog :
 				$ACTIon:DAC:VOLT 5!
 				$ACTIon:DAC:VOLT -12.5!
 
+				===========================================================================================================
+				$DAC:VOLT 5!
+				$DAC:VOLT -12.5!
+				===========================================================================================================
+
 			DIN catalog :
 				$ACTIon:DIN 2:STATe?!
 				$ACTIon:DIN 5:STATe?;DIN 8:STATe?;DIN 7:STATe?;DIN 24:STATe?!
+
+				===========================================================================================================
+				$DIN 2:STATe?!
+				$DIN 5:STATe?;DIN 8:STATe?;DIN 7:STATe?;DIN 24:STATe?!
+				===========================================================================================================
 
 			DOUT catalog :
 				$ACTIon:DOUT 0x05:16 HIGH!
 				$ACTIon:DOUT 0x08:21 LOW;DOUT 0x03:19 LOW;DOUT 0x10:04 HIGH!
 				$ACTIon:DOUT 0x01:XXXXXXX1X0X10XX111X000X1!
 
+				===========================================================================================================
+				$DOUT 0x05:16 HIGH!
+				$DOUT 0x08:21 LOW;DOUT 0x03:19 LOW;DOUT 0x10:04 HIGH!
+				$DOUT 0x01:XXXXXXX1X0X10XX111X000X1!
+				$DOUT 0x01:000000000000000000000000!
+				$DOUT 0x01:111111111111111111111111!
+				$DOUT 0x01:21 LOW;DOUT 0x01:19 LOW;DOUT 0x01:04 HIGH!
+				$DOUT 0x01:21 HIGH;DOUT 0x01:19 HIGH;DOUT 0x01:04 HIGH!
+
+				$DOUT 0x01:21 HIGH;DOUT 0x01:17 HIGH;DOUT 0x01:04 HIGH;DOUT 0x01:06 HIGH;DOUT 0x01:13 HIGH;DOUT 0x01:2 HIGH!
+				$DOUT 0x01:21 LOW;DOUT 0x01:17 LOW;DOUT 0x01:04 LOW;DOUT 0x01:06 LOW;DOUT 0x01:13 LOW;DOUT 0x01:2 LOW!
+				===========================================================================================================
+
 			PWM catalog :
 				$ACTIon:PWM CH#:Freq DutyCycle!
+
+				===========================================================================================================
+				$PWM CH#:Freq DutyCycle!
+				===========================================================================================================
 
 
 

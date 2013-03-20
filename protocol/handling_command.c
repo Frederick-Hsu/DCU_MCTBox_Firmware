@@ -15,6 +15,7 @@
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
+#include "handling_DIO_cmd.h"
 #include "../utility.h"
 
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
