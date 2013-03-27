@@ -915,16 +915,13 @@
     <Instance Guid="45559f59-1ecf-4a05-b219-69f9ffc532da">
       <MemoCount>0</MemoCount>
     </Instance>
+    <Instance Guid="532fbbe4-05cf-429d-90e7-143872a7add6">
+      <MemoCount>0</MemoCount>
+    </Instance>
     <Instance Guid="95eca791-ff40-4442-b47a-0067cba34e29">
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="57ddb3da-8fef-41fd-8d4a-3e9a72d732ce">
-      <MemoCount>0</MemoCount>
-    </Instance>
-    <Instance Guid="3c9dca1c-8a8b-46d9-a310-d669eb45b0c2">
-      <MemoCount>0</MemoCount>
-    </Instance>
-    <Instance Guid="532fbbe4-05cf-429d-90e7-143872a7add6">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
