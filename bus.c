@@ -531,30 +531,57 @@ DWORD Read_Digital_In_Bus_Value()
 	 * Just directly get its individual value of each port.
 	 * Remarked by XU ZAN@2012-10-20
 	 */
-	dwDigitalInValue = DIN00 + 
-			   DIN01<<1 + 
-			   DIN02<<2 + 
-			   DIN03<<3 + 
-			   DIN04<<4 + 
-			   DIN05<<5 +
-			   DIN06<<6 +
-			   DIN07<<7 +
-			   DIN08<<8 +
-			   DIN09<<9 +
-			   DIN10<<10 +
-			   DIN11<<11 +
-			   DIN12<<12 +
-			   DIN13<<13 +
-			   DIN14<<14 +
-			   DIN15<<15 +
-			   DIN16<<16 +
-			   DIN17<<17 +
-			   DIN18<<18 +
-			   DIN19<<19 +
-			   DIN20<<20 +
-			   DIN21<<21 +
-			   DIN22<<22 +
-			   DIN23<<23;
+	#if 0
+	dwDigitalInValue = (DIN00    ) + 
+			   (DIN01<< 1) + 
+			   (DIN02<< 2) + 
+			   (DIN03<< 3) + 
+			   (DIN04<< 4) + 
+			   (DIN05<< 5) +
+			   (DIN06<< 6) +
+			   (DIN07<< 7) +
+			   (DIN08<< 8) +
+			   (DIN09<< 9) +
+			   (DIN10<<10) +
+			   (DIN11<<11) +
+			   (DIN12<<12) +
+			   (DIN13<<13) +
+			   (DIN14<<14) +
+			   (DIN15<<15) +
+			   (DIN16<<16) +
+			   (DIN17<<17) +
+			   (DIN18<<18) +
+			   (DIN19<<19) +
+			   (DIN20<<20) +
+			   (DIN21<<21) +
+			   (DIN22<<22) +
+			   (DIN23<<23) ;
+	#else
+	dwDigitalInValue = ((PDLL.5 & 0x00000001)      ) + 	// Please pay attention to the operator priority issue
+			   ((PDLL.4 & 0x00000001) <<  1) +	// "+" operator is prior than "<<" operator.
+			   ((PDLL.3 & 0x00000001) <<  2) +	// You can use () to re-assign the expression priority manually.
+			   ((PDLL.2 & 0x00000001) <<  3) +
+			   ((PDLL.1 & 0x00000001) <<  4) +
+			   ((PDLL.0 & 0x00000001) <<  5) +
+			   ((PCT.6  & 0x00000001) <<  6) +
+			   ((PCT.4  & 0x00000001) <<  7) +
+			   ((P9L.2  & 0x00000001) <<  8) +
+			   ((P9L.1  & 0x00000001) <<  9) +
+			   ((P9L.0  & 0x00000001) << 10) +
+			   ((P5.1   & 0x00000001) << 11) +
+			   ((P5.0   & 0x00000001) << 12) +
+			   ((P3L.7  & 0x00000001) << 13) +
+			   ((P3L.6  & 0x00000001) << 14) +
+			   ((P3L.5  & 0x00000001) << 15) +
+			   ((P0.6   & 0x00000001) << 16) +
+			   ((P0.4   & 0x00000001) << 17) +
+			   ((P0.3   & 0x00000001) << 18) +
+			   ((P0.2   & 0x00000001) << 19) +
+			   ((P0.1   & 0x00000001) << 20) +
+			   ((P0.0   & 0x00000001) << 21) +
+			   ((P1.1   & 0x00000001) << 22) + 
+			   ((P1.0   & 0x00000001) << 23) ;
+	#endif
 	
 	return dwDigitalInValue;
 }
