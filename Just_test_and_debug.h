@@ -27,6 +27,10 @@
 		void Print_ADC_Values_8Channels(void);
 		
 		void Test_MCU_Chip_System(void);
+		
+		void Test_1Ch_ADC_Voltage_Measurement(void);
+		
+		void Test_1Ch_DIN_Measurement(void);
 	
 	#endif	/*    TEST_DEBUG_PURPOSE    */
 	

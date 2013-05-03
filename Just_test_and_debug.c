@@ -12,8 +12,9 @@
 
 #include "Just_test_and_debug.h"
  
-#include "Switch_Relay_Control\Switch_Relay_Control.h"
+#include "Switch_Relay_Control/Switch_Relay_Control.h"
 #include "bus.h"
+#include "DIO/Digital_IN.h"
 
 
 /*************************************************************************/
@@ -158,6 +159,44 @@
 		
 		sprintf(sTemp, "This MCU chip is a %d-byte system.\n\n", sizeof(iBit));
 		UARTD2_SendData(sTemp, strlen(sTemp)*sizeof(char));
+		
+		return;
+	}
+	
+	void Test_1Ch_ADC_Voltage_Measurement(void)
+	{
+		int iADC_CHn = 0;
+		int iAdcCntValue = 0;
+		float fVoltage = 0.0000f;
+		
+		char sAdcMeasureResult[128] = {0};
+		
+		ADC_Acquiring_AnalogInputValue(iADC_CHn, &iAdcCntValue);	
+		Calculate_Analog_Input_Value_for_1Ch(iADC_CHn, &fVoltage);
+		
+		sprintf(sAdcMeasureResult, 
+			"ADC %d:COUNT %d\tADC %d:VOLT  %f\n",
+			iADC_CHn, iAdcCntValue, fVoltage);
+		UARTD2_SendData(sAdcMeasureResult, strlen(sAdcMeasureResult)*sizeof(char));
+		
+		return;
+	}
+	
+	void Test_1Ch_DIN_Measurement(void)
+	{
+		DIN_CHm_STATE tCurrentDinCh = {23, LOW};
+		char sDinMeasureResult[128] = {0};
+		
+		Read_DIN_CHn_State(&tCurrentDinCh);
+		if (LOW == tCurrentDinCh.eCHm_State)
+		{
+			sprintf(sDinMeasureResult, "DIN %d:STATE LOW\n", tCurrentDinCh.eCHm);
+		}
+		else
+		{
+			sprintf(sDinMeasureResult, "DIN %d:STATE HIGH\n", tCurrentDinCh.eCHm);
+		}
+		UARTD2_SendData(sDinMeasureResult, strlen(sDinMeasureResult)*sizeof(char));
 		
 		return;
 	}
