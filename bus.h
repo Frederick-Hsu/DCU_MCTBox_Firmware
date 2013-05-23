@@ -183,6 +183,10 @@
 	void Write_DataBus_Single_CHn(     DWORD   dwCHn,
 				      enum LEVEL   eSpecificLevelValue);
 	
+	void Write_DataBus_Output_Port_Mode(	 BYTE 	byBoardIdx,
+				    	 	 DWORD 	dwCHn,
+				    	    enum LEVEL 	eLevelValue);
+	
 	DWORD Read_DataBus_State_from_DB23_to_DB00(void);
 	
 	

@@ -19,6 +19,8 @@
 #include "Switch_Relay_Control.h"
 #include "..\bus.h"
 
+#define FIX_ISSUE_DATABUS_INPUT_OUTPUT_MODE_CONFUSION_WITH_ADC
+
 void Control_Single_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSingleSwitchCHn)
 {
 	DWORD iCHn = pSingleSwitchCHn->dwSwitch_Relay_CHn;
@@ -36,7 +38,17 @@ void Control_Single_Switch(PST_Access_Ctrl_SwitchRelayMatrix pSingleSwitchCHn)
 	Write_Address_Bus(pSingleSwitchCHn->byteBoardID);
 	
 	// Step 3 :
-	Write_DataBus_Single_CHn(iCHn-1, eLEVEL);	
+	#if defined (FIX_ISSUE_DATABUS_INPUT_OUTPUT_MODE_CONFUSION_WITH_ADC)
+	/* Issue : 
+	 */
+	 	#if 0
+		Write_DataBus_Single_CHn(iCHn-1, eLEVEL);
+		#else
+		Write_DataBus_Output_Port_Mode(pSingleSwitchCHn->byteBoardID,
+					       iCHn-1,
+					       eLEVEL);
+		#endif
+	#endif	/* End FIX_ISSUE */
 	
 	/* A short delay should be inserted here.
 	 *

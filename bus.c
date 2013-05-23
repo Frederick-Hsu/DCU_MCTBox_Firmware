@@ -189,7 +189,9 @@
 	 */
 	BYTE g_btDAC_In_Databus_bit7_0 = 0x00; // = P7L;
 	
-	
+	/*******************************************************************************/
+	// Static global variables
+	static UINT sg_uiDataBusOutModeInitValue[256] = {0x00000000};
 	
 	
 /*======================================================================================================================================================================================================*/
@@ -798,7 +800,27 @@ void Write_DataBus_Single_CHn(     DWORD  dwCHn,  /* 0 <= CHn <= 23   must */
 	return;
 }
 
+void Write_DataBus_Output_Port_Mode(	 BYTE 	byBoardIdx,
+				    	 DWORD 	dwCHn,
+				    enum LEVEL 	eLevelValue)
+{
+	UINT uiPreviousDataBusValue = 0x00000000,
+	     uiCurrentChangedDataBusValue = 0x00000000;
 
+	uiPreviousDataBusValue = sg_uiDataBusOutModeInitValue[byBoardIdx];
+	if (eLevelValue == HIGH)
+	{
+		uiCurrentChangedDataBusValue = uiPreviousDataBusValue | (0x00000001 << dwCHn);
+	}
+	else if (eLevelValue == LOW)
+	{
+		uiCurrentChangedDataBusValue = uiPreviousDataBusValue & (~(0x00000001 << dwCHn));
+	}
+	sg_uiDataBusOutModeInitValue[byBoardIdx] = uiCurrentChangedDataBusValue;
+	
+	Write_All_DataBus(uiCurrentChangedDataBusValue);
+	return;
+}
 
 DWORD Read_DataBus_State_from_DB23_to_DB00(void)
 {
