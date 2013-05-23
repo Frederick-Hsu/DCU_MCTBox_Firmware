@@ -17,8 +17,8 @@
 #pragma ioreg
 
 
-static const float fADC_Ref_Voltage // = 2.5000f;	// The internal reference voltage inside chip AD976A
-				    = 10.0000f;		// 2.5V or 10.0V, which is correct?	Remarked by XUZAN@2012-10-25
+static const float fADC_Ref_Voltage = 2.5000f;	// The internal reference voltage inside chip AD976A
+				    // = 10.0000f;		// 2.5V or 10.0V, which is correct?	Remarked by XUZAN@2012-10-25
 
 
 
@@ -124,6 +124,7 @@ void ADC_Acquiring_AnalogInputValue(E_ADC_CH 	eADC_CHn,
 	 */
 	CS0 = HIGH;
 	ENDA = HIGH;
+	// ENDA = LOW;	// Just for hardware debugging.
 
 	PORT_ChangePCM3Input();		// Change BUSY port to Input mode
 
@@ -142,17 +143,22 @@ void ADC_Acquiring_AnalogInputValue(E_ADC_CH 	eADC_CHn,
 		NOP();		// each NOP() will cost 1 instruction cycle.  (1 instruction cycle = 1/core_frequency (32MHz) = 31.25ns)
 		CON = HIGH;
 
+		#if 1
 		do
 		{			// Just waiting for the BUSY line, till it become HIGH.
 			NOP();		// Use NOP() is used to kill the time, nothing need to do.
 		}			//
 		while(BUSY != HIGH);	// Then start to acquire immediately BUSY line become HIGH, quit the loop.
+		#endif
 
 		iTempAdcInValue = Read_ADCInput_DataBus_from_DB15_to_DB00();
 	}
 	Disable_ADC_CHNL_Selector_Chip_ADG1208();	// Disable ADC
 
-	*iAIN_Value = iTempAdcInValue;
+	// *iAIN_Value = iTempAdcInValue;
+	
+	memcpy(iAIN_Value, &iTempAdcInValue, sizeof(int));
+	
 	return;
 }
 
@@ -204,7 +210,9 @@ void Calculate_Analog_Input_Value_for_1Ch(E_ADC_CH 	eADC_CHn,
 
 	ADC_Acquiring_AnalogInputValue(eADC_CHn, &iADCValue);
 
-	fTempValue = iADCValue*fADC_Ref_Voltage/power(2, 16);
+	// fTempValue = iADCValue*fADC_Ref_Voltage/power(2, 16);
+	// fTempValue = ((float)(iADCValue-65))/326.66;
+	fTempValue = ((float)(iADCValue-28))/1810.16;
 
 	// fAnalogInputValue = &fTempValue;
 	memcpy(fAnalogInputValue, &fTempValue, sizeof(float));

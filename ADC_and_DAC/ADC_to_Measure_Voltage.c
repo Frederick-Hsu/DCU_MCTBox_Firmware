@@ -49,14 +49,12 @@ float Measure_Single_CHn_Voltage_Value(E_ADC_CH 	eCHn,
 	
 	Calculate_Analog_Input_Value_for_1Ch(eCHn, &fVoltage);
 	
-	#if (SCALING_COEFFICIENT == SCALING_COEFFICIENT_FIXED_BY_REXT)
-	
-		fVoltage = fVoltage * g_fScalingCoefficient_FixedByRext;
-		
-	#elif (SCALING_COEFFICIENT == SCALING_COEFFICIENT_DETERMINED_BY_USER)
-	
-		fVoltage = fVoltage * fScalingCoefficient;
-	
+	#if 0
+		#if (SCALING_COEFFICIENT == SCALING_COEFFICIENT_FIXED_BY_REXT)
+			fVoltage = fVoltage * g_fScalingCoefficient_FixedByRext;
+		#elif (SCALING_COEFFICIENT == SCALING_COEFFICIENT_DETERMINED_BY_USER)
+			fVoltage = fVoltage * fScalingCoefficient;
+		#endif
 	#endif
 	
 	return fVoltage;
