@@ -17,24 +17,26 @@
 #define _HANDLING_ADC_DAC_CMD_H
 
 	int handling_Voltage_Measurement(char *sVoltageMeasurementCmdMesg, 
-									 char *sARGOUT_VoltageMeasureResultResponse);
+					 char *sARGOUT_VoltageMeasureResultResponse);
 
 	int handling_Current_Measurement(char *sCurrentMeasurementCmdMesg, 
-									 char *sARGOUT_CurrentMeasureResultResponse);
+					 char *sARGOUT_CurrentMeasureResultResponse);
 
 	int handling_1VoltageMeasureUnit(char *sARGIN_1VoltageMeasureUnit_Mesg, 
-									 char *sARGOUT_VoltageMeasureResponse);
+					 char *sARGOUT_VoltageMeasureResponse);
 
 	int handling_MultiVoltageMeasureUnits(char *sARGIN_MultiVoltageMeasureUnits_Mesg,
-										  char *sARGOUT_MultiVoltageMeasureResponse);
+					      char *sARGOUT_MultiVoltageMeasureResponse);
 
 	int handling_8CHVoltageMeasurement(char *ARGOUT_8ChVoltageMeasureResponse);
 
 	int handling_MultiCurrentMeasureUnits(char *sARGIN_MultiCurrentMeasureUnits_Mesg,
-										  char *sARGOUT_MultiCurrentMeasureResponse);
+					      char *sARGOUT_MultiCurrentMeasureResponse);
 
 	int handling_1CurrentMeasureUnit(char *sARGIN_1CurrentMeasureUnit_Mesg,
-									 char *sARGOUT_CurrentMeasureResponse);
+					 char *sARGOUT_CurrentMeasureResponse);
+	
+	int handling_DAC_Voltage_Output(char *sDACVoltageOutputCmdMesg);
 
 #endif	/*  _HANDLING_ADC_DAC_CMD_H  */
 
