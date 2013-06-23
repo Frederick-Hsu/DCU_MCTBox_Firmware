@@ -326,7 +326,7 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 		return g_iErrorCodeNo;
 	}
 	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
+		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State, NULL);
 	#endif
 
 	do 
@@ -346,7 +346,7 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 			return g_iErrorCodeNo;
 		}
 		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-			Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
+			Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State, NULL);
 		#endif
 		/*************************************************************************************************/
 		memset(sTempRestSubString, 0, strlen(sTempRestSubString)*sizeof(char));
@@ -367,7 +367,7 @@ int handling_Batch_Switches(char* sBatch_Switch_Ctrl_Cmd_Mesg)
 		return g_iErrorCodeNo;
 	}
 	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State);
+		Control_Batch_Switch(bytSwitchBoardID, &pSwitch_CH_State, NULL);
 	#endif
 	// free(&pSwitch_CH_State);
 	return iResult;
