@@ -74,6 +74,14 @@ float DAC_Output_Voltage(BYTE byteDigital_Input)
 	
 	return fDAC_Voltage;
 }
+void DAC_OutPut_Voltage_For_Debugging(BYTE byDigit_Input)
+{
+	Enable_DAC_Chip_DAC0832();
+	ENAD = LOW;
+	CS0  = HIGH;
+	Write_DAC_Value_to_Chip_DAC0832(byDigit_Input);
+	// Disable_DAC_Chip_DAC0832();
+}
 
 void DAC_Output_Real_Voltage(float fRealVoltageValue)
 {

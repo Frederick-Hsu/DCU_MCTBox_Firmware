@@ -181,15 +181,15 @@ int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 	int iResult = 0;
 
 	unsigned int uiLen = strlen(sDAC_cmd_Mesg),
-				 uiPosOfCmdSeparator_Colon = strcspn(sDAC_cmd_Mesg, ":"),
-				 uiPosOfCmdSeparator_Space = strcspn(sDAC_cmd_Mesg, " ");
+			     uiPosOfCmdSeparator_Colon = strcspn(sDAC_cmd_Mesg, ":"),
+			     uiPosOfCmdSeparator_Space = strcspn(sDAC_cmd_Mesg, " ");
 
 	char sDAC_OutputType[16] = {0}, sDAC_OutputVoltageValue[16] = {0};
 	float fOutputVoltage = 0.0000f;
 
 	strncpy(sDAC_OutputType,
-			sDAC_cmd_Mesg+uiPosOfCmdSeparator_Colon+1,
-			uiPosOfCmdSeparator_Space-uiPosOfCmdSeparator_Colon-1);
+		sDAC_cmd_Mesg+uiPosOfCmdSeparator_Colon+1,
+		uiPosOfCmdSeparator_Space-uiPosOfCmdSeparator_Colon-1);
 
 	ToUpperString(sDAC_OutputType);
 	if (strncmp(sDAC_OutputType, "VOLT", 4))
@@ -214,11 +214,21 @@ int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 	 *
 	 */
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-	#if defined (JUST_TESTING_PURPOSE)
-		DAC_Output_Real_Voltage(fOutputVoltage);
-	#else
-		DAC_Output_Voltage(abs(floorf(fOutputVoltage)));
-	#endif	/*  JUST_TESTING_PURPOSE  */
+	/*
+	 * Do experiment to output 256 voltage values, test and verify the DAC voltage linearity.
+	 * Just for debugging purpose.
+	 *
+	 * Remarked by Xu Zan@2013-05-28
+	 */
+	DAC_OutPut_Voltage_For_Debugging(atoi(sDAC_OutputVoltageValue));
+	
+	#if 0	// Temporarily disable this actual DAC_Outputing_Voltage block.	Modified by Xu Zan@2013-05-28
+		#if defined (JUST_TESTING_PURPOSE)
+			DAC_Output_Real_Voltage(fOutputVoltage);
+		#else
+			DAC_Output_Voltage(abs(floorf(fOutputVoltage)));
+		#endif	/*  JUST_TESTING_PURPOSE  */
+	#endif
 #endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 /***************************************/

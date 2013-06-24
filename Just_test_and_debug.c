@@ -95,7 +95,7 @@
 			
 			Control_Single_Switch(pSwitch1);
 			
-			// Control_Multi_Switch(pSwitch2, pSwitch3, pSwitch4, pSwitch5, pSwitch6);
+			// Control_Multi_Switch(pSwitch2, pSwitch3, pSwitch4, pSwitch5, pSwitch6, NULL);
 			
 			free(pSwitch1);
 			free(pSwitch2);
