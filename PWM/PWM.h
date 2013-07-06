@@ -9,8 +9,15 @@
  ********************************************************************************************/
 
 #ifndef PWM_H
-#define	PWM_H
+#define PWM_H
 
+	typedef struct stPWM_Param
+	{
+		float fPWM_Freq_InHz;
+		float fPWM_DutyCycle_InPercentage;
+		float fPWM_MaxAmplitude_InVoltage;
+	}
+	ST_PWM_Param, *PST_PWM_Param;
 	
 
 #endif	/*  PWM_H  */
