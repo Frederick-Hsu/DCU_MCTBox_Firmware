@@ -37,6 +37,8 @@
 /* End user code for include definition. Do not edit comment generated here */
 #include "user_define.h"
 
+#include "PWM/PWM.h"
+
 /*
 *******************************************************************************
 **  Global define
@@ -45,6 +47,7 @@
 /* Start user code for global definition. Do not edit comment generated here */
 /* End user code for global definition. Do not edit comment generated here */
 
+extern int iCurrentActivePwmOutCh;
 
 /*
 **-----------------------------------------------------------------------------
@@ -64,6 +67,19 @@ __interrupt void MD_INTTAA0CC0(void)
 {
 	/* Start user code. Do not edit comment generated here */	
 	/* End user code. Do not edit comment generated here */
+	
+	//TAA0 timer ---> timeout
+	TAA0_Stop();
+	
+	if (iCurrentActivePwmOutCh == 1)
+	{
+		PWM_OUT1 = LOW;
+	}
+	else if (iCurrentActivePwmOutCh == 2)
+	{
+		PWM_OUT2 = LOW;
+	}	
+	TAA1_Start();
 }
 
 /*
@@ -84,6 +100,19 @@ __interrupt void MD_INTTAA1CC0(void)
 {
 	/* Start user code. Do not edit comment generated here */	
 	/* End user code. Do not edit comment generated here */
+	
+	// TAA1 timer ---> timeout
+	TAA1_Stop();
+	
+	if (iCurrentActivePwmOutCh == 1)
+	{
+		PWM_OUT1 = HIGH;
+	}
+	else if (iCurrentActivePwmOutCh == 2)
+	{
+		PWM_OUT2 = HIGH;
+	}
+	TAA0_Start();	// Restart TAA0 timer
 }
 
 /* Start adding user code. Do not edit comment generated here */
