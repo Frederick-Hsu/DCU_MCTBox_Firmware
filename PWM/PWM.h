@@ -71,6 +71,11 @@
 	void PWM_Out_Start(void);
 	void PWM_Out_Stop(void);
 	
+	void Calculate_Timer_Interval(float fARGIN_PWM_Freq_InHz, 
+				      float fARGIN_PWM_DutyCycle_InPercentage,
+				      USHORT *ushrtARGOUT_pInterval_For_PwmON,
+				      USHORT *ushrtARGOUT_pInterval_For_PwmOFF);
+	
 
 #endif	/*  PWM_H  */
 
