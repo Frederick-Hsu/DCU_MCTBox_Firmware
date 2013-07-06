@@ -742,6 +742,9 @@
     <Instance Guid="06ee4024-7a26-4cd5-bbf1-2a417652e973">
       <MemoCount>0</MemoCount>
     </Instance>
+    <Instance Guid="a29e3fc1-42d3-4e3c-bb6b-565f1dc808ec">
+      <MemoCount>0</MemoCount>
+    </Instance>
     <Instance Guid="7984d5da-b2f4-41a5-a414-6fe76322ac4f">
       <MemoCount>0</MemoCount>
     </Instance>
@@ -919,9 +922,6 @@
     <Instance Guid="423a0fb7-8100-49ce-aae7-0b50d168383a">
       <MemoCount>0</MemoCount>
     </Instance>
-    <Instance Guid="a29e3fc1-42d3-4e3c-bb6b-565f1dc808ec">
-      <MemoCount>0</MemoCount>
-    </Instance>
   </Class>
   <Class Guid="78a5c5cd-76cb-4bcc-a031-3020011fbc9a">
     <Instance Guid="6cfdcd04-a477-447e-9a22-0eaa67fed857">
@@ -946,9 +946,6 @@
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="45559f59-1ecf-4a05-b219-69f9ffc532da">
-      <MemoCount>0</MemoCount>
-    </Instance>
-    <Instance Guid="f07d8e42-d3a5-47bb-a83b-592c65b70ab4">
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="532fbbe4-05cf-429d-90e7-143872a7add6">
