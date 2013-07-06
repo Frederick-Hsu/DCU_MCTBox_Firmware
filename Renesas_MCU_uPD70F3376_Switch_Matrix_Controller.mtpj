@@ -625,6 +625,30 @@
       <ParentItem>cfc0ea65-384c-44a8-af6e-94be42ae2dd6</ParentItem>
       <Property>42aa7123-30ca-4f0e-9296-5816fdeaaaca</Property>
     </Instance>
+    <Instance Guid="d0bc8f83-8448-4dd5-b475-36e051c21e82">
+      <Name>PWM_In.c</Name>
+      <Type>File</Type>
+      <RelativePath>PWM\PWM_In.c</RelativePath>
+      <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
+      <ParentItem>587c948f-50b0-430c-a5b8-8b9ca960fca6</ParentItem>
+      <Property>29ed240d-a59e-485a-bc89-89d2e6135bd6</Property>
+    </Instance>
+    <Instance Guid="2b275789-0b67-45a5-9698-1658be0607d7">
+      <Name>PWM_Out.c</Name>
+      <Type>File</Type>
+      <RelativePath>PWM\PWM_Out.c</RelativePath>
+      <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
+      <ParentItem>587c948f-50b0-430c-a5b8-8b9ca960fca6</ParentItem>
+      <Property>4f385ad1-d416-4bc1-b88d-fa4992735c81</Property>
+    </Instance>
+    <Instance Guid="b4d848ff-48e8-4d83-9dba-a002c233ef99">
+      <Name>PWM.h</Name>
+      <Type>File</Type>
+      <RelativePath>PWM\PWM.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>587c948f-50b0-430c-a5b8-8b9ca960fca6</ParentItem>
+      <Property>72042465-7000-4212-9e07-cc1a742993a6</Property>
+    </Instance>
     <Instance Guid="ab2481a1-bce0-4be5-b952-a8b8d847a794">
       <Name>IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf</Name>
       <Type>File</Type>
@@ -889,6 +913,15 @@
     <Instance Guid="423a0fb7-8100-49ce-aae7-0b50d168383a">
       <MemoCount>0</MemoCount>
     </Instance>
+    <Instance Guid="29ed240d-a59e-485a-bc89-89d2e6135bd6">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="4f385ad1-d416-4bc1-b88d-fa4992735c81">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="72042465-7000-4212-9e07-cc1a742993a6">
+      <MemoCount>0</MemoCount>
+    </Instance>
   </Class>
   <Class Guid="78a5c5cd-76cb-4bcc-a031-3020011fbc9a">
     <Instance Guid="6cfdcd04-a477-447e-9a22-0eaa67fed857">
@@ -1030,7 +1063,11 @@
       <SourceItemType33>CSource</SourceItemType33>
       <SourceItemGuid34>d4e60805-fe22-4093-b8bc-66b58451f93d</SourceItemGuid34>
       <SourceItemType34>CSource</SourceItemType34>
-      <SourceItemCount>35</SourceItemCount>
+      <SourceItemGuid35>2b275789-0b67-45a5-9698-1658be0607d7</SourceItemGuid35>
+      <SourceItemType35>CSource</SourceItemType35>
+      <SourceItemGuid36>d0bc8f83-8448-4dd5-b475-36e051c21e82</SourceItemGuid36>
+      <SourceItemType36>CSource</SourceItemType36>
+      <SourceItemCount>37</SourceItemCount>
       <SectionSourceItemCount>0</SectionSourceItemCount>
     </Instance>
     <Instance Guid="33b17284-4937-470c-94e4-fc201c717342">
@@ -1215,8 +1252,9 @@
       <DisableBitOperationReplacement-DefaultValue>False</DisableBitOperationReplacement-DefaultValue>
       <TruncateAlignment-DefaultValue>False</TruncateAlignment-DefaultValue>
       <StrongestOptimization-DefaultValue>False</StrongestOptimization-DefaultValue>
-      <TimeTagModified--0>-8588500914698142973</TimeTagModified--0>
-      <AdditionalIncludePaths-0>protocol
+      <TimeTagModified--0>-8588284970372654117</TimeTagModified--0>
+      <AdditionalIncludePaths-0>PWM
+protocol
 ADC_and_DAC
 Switch_Relay_Control
 DIO
@@ -1291,7 +1329,7 @@ DIO
       <DisableBitOperationReplacement-0>False</DisableBitOperationReplacement-0>
       <TruncateAlignment-0>False</TruncateAlignment-0>
       <StrongestOptimization-0>False</StrongestOptimization-0>
-      <TimeTagModified--1>-8588500914698142973</TimeTagModified--1>
+      <TimeTagModified--1>-8588284970372654117</TimeTagModified--1>
       <AdditionalIncludePaths-1 />
       <BitFieldSign-1>True</BitFieldSign-1>
       <DebugInformation-1>True</DebugInformation-1>
@@ -1363,7 +1401,7 @@ DIO
       <DisableBitOperationReplacement-1>False</DisableBitOperationReplacement-1>
       <TruncateAlignment-1>False</TruncateAlignment-1>
       <StrongestOptimization-1>False</StrongestOptimization-1>
-      <TimeTagModified--2>-8588500914698142973</TimeTagModified--2>
+      <TimeTagModified--2>-8588284970372654117</TimeTagModified--2>
       <AdditionalIncludePaths-2 />
       <BitFieldSign-2>True</BitFieldSign-2>
       <DebugInformation-2>True</DebugInformation-2>
@@ -2254,6 +2292,18 @@ DIO
       <ItemAddTime>634989624629643785</ItemAddTime>
       <ItemAddTimeCount>4</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="d0bc8f83-8448-4dd5-b475-36e051c21e82">
+      <ItemAddTime>635087354136414097</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="2b275789-0b67-45a5-9698-1658be0607d7">
+      <ItemAddTime>635087354136414097</ItemAddTime>
+      <ItemAddTimeCount>1</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="b4d848ff-48e8-4d83-9dba-a002c233ef99">
+      <ItemAddTime>635087354482521699</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="2317529b-91c1-49b6-8351-6d8f51718b0d">
       <TimeTagModified-SourceItem0--0>-8588529555936463208</TimeTagModified-SourceItem0--0>
       <SourceItem0-BuildingTarget-0>True</SourceItem0-BuildingTarget-0>
@@ -2551,6 +2601,24 @@ DIO
       <TimeTagModified-SourceItem34--2>-8588507929963915094</TimeTagModified-SourceItem34--2>
       <SourceItem34-BuildingTarget-2>True</SourceItem34-BuildingTarget-2>
       <SourceItem34-IndividualCompileOption-2>False</SourceItem34-IndividualCompileOption-2>
+      <TimeTagModified-SourceItem35--0>-8588284970718361711</TimeTagModified-SourceItem35--0>
+      <SourceItem35-BuildingTarget-0>True</SourceItem35-BuildingTarget-0>
+      <SourceItem35-IndividualCompileOption-0>False</SourceItem35-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem35--1>-8588284970718361711</TimeTagModified-SourceItem35--1>
+      <SourceItem35-BuildingTarget-1>True</SourceItem35-BuildingTarget-1>
+      <SourceItem35-IndividualCompileOption-1>False</SourceItem35-IndividualCompileOption-1>
+      <TimeTagModified-SourceItem35--2>-8588284970718361711</TimeTagModified-SourceItem35--2>
+      <SourceItem35-BuildingTarget-2>True</SourceItem35-BuildingTarget-2>
+      <SourceItem35-IndividualCompileOption-2>False</SourceItem35-IndividualCompileOption-2>
+      <TimeTagModified-SourceItem36--0>-8588284970718361711</TimeTagModified-SourceItem36--0>
+      <SourceItem36-BuildingTarget-0>True</SourceItem36-BuildingTarget-0>
+      <SourceItem36-IndividualCompileOption-0>False</SourceItem36-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem36--1>-8588284970718361711</TimeTagModified-SourceItem36--1>
+      <SourceItem36-BuildingTarget-1>True</SourceItem36-BuildingTarget-1>
+      <SourceItem36-IndividualCompileOption-1>False</SourceItem36-IndividualCompileOption-1>
+      <TimeTagModified-SourceItem36--2>-8588284970718361711</TimeTagModified-SourceItem36--2>
+      <SourceItem36-BuildingTarget-2>True</SourceItem36-BuildingTarget-2>
+      <SourceItem36-IndividualCompileOption-2>False</SourceItem36-IndividualCompileOption-2>
     </Instance>
     <Instance Guid="0d0f149a-1fe7-4bf0-80ed-6bb1bc93c593">
       <TimeTagModified-SourceItem7--0>-8588529555936463208</TimeTagModified-SourceItem7--0>
