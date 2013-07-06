@@ -11,6 +11,20 @@
 #include "PWM.h"
 
 
+void Set_Config_PWM_Out_Param(ST_PWM_OUT stPwmParam)
+{
+}
+
+
+void PWM_Out_Start(void)
+{
+}
+
+
+void PWM_Out_Stop(void)
+{
+}
+
 /*
  * END OF FILE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  */
