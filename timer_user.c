@@ -37,7 +37,7 @@
 /* End user code for include definition. Do not edit comment generated here */
 #include "user_define.h"
 
-#include "PWM/PWM.h"
+#include "PWM/PWM_Out.h"
 
 /*
 *******************************************************************************
@@ -47,7 +47,7 @@
 /* Start user code for global definition. Do not edit comment generated here */
 /* End user code for global definition. Do not edit comment generated here */
 
-extern int iCurrentActivePwmOutCh;
+extern struct PwmOutChnSelector g_stPwmOutChn;
 
 /*
 **-----------------------------------------------------------------------------
@@ -71,14 +71,15 @@ __interrupt void MD_INTTAA0CC0(void)
 	//TAA0 timer ---> timeout
 	TAA0_Stop();
 	
-	if (iCurrentActivePwmOutCh == 1)
+	if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
 	{
-		PWM_OUT1 = LOW;
+		Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, LOW);
 	}
-	else if (iCurrentActivePwmOutCh == 2)
+	else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
 	{
-		PWM_OUT2 = LOW;
-	}	
+		Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, LOW);
+	}
+	
 	TAA1_Start();
 }
 
@@ -104,14 +105,15 @@ __interrupt void MD_INTTAA1CC0(void)
 	// TAA1 timer ---> timeout
 	TAA1_Stop();
 	
-	if (iCurrentActivePwmOutCh == 1)
+	if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
 	{
-		PWM_OUT1 = HIGH;
+		Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, HIGH);
 	}
-	else if (iCurrentActivePwmOutCh == 2)
+	else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
 	{
-		PWM_OUT2 = HIGH;
+		Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, HIGH);
 	}
+	
 	TAA0_Start();	// Restart TAA0 timer
 }
 

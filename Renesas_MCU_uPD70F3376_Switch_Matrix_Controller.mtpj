@@ -633,6 +633,14 @@
       <ParentItem>587c948f-50b0-430c-a5b8-8b9ca960fca6</ParentItem>
       <Property>29ed240d-a59e-485a-bc89-89d2e6135bd6</Property>
     </Instance>
+    <Instance Guid="e233f047-b6d3-45f4-a7fd-9238c68ee5cf">
+      <Name>PWM_In.h</Name>
+      <Type>File</Type>
+      <RelativePath>PWM\PWM_In.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>587c948f-50b0-430c-a5b8-8b9ca960fca6</ParentItem>
+      <Property>c69556dc-3be3-4736-8100-9ae404ccb1f7</Property>
+    </Instance>
     <Instance Guid="2b275789-0b67-45a5-9698-1658be0607d7">
       <Name>PWM_Out.c</Name>
       <Type>File</Type>
@@ -641,13 +649,13 @@
       <ParentItem>587c948f-50b0-430c-a5b8-8b9ca960fca6</ParentItem>
       <Property>4f385ad1-d416-4bc1-b88d-fa4992735c81</Property>
     </Instance>
-    <Instance Guid="b4d848ff-48e8-4d83-9dba-a002c233ef99">
-      <Name>PWM.h</Name>
+    <Instance Guid="a8f4ae4a-8d75-4da3-b40e-5dd68c6f9577">
+      <Name>PWM_Out.h</Name>
       <Type>File</Type>
-      <RelativePath>PWM\PWM.h</RelativePath>
+      <RelativePath>PWM\PWM_Out.h</RelativePath>
       <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
       <ParentItem>587c948f-50b0-430c-a5b8-8b9ca960fca6</ParentItem>
-      <Property>72042465-7000-4212-9e07-cc1a742993a6</Property>
+      <Property>572cac83-431b-4e42-b72b-49906db7cc31</Property>
     </Instance>
     <Instance Guid="ab2481a1-bce0-4be5-b952-a8b8d847a794">
       <Name>IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf</Name>
@@ -904,7 +912,7 @@
     <Instance Guid="4f385ad1-d416-4bc1-b88d-fa4992735c81">
       <MemoCount>0</MemoCount>
     </Instance>
-    <Instance Guid="72042465-7000-4212-9e07-cc1a742993a6">
+    <Instance Guid="c69556dc-3be3-4736-8100-9ae404ccb1f7">
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="455df243-1102-45e6-97f9-c86d314a5b4e">
@@ -920,6 +928,9 @@
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="423a0fb7-8100-49ce-aae7-0b50d168383a">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="572cac83-431b-4e42-b72b-49906db7cc31">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
@@ -1574,7 +1585,7 @@ DIO
       <PreLinkCommands-DefaultValue />
       <PostLinkCommands-DefaultValue />
       <OtherAdditionalOptions-DefaultValue />
-      <TimeTagModified--0>-8588413159249283122</TimeTagModified--0>
+      <TimeTagModified--0>-8588274944229773002</TimeTagModified--0>
       <EntrySymbol-0 />
       <LibraryFiles-0 />
       <OutputFolder-0>%BuildModeName%</OutputFolder-0>
@@ -1608,7 +1619,7 @@ DIO
       <PreLinkCommands-0 />
       <PostLinkCommands-0 />
       <OtherAdditionalOptions-0 />
-      <TimeTagModified--1>-8588413159249283122</TimeTagModified--1>
+      <TimeTagModified--1>-8588274944229773002</TimeTagModified--1>
       <EntrySymbol-1 />
       <LibraryFiles-1 />
       <OutputFolder-1>%BuildModeName%</OutputFolder-1>
@@ -1642,7 +1653,7 @@ DIO
       <PreLinkCommands-1 />
       <PostLinkCommands-1 />
       <OtherAdditionalOptions-1 />
-      <TimeTagModified--2>-8588413159249283122</TimeTagModified--2>
+      <TimeTagModified--2>-8588274944229773002</TimeTagModified--2>
       <EntrySymbol-2 />
       <LibraryFiles-2 />
       <OutputFolder-2>%BuildModeName%</OutputFolder-2>
@@ -1850,21 +1861,21 @@ DIO
       <OutputFileName-DefaultValue>lib%ProjectName%.a</OutputFileName-DefaultValue>
       <PostArchiveCommands-DefaultValue />
       <OtherAdditionalOptions-DefaultValue />
-      <TimeTagModified--0>-8588413159249283122</TimeTagModified--0>
+      <TimeTagModified--0>-8588274944229773002</TimeTagModified--0>
       <OutputFolder-0>%BuildModeName%</OutputFolder-0>
       <PreArchiveCommands-0 />
       <VerboseMode-0>False</VerboseMode-0>
       <OutputFileName-0>lib%ProjectName%.a</OutputFileName-0>
       <PostArchiveCommands-0 />
       <OtherAdditionalOptions-0 />
-      <TimeTagModified--1>-8588413159249283122</TimeTagModified--1>
+      <TimeTagModified--1>-8588274944229773002</TimeTagModified--1>
       <OutputFolder-1>%BuildModeName%</OutputFolder-1>
       <PreArchiveCommands-1 />
       <VerboseMode-1>False</VerboseMode-1>
       <OutputFileName-1>lib%ProjectName%.a</OutputFileName-1>
       <PostArchiveCommands-1 />
       <OtherAdditionalOptions-1 />
-      <TimeTagModified--2>-8588413159249283122</TimeTagModified--2>
+      <TimeTagModified--2>-8588274944229773002</TimeTagModified--2>
       <OutputFolder-2>%BuildModeName%</OutputFolder-2>
       <PreArchiveCommands-2 />
       <VerboseMode-2>False</VerboseMode-2>
@@ -2300,8 +2311,12 @@ DIO
       <ItemAddTime>635087354136414097</ItemAddTime>
       <ItemAddTimeCount>1</ItemAddTimeCount>
     </Instance>
-    <Instance Guid="b4d848ff-48e8-4d83-9dba-a002c233ef99">
-      <ItemAddTime>635087354482521699</ItemAddTime>
+    <Instance Guid="e233f047-b6d3-45f4-a7fd-9238c68ee5cf">
+      <ItemAddTime>635097381286404823</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="a8f4ae4a-8d75-4da3-b40e-5dd68c6f9577">
+      <ItemAddTime>635097381544996918</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
     <Instance Guid="2317529b-91c1-49b6-8351-6d8f51718b0d">
