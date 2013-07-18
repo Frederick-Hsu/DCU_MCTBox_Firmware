@@ -529,6 +529,22 @@
       <ParentItem>becd3c4a-0fbd-4068-9e58-06ab81b777fc</ParentItem>
       <Property>6e778bea-9622-48ec-83d6-77cadbd84b74</Property>
     </Instance>
+    <Instance Guid="7b0841ad-ec46-4e7f-aba3-5864c3cc18cb">
+      <Name>handling_PWM_cmd.c</Name>
+      <Type>File</Type>
+      <RelativePath>protocol\handling_PWM_cmd.c</RelativePath>
+      <TreeImageGuid>941832c1-fc3b-4e1b-94e8-01ea17128b42</TreeImageGuid>
+      <ParentItem>becd3c4a-0fbd-4068-9e58-06ab81b777fc</ParentItem>
+      <Property>a26608f8-7f94-4c7e-a417-a2ffc1d98a72</Property>
+    </Instance>
+    <Instance Guid="f37ea59e-d142-4f89-abb2-ea1f06b5e168">
+      <Name>handling_PWM_cmd.h</Name>
+      <Type>File</Type>
+      <RelativePath>protocol\handling_PWM_cmd.h</RelativePath>
+      <TreeImageGuid>03cad1e8-2eb3-4cde-a8a3-982423631122</TreeImageGuid>
+      <ParentItem>becd3c4a-0fbd-4068-9e58-06ab81b777fc</ParentItem>
+      <Property>ac61d10b-9b6d-4208-baa6-95ed248be2a5</Property>
+    </Instance>
     <Instance Guid="580119df-f9f4-40d1-b2bf-50d90584ed2b">
       <Name>Switch_Relay_Control.c</Name>
       <Type>File</Type>
@@ -909,10 +925,13 @@
     <Instance Guid="29ed240d-a59e-485a-bc89-89d2e6135bd6">
       <MemoCount>0</MemoCount>
     </Instance>
+    <Instance Guid="c69556dc-3be3-4736-8100-9ae404ccb1f7">
+      <MemoCount>0</MemoCount>
+    </Instance>
     <Instance Guid="4f385ad1-d416-4bc1-b88d-fa4992735c81">
       <MemoCount>0</MemoCount>
     </Instance>
-    <Instance Guid="c69556dc-3be3-4736-8100-9ae404ccb1f7">
+    <Instance Guid="572cac83-431b-4e42-b72b-49906db7cc31">
       <MemoCount>0</MemoCount>
     </Instance>
     <Instance Guid="455df243-1102-45e6-97f9-c86d314a5b4e">
@@ -930,7 +949,10 @@
     <Instance Guid="423a0fb7-8100-49ce-aae7-0b50d168383a">
       <MemoCount>0</MemoCount>
     </Instance>
-    <Instance Guid="572cac83-431b-4e42-b72b-49906db7cc31">
+    <Instance Guid="a26608f8-7f94-4c7e-a417-a2ffc1d98a72">
+      <MemoCount>0</MemoCount>
+    </Instance>
+    <Instance Guid="ac61d10b-9b6d-4208-baa6-95ed248be2a5">
       <MemoCount>0</MemoCount>
     </Instance>
   </Class>
@@ -1078,7 +1100,9 @@
       <SourceItemType35>CSource</SourceItemType35>
       <SourceItemGuid36>2b275789-0b67-45a5-9698-1658be0607d7</SourceItemGuid36>
       <SourceItemType36>CSource</SourceItemType36>
-      <SourceItemCount>37</SourceItemCount>
+      <SourceItemGuid37>7b0841ad-ec46-4e7f-aba3-5864c3cc18cb</SourceItemGuid37>
+      <SourceItemType37>CSource</SourceItemType37>
+      <SourceItemCount>38</SourceItemCount>
       <SectionSourceItemCount>0</SectionSourceItemCount>
     </Instance>
     <Instance Guid="33b17284-4937-470c-94e4-fc201c717342">
@@ -2319,6 +2343,14 @@ DIO
       <ItemAddTime>635097381544996918</ItemAddTime>
       <ItemAddTimeCount>0</ItemAddTimeCount>
     </Instance>
+    <Instance Guid="7b0841ad-ec46-4e7f-aba3-5864c3cc18cb">
+      <ItemAddTime>635097445580640896</ItemAddTime>
+      <ItemAddTimeCount>0</ItemAddTimeCount>
+    </Instance>
+    <Instance Guid="f37ea59e-d142-4f89-abb2-ea1f06b5e168">
+      <ItemAddTime>635097445580640896</ItemAddTime>
+      <ItemAddTimeCount>1</ItemAddTimeCount>
+    </Instance>
     <Instance Guid="2317529b-91c1-49b6-8351-6d8f51718b0d">
       <TimeTagModified-SourceItem0--0>-8588529555936463208</TimeTagModified-SourceItem0--0>
       <SourceItem0-BuildingTarget-0>True</SourceItem0-BuildingTarget-0>
@@ -2634,6 +2666,15 @@ DIO
       <TimeTagModified-SourceItem36--2>-8588284970718361711</TimeTagModified-SourceItem36--2>
       <SourceItem36-BuildingTarget-2>True</SourceItem36-BuildingTarget-2>
       <SourceItem36-IndividualCompileOption-2>False</SourceItem36-IndividualCompileOption-2>
+      <TimeTagModified-SourceItem37--0>-8588274879274124911</TimeTagModified-SourceItem37--0>
+      <SourceItem37-BuildingTarget-0>True</SourceItem37-BuildingTarget-0>
+      <SourceItem37-IndividualCompileOption-0>False</SourceItem37-IndividualCompileOption-0>
+      <TimeTagModified-SourceItem37--1>-8588274879274124911</TimeTagModified-SourceItem37--1>
+      <SourceItem37-BuildingTarget-1>True</SourceItem37-BuildingTarget-1>
+      <SourceItem37-IndividualCompileOption-1>False</SourceItem37-IndividualCompileOption-1>
+      <TimeTagModified-SourceItem37--2>-8588274879274124911</TimeTagModified-SourceItem37--2>
+      <SourceItem37-BuildingTarget-2>True</SourceItem37-BuildingTarget-2>
+      <SourceItem37-IndividualCompileOption-2>False</SourceItem37-IndividualCompileOption-2>
     </Instance>
     <Instance Guid="0d0f149a-1fe7-4bf0-80ed-6bb1bc93c593">
       <TimeTagModified-SourceItem7--0>-8588529555936463208</TimeTagModified-SourceItem7--0>
