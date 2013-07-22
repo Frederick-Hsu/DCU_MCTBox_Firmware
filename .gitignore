@@ -18,7 +18,6 @@
 *.layout
 *.opensdf
 FW_Simulation_Testing/UpgradeLog.XML
-FW_Simulation_Testing/FW_Simulation_Testing.vcxproj.filters
 FW_Simulation_Testing/FW_Simulation_Testing.sdf
 FW_Simulation_Testing/Debug/
 FW_Simulation_Testing/Release/
