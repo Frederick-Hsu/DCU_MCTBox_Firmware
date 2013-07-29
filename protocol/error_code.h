@@ -38,6 +38,7 @@
 		"Error code # 020: Digital-OUT board ID error.\n",
 		"Error code # 021: Digital-OUT channel number error.\n",
 		"Error code # 022: Digital-OUT channel state error.\n",
+		"Error code # 023: PWM command type error.\n",
 		""
 	};
 
