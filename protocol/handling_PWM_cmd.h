@@ -13,5 +13,12 @@
 #ifndef HANDLING_PWM_CMD_H
 #define HANDLING_PWM_CMD_H
 
+	int handling_PWMOut_cmd(char* sPWMOutCmdMesg);
+	int handling_PWMOut_Config(char *sPWMOutConfigMesg);
+	int handling_PWMOut_Start(char *sPWMOutStartMesg);
+	int handling_PWMOut_Stop(char *sPWMOutStopMesg);
+	
+	int handling_PWMIn_cmd(char* sPWMInCmdMesg);
+
 #endif	/*  HANDLING_PWM_CMD_H  */
 
