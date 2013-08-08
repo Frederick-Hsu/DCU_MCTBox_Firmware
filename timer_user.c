@@ -24,8 +24,7 @@
 *******************************************************************************
 */
 
-#pragma interrupt INTTAA0CC0 MD_INTTAA0CC0
-#pragma interrupt INTTAA1CC0 MD_INTTAA1CC0
+
 /*
 *******************************************************************************
 **  Include files
@@ -47,76 +46,164 @@
 /* Start user code for global definition. Do not edit comment generated here */
 /* End user code for global definition. Do not edit comment generated here */
 
-extern struct PwmOutChnSelector g_stPwmOutChn;
+#if (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION2)
+	#pragma interrupt INTTAA0CC0 MD_INTTAA0CC0
+	#pragma interrupt INTTAA1CC0 MD_INTTAA1CC0
 
-/*
-**-----------------------------------------------------------------------------
-**
-**	Abstract:
-**		This function is INTTAA0CC0 interrupt service routine.
-**
-**	Parameters:
-**		None
-**
-**	Returns:
-**		None
-**
-**-----------------------------------------------------------------------------
-*/
-__interrupt void MD_INTTAA0CC0(void)
-{
-	/* Start user code. Do not edit comment generated here */	
-	/* End user code. Do not edit comment generated here */
-	
-	//TAA0 timer ---> timeout
-	TAA0_Stop();
-	
-	if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
-	{
-		Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, LOW);
-	}
-	else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
-	{
-		Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, LOW);
-	}
-	
-	TAA1_Start();
-}
+	extern struct PwmOutChnSelector g_stPwmOutChn;
+	extern unsigned int iTAA0_FlagCycleCnt; 
+	extern unsigned int iTAA1_FlagCycleCnt;
+	extern USHORT ushrtPWMOnCnt_TAA0CCR0;
+	extern USHORT ushrtPWMOffCnt_TAA1CCR0;
 
-/*
-**-----------------------------------------------------------------------------
-**
-**	Abstract:
-**		This function is INTTAA1CC0 interrupt service routine.
-**
-**	Parameters:
-**		None
-**
-**	Returns:
-**		None
-**
-**-----------------------------------------------------------------------------
-*/
-__interrupt void MD_INTTAA1CC0(void)
-{
-	/* Start user code. Do not edit comment generated here */	
-	/* End user code. Do not edit comment generated here */
-	
-	// TAA1 timer ---> timeout
-	TAA1_Stop();
-	
-	if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
-	{
-		Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, HIGH);
-	}
-	else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
-	{
-		Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, HIGH);
-	}
-	
-	TAA0_Start();	// Restart TAA0 timer
-}
+	static unsigned int iTAA0_CycleAccumulator = 0;
+	static unsigned int iTAA1_CycleAccumulator = 0;
 
+	/*
+	**-----------------------------------------------------------------------------
+	**
+	**	Abstract:
+	**		This function is INTTAA0CC0 interrupt service routine.
+	**
+	**	Parameters:
+	**		None
+	**
+	**	Returns:
+	**		None
+	**
+	**-----------------------------------------------------------------------------
+	*/
+	__interrupt void MD_INTTAA0CC0(void)
+	{
+		USHORT ushrtTempPwmOnCnt_For_TAA0CCR0 = 0;
+		/* Start user code. Do not edit comment generated here */	
+		/* End user code. Do not edit comment generated here */
+		
+		if (iTAA0_FlagCycleCnt == 0)	// not use accumulator
+		{
+			TAA0_Stop();	
+			if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
+			{
+				Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, LOW);
+			}
+			else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
+			{
+				Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, LOW);
+			}
+			TAA1_Start();
+		}
+		else	// use accumulator : iTAA0_CycleAccumulator
+		{
+			if (iTAA0_CycleAccumulator < iTAA0_FlagCycleCnt)
+			{
+				iTAA0_CycleAccumulator++;
+				TAA0CCIF0 = 0;	/* clear INTTAA0CC0 interrupt flag */
+				return;
+			}
+			else if (iTAA0_CycleAccumulator == iTAA0_FlagCycleCnt)
+			{
+				TAA0_Stop();
+				TAA0_ChangeTimerCondition(&ushrtPWMOnCnt_TAA0CCR0, 1);
+				TAA0_Start();
+				iTAA0_CycleAccumulator++;
+				return;
+			}
+			else
+			{
+				//TAA0 timer ---> timeout
+				TAA0_Stop();
+				
+				if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
+				{
+					Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, LOW);
+				}
+				else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
+				{
+					Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, LOW);
+				}
+				
+				{
+					ushrtTempPwmOnCnt_For_TAA0CCR0 = 0xFFFF;
+					TAA0_ChangeTimerCondition(&ushrtTempPwmOnCnt_For_TAA0CCR0, 1);
+					iTAA0_CycleAccumulator = 0;	// Reset the accumulator
+				}
+				TAA1_Start();
+			}
+		}
+	}
+
+	/*
+	**-----------------------------------------------------------------------------
+	**
+	**	Abstract:
+	**		This function is INTTAA1CC0 interrupt service routine.
+	**
+	**	Parameters:
+	**		None
+	**
+	**	Returns:
+	**		None
+	**
+	**-----------------------------------------------------------------------------
+	*/
+	__interrupt void MD_INTTAA1CC0(void)
+	{
+		USHORT ushrtTempPwmOffCnt_For_TAA1CCR0 = 0;
+		/* Start user code. Do not edit comment generated here */	
+		/* End user code. Do not edit comment generated here */
+		if (iTAA1_FlagCycleCnt == 0)	// not use accumulator
+		{
+			// TAA1 timer ---> timeout
+			TAA1_Stop();
+			if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
+			{
+				Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, HIGH);
+			}
+			else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
+			{
+				Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, HIGH);
+			}
+			TAA0_Start();	// Restart TAA0 timer
+		}
+		else	// use accumulator : iTAA1_CycleAccumulator
+		{
+			if (iTAA1_CycleAccumulator < iTAA1_FlagCycleCnt)
+			{
+				iTAA1_CycleAccumulator++;
+				TAA1CCIF0 = 0;	/* clear INTTAA1CC0 interrupt flag */
+				return;
+			}
+			else if (iTAA1_CycleAccumulator == iTAA1_FlagCycleCnt)
+			{
+				TAA1_Stop();
+				TAA1_ChangeTimerCondition(&ushrtPWMOffCnt_TAA1CCR0, 1);
+				TAA1_Start();
+				iTAA1_CycleAccumulator++;
+				return;
+			}
+			else
+			{
+				TAA1_Stop();
+				if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
+				{
+					Set_PwmOutPrimaryChn_Level(g_stPwmOutChn.iPwmOutChn, HIGH);
+				}
+				else if (g_stPwmOutChn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
+				{
+					Set_PwmOutSecondaryChn_Level(g_stPwmOutChn.bytPwmOutBoardID, g_stPwmOutChn.iPwmOutChn, HIGH);
+				}
+				
+				{
+					ushrtTempPwmOffCnt_For_TAA1CCR0 = 0xFFFF;
+					TAA1_ChangeTimerCondition(&ushrtTempPwmOffCnt_For_TAA1CCR0, 1);
+					iTAA1_CycleAccumulator= 0;	// Reset the accumulator
+				}
+				TAA0_Start();	// Restart TAA0 timer
+			}
+		}
+	}
+
+#endif
 /* Start adding user code. Do not edit comment generated here */
 /* End user code adding. Do not edit comment generated here */
 
