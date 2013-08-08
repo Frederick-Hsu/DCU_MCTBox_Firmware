@@ -305,7 +305,8 @@ int handling_PWM_cmd(char* sPWM_cmd_Mesg)
 	int iError = 0;
 
 	char sResponseMesg[256] = {0};
-	if (strnicmp(sPWM_cmd_Mesg, "PWMO", 4) == 0)
+	ToUpperString(sPWM_cmd_Mesg);
+	if (strncmp(sPWM_cmd_Mesg, "PWMO", 4) == 0)
 	{
 		iError = handling_PWMOut_cmd(sPWM_cmd_Mesg);
 		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
@@ -313,7 +314,7 @@ int handling_PWM_cmd(char* sPWM_cmd_Mesg)
 			UARTD2_SendData(sResponseMesg, strlen(sResponseMesg));
 		#endif
 	}	
-	else if (strnicmp(sPWM_cmd_Mesg, "PWMI", 4) == 0)
+	else if (strncmp(sPWM_cmd_Mesg, "PWMI", 4) == 0)
 	{
 		iError = handling_PWMIn_cmd(sPWM_cmd_Mesg);
 	}
