@@ -169,6 +169,7 @@ void  main(void)
 	 */
 	UARTD2_ReceiveData(gRxBuf, sizeof(gRxBuf));
 
+	Test_PWM_Out();	// Just test the PWM_Out function. Added by Xuzan@2013-07-31
 	
 	/* Start user code. Do not edit comment generated here */
 	while (1) 
