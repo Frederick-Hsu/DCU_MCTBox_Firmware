@@ -14,6 +14,7 @@
 
 	#include "../macrodriver.h"
 	#include "../bus.h"
+	#include "PWM_Out_Generating_Option.h"
 	
 	typedef struct stPWM_Param
 	{
@@ -23,6 +24,11 @@
 	}
 	ST_PWM_PARAM, *PST_PWM_PARAM;
 	
+	enum Pwm_Out_No
+	{
+		PWM_OUT1 = 1,
+		PWM_OUT2 = 2
+	};
 	/*
 	 * Note : 
 	 * Since the original PWM ports of Renesas uPD70F3376 chip had been occupied as the GPIOs in the schematics, 
@@ -50,7 +56,7 @@
 	// PWM Approach 2 :
 	typedef enum PwmOutSecondaryChn
 	{
-		PwmOutChn_Secondary0,	// DB00
+		PwmOutChn_Secondary0 = 0,	// DB00
 		PwmOutChn_Secondary1,	// DB01
 		PwmOutChn_Secondary2,	// DB02
 		PwmOutChn_Secondary3,	// DB03
@@ -84,24 +90,61 @@
 		BYTE 			bytPwmOutBoardID;
 	};
 	
+#if 0
+	enum PWM_OUT_CURRENT_STATE
+	{
+		PWM_STATE_STOPPED = 0,
+		PWM_STATE_RUNNING = 1
+	};
+	enum PWM_OUTn_CURRENT_ENABLED
+	{
+		PWM_OUT1_DISABLED = 0,
+		PWM_OUT2_DISABLED = 0,
+		
+		PWM_OUT1_ENABLED = 1,
+		PWM_OUT2_ENABLED = 1
+	};
+	
+	typedef struct tPwmOut_FSM
+	{
+		// enum Pwm_Out_No eCurrentActivePwmOutNr;
+		enum PWM_OUT_CURRENT_STATE ePwmCurrentState;
+		struct PwmOutChnSelector tPWM_Out_CH;		
+	}
+	ST_PWMOUT_FSM, *PST_PWMOUT_FSM;
+#endif
+	
 	/*===============================================================================================
 	 * Functions prototype relative to PWM :
 	 */
-	void Set_Config_PWM_Out_Param(ST_PWM_PARAM stPwmParam);
-	
 	void Set_PwmOutPrimaryChn_Level(PWM_OUT_PRIMARY_CHN ePrimaryChn, enum LEVEL eLevel);
-	
 	void Set_PwmOutSecondaryChn_Level(BYTE 				bytPwmBoardID, 
 					  PWM_OUT_SECONDARY_CHN 	ePwmSecondaryChn, 
 					  enum LEVEL 			eLevel);
 	
-	void PWM_Out_Start(int ePrimaryOrSecondary, int ePwmChn, BYTE bytPwmBoardID);
-	void PWM_Out_Stop(void);
-	
-	void Calculate_Timer_Interval(float 	fARGIN_PWM_Freq_InHz, 
-				      float 	fARGIN_PWM_DutyCycle_InPercentage,
-				      USHORT 	*ushrtARGOUT_pInterval_For_PwmON,
-				      USHORT 	*ushrtARGOUT_pInterval_For_PwmOFF);
+	#if (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION2)
+		void Set_Config_PWM_Out_Param(ST_PWM_PARAM stPwmParam);
+		
+		void PWM_Out_Start(int ePrimaryOrSecondary, int ePwmChn, BYTE bytPwmBoardID);
+		void PWM_Out_Stop(void);
+		
+		void Calculate_Timer_Interval(float 	fARGIN_PWM_Freq_InHz, 
+					      float 	fARGIN_PWM_DutyCycle_InPercentage,
+					      USHORT 	*ushrtARGOUT_pInterval_For_PwmON,
+					      USHORT 	*ushrtARGOUT_pInterval_For_PwmOFF);
+	#elif (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION1)
+		void Set_Config_PWM_Out_Param(enum Pwm_Out_No ePwmOutNr, ST_PWM_PARAM stPwmParam);
+		
+		void Calculate_Timer_Interval(float fARGIN_PWM_Freq_InHz,
+					      float fARGIN_PWM_DutyCycle_InPercentage,
+					      unsigned int *uiARGOUT_pCycleCnt_For_PwmHigh,
+					      unsigned int *uiARGOUT_pCycleCnt_For_PwmLow);
+		
+		void PWM_Out_Start(enum Pwm_Out_No ePwmOutNr, int ePrimaryOrSecondary, int ePwmChn, BYTE bytPwmBoardID);
+		void PWM_Out_Stop(enum Pwm_Out_No ePwmOutNr);
+		void PWM_Out1_Stop(void);
+		void PWM_Out2_Stop(void);
+	#endif
 	
 
 #endif	/*  PWM_OUT_H  */
