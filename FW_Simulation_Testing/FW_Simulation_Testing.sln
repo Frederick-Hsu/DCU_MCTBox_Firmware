@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FW_Simulation_Testing", "FW_Simulation_Testing.vcxproj", "{2B0F5C51-4DC1-4142-ABA3-BBEA98B5696D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Aux_Testing", "Aux_Testing\Aux_Testing.vcxproj", "{A2CE7B87-3F1B-4624-8B1B-F2181FCED9C4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testing_Macro_Global_Effectivity", "Testing_Macro_Global_Effectivity\Testing_Macro_Global_Effectivity.vcxproj", "{1DFB2BAA-F8AB-4890-A9D7-9B0ED5D6D2D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,14 @@ Global
 		{2B0F5C51-4DC1-4142-ABA3-BBEA98B5696D}.Debug|Win32.Build.0 = Debug|Win32
 		{2B0F5C51-4DC1-4142-ABA3-BBEA98B5696D}.Release|Win32.ActiveCfg = Release|Win32
 		{2B0F5C51-4DC1-4142-ABA3-BBEA98B5696D}.Release|Win32.Build.0 = Release|Win32
+		{A2CE7B87-3F1B-4624-8B1B-F2181FCED9C4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A2CE7B87-3F1B-4624-8B1B-F2181FCED9C4}.Debug|Win32.Build.0 = Debug|Win32
+		{A2CE7B87-3F1B-4624-8B1B-F2181FCED9C4}.Release|Win32.ActiveCfg = Release|Win32
+		{A2CE7B87-3F1B-4624-8B1B-F2181FCED9C4}.Release|Win32.Build.0 = Release|Win32
+		{1DFB2BAA-F8AB-4890-A9D7-9B0ED5D6D2D7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1DFB2BAA-F8AB-4890-A9D7-9B0ED5D6D2D7}.Debug|Win32.Build.0 = Debug|Win32
+		{1DFB2BAA-F8AB-4890-A9D7-9B0ED5D6D2D7}.Release|Win32.ActiveCfg = Release|Win32
+		{1DFB2BAA-F8AB-4890-A9D7-9B0ED5D6D2D7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
