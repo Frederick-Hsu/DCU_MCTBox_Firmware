@@ -32,6 +32,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\utility.h" />
+    <ClInclude Include="..\ADC_and_DAC\ADC_and_DAC.h">
+      <Filter>ADC_and_DAC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ADC_and_DAC\ADC_to_Measure_Voltage_Current.h">
+      <Filter>ADC_and_DAC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DIO\Digital_IN.h">
+      <Filter>DIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DIO\Digital_OUT.h">
+      <Filter>DIO</Filter>
+    </ClInclude>
     <ClInclude Include="..\protocol\error_code.h">
       <Filter>protocol</Filter>
     </ClInclude>
@@ -56,23 +68,14 @@
     <ClInclude Include="..\protocol\Parse_UART2_Message.h">
       <Filter>protocol</Filter>
     </ClInclude>
-    <ClInclude Include="..\ADC_and_DAC\ADC_and_DAC.h">
-      <Filter>ADC_and_DAC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ADC_and_DAC\ADC_to_Measure_Voltage_Current.h">
-      <Filter>ADC_and_DAC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DIO\Digital_IN.h">
-      <Filter>DIO</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DIO\Digital_OUT.h">
-      <Filter>DIO</Filter>
+    <ClInclude Include="configuration.h">
+      <Filter>FW_Simulation_Testing</Filter>
     </ClInclude>
     <ClInclude Include="..\Switch_Relay_Control\Switch_Relay_Control.h">
       <Filter>Switch_Relay_Control</Filter>
     </ClInclude>
-    <ClInclude Include="configuration.h">
-      <Filter>FW_Simulation_Testing</Filter>
+    <ClInclude Include="..\protocol\handling_PWM_cmd.h">
+      <Filter>protocol</Filter>
     </ClInclude>
     <ClInclude Include="..\PWM\PWM_In.h">
       <Filter>PWM</Filter>
@@ -80,15 +83,12 @@
     <ClInclude Include="..\PWM\PWM_Out.h">
       <Filter>PWM</Filter>
     </ClInclude>
-    <ClInclude Include="..\protocol\handling_PWM_cmd.h">
-      <Filter>protocol</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\protocol\Protocol.txt">
+    <None Include="..\protocol\How_to_implement_command_message_parsing.txt">
       <Filter>protocol</Filter>
     </None>
-    <None Include="..\protocol\How_to_implement_command_message_parsing.txt">
+    <None Include="..\protocol\Protocol.txt">
       <Filter>protocol</Filter>
     </None>
     <None Include="..\Reference_documentations\IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf">
@@ -109,25 +109,25 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">
-      <UniqueIdentifier>{a53a738b-caae-4231-9f0a-09f6937b3eaa}</UniqueIdentifier>
+      <UniqueIdentifier>{ef2d0237-759f-4d43-ac67-36a8acfbe0cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="ADC_and_DAC">
-      <UniqueIdentifier>{ade8dbb9-9253-47cb-b266-dd75fcadf644}</UniqueIdentifier>
+      <UniqueIdentifier>{4ce9d076-1106-445d-b29a-5a8d14135e2f}</UniqueIdentifier>
     </Filter>
     <Filter Include="DIO">
-      <UniqueIdentifier>{e11640ce-367d-4fc5-892d-b50c5825cde8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Switch_Relay_Control">
-      <UniqueIdentifier>{6aeb2b02-8ce4-4953-8cfc-e40a2fce55c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Reference_documentations">
-      <UniqueIdentifier>{0806022d-db35-4f6b-a7ae-e7c6510f8086}</UniqueIdentifier>
+      <UniqueIdentifier>{b79ec3d4-e080-4e5a-b1e7-c9b5aa409686}</UniqueIdentifier>
     </Filter>
     <Filter Include="FW_Simulation_Testing">
-      <UniqueIdentifier>{e4f2c8ed-9a37-4b52-8556-b949b774beb3}</UniqueIdentifier>
+      <UniqueIdentifier>{b30074fb-ebb6-4656-a25b-2ddb03386a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Switch_Relay_Control">
+      <UniqueIdentifier>{d59c61a6-6b24-45da-a749-bd354a6705f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Reference_documentations">
+      <UniqueIdentifier>{94f9f65e-fac5-4ef7-8580-fd9ed4cd6d0c}</UniqueIdentifier>
     </Filter>
     <Filter Include="PWM">
-      <UniqueIdentifier>{82802dfd-b021-45f0-8cb1-e3fe96cf8f0d}</UniqueIdentifier>
+      <UniqueIdentifier>{4f54a190-9de9-40e0-9412-03eea4b325e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
