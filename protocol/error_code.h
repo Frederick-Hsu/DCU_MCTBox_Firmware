@@ -39,7 +39,8 @@
 		"Error code # -021: Digital-OUT channel number error.\n",
 		"Error code # -022: Digital-OUT channel state error.\n",
 		"Error code # -023: PWM command type error.\n",
-		"Error code # -024: Duplicate PWM output on the same port.\n"
+		"Error code # -024: Duplicate PWM output on the same port.\n",
+		"Error code # -025: PWM Out command format error. No space or colon found.\n"
 	};
 
 
