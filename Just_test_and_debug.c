@@ -15,6 +15,7 @@
 #include "Switch_Relay_Control/Switch_Relay_Control.h"
 #include "bus.h"
 #include "DIO/Digital_IN.h"
+#include "PWM/PWM_Out.h"
 
 
 /*************************************************************************/
@@ -199,6 +200,30 @@
 		UARTD2_SendData(sDinMeasureResult, strlen(sDinMeasureResult)*sizeof(char));
 		
 		return;
+	}
+	
+	void Test_PWM_Out(void)
+	{
+	#if (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION2)
+		ST_PWM_PARAM tPwmParam = {10,	// PWM_Freq = 1Hz
+					  20,	// PWM_DutyCyle = 40%
+					  5};	// PWM_Amplitude = 5V
+		// Configure PWM parameter
+		Set_Config_PWM_Out_Param(tPwmParam);
+		// Activate PWM_Out
+		PWM_Out_Start(PWM_ATTR_SECONDARY, PwmOutChn_Secondary11, 0x01);
+	#elif (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION1)
+		ST_PWM_PARAM tPwmParam1 = {20, 40, 5}, tPwmParam2 = {50, 80, 5};
+		/* Configure the PWM_Out1 parameter */
+		Set_Config_PWM_Out_Param(PWM_OUT1, tPwmParam1);
+		/* Activate PWM_Out1 */
+		PWM_Out_Start(PWM_OUT1, PWM_ATTR_SECONDARY, PwmOutChn_Secondary11, 0x01);
+		
+		Set_Config_PWM_Out_Param(PWM_OUT2, tPwmParam2);
+		PWM_Out_Start(PWM_OUT2, PWM_ATTR_SECONDARY, PwmOutChn_Secondary21, 0x01);
+		/* Stop PWM_Out1 */
+		// PWM_Out_Stop(PWM_OUT1);
+	#endif
 	}
 
 #endif	/*    TEST_DEBUG_PURPOSE    */
