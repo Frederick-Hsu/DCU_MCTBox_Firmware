@@ -1,20 +1,18 @@
+/****************************************************************************************
+ * File name	: handling_CAN_cmd.c
+ * Description	: To parse / handle the CAN command in the handling_CAN_cmd.c (.h) 
+ * 		  file-pair. Declare the handling functions for CAN command group.
+ * Creator	: XU ZAN	[HSE-OT]
+ * Creation date: Sun.	July 07, 2013
+ * Copyright(C)		2013	Hella Shanghai Electronics Co., Ltd.
+ * All rights reserved.
+ *
+ ****************************************************************************************/
+
 #include "Parse_UART2_Message.h"
 
 
-int handling_CAN_cmd(char* sCAN_cmd_Mesg)
-{
-	return 0;
-}
-
-
-int handling_LIN_cmd(char* sLIN_cmd_Mesg)
-{
-	return 0;
-}
-
-
-int handling_PWM_cmd(char* sPWM_cmd_Mesg)
-{
-	return 0;
-}
+/*
+ * END OF FILE  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ */
 

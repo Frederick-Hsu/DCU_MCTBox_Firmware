@@ -10,12 +10,14 @@
 
 /****************************************************************************/
 // Includeds :
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
 #include "handling_DIO_cmd.h"
+#include "handling_PWM_cmd.h"
 #include "../utility.h"
 
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
@@ -120,7 +122,6 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 	return 0;
 }
 
-
 int handling_ADC_cmd(char* sADC_cmd_Mesg)
 {
 	int iResult = 0;
@@ -174,7 +175,6 @@ int handling_ADC_cmd(char* sADC_cmd_Mesg)
 /***************************************/
 	return iResult;
 }
-
 
 int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 {
@@ -272,7 +272,6 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	return iError;
 }
 
-
 int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 {
 	int iError = 0;
@@ -301,6 +300,47 @@ int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 	return iError;
 }
 
+int handling_PWM_cmd(char* sPWM_cmd_Mesg)
+{
+	int iError = 0;
+
+	char sResponseMesg[256] = {0};
+	if (strnicmp(sPWM_cmd_Mesg, "PWMO", 4) == 0)
+	{
+		iError = handling_PWMOut_cmd(sPWM_cmd_Mesg);
+		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			sprintf(sResponseMesg, "!%s", sPWM_cmd_Mesg);
+			UARTD2_SendData(sResponseMesg, strlen(sResponseMesg));
+		#endif
+	}	
+	else if (strnicmp(sPWM_cmd_Mesg, "PWMI", 4) == 0)
+	{
+		iError = handling_PWMIn_cmd(sPWM_cmd_Mesg);
+	}
+	else
+	{
+		g_iErrorCodeNo = -23;
+		return g_iErrorCodeNo;
+	}
+	
+/***************************/
+	return iError;
+}
+
+int handling_CAN_cmd(char* sCAN_cmd_Mesg)
+{
+	int iResult = 0;
+	
+	return iResult;
+}
+
+int handling_LIN_cmd(char* sLIN_cmd_Mesg)
+{
+	int iResult = 0;
+	
+	return iResult;
+}
+
 int handling_System_cmd(char *sSystem_cmd_Mesg)
 {
 	int iError = 0;
@@ -308,6 +348,7 @@ int handling_System_cmd(char *sSystem_cmd_Mesg)
 /***************************/
 	return iError;
 }
+
 /*
  * END OF FILE  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  */
