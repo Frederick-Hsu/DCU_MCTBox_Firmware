@@ -17,6 +17,12 @@
 	int handling_PWMOut_Config(char *sPWMOutConfigMesg);
 	int handling_PWMOut_Start(char *sPWMOutStartMesg);
 	int handling_PWMOut_Stop(char *sPWMOutStopMesg);
+
+	int Parsing_PWMOut_Config_Param(char  sARGIN_PwmOutConfigStr[], 
+									char *sARGOUT_PwmOutN,
+									char *sARGOUT_PwmOutFreq,
+									char *sARGOUT_PwmOutDuty,
+									char *sARGOUT_PwmOutVolt);
 	
 	int handling_PWMIn_cmd(char* sPWMInCmdMesg);
 
