@@ -198,6 +198,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\protocol\handling_PWM_cmd.c"
+				>
+			</File>
+			<File
+				RelativePath="..\protocol\handling_PWM_cmd.h"
+				>
+			</File>
+			<File
 				RelativePath="..\protocol\handling_Switch_Relay_Control_cmd.c"
 				>
 			</File>
@@ -259,6 +267,58 @@
 			</File>
 			<File
 				RelativePath=".\FW_Simulation_Testing_Main.c"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="DIO"
+			>
+			<File
+				RelativePath="..\DIO\Digital_IN.h"
+				>
+			</File>
+			<File
+				RelativePath="..\DIO\Digital_OUT.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="PWM"
+			>
+			<File
+				RelativePath="..\PWM\PWM_In.h"
+				>
+			</File>
+			<File
+				RelativePath="..\PWM\PWM_Out.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Reference_documentations"
+			>
+			<File
+				RelativePath="..\Reference_documentations\IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf"
+				>
+			</File>
+			<File
+				RelativePath="..\Reference_documentations\Micrcontroller board.pdf"
+				>
+			</File>
+			<File
+				RelativePath="..\Reference_documentations\NI-Tutorial-3388-en.pdf"
+				>
+			</File>
+			<File
+				RelativePath="..\Reference_documentations\Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf"
+				>
+			</File>
+			<File
+				RelativePath="..\Reference_documentations\Renesas_V850ES_Assembly_Instruction_Set_User_Manual.pdf"
+				>
+			</File>
+			<File
+				RelativePath="..\Reference_documentations\Switch Relay Board.pdf"
 				>
 			</File>
 		</Filter>
