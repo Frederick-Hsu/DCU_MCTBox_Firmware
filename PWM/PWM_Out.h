@@ -11,9 +11,12 @@
 #ifndef PWM_OUT_H
 #define PWM_OUT_H
 
-
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	#include "../macrodriver.h"
 	#include "../bus.h"
+#else
+	#include "../FW_Simulation_Testing/configuration.h"
+#endif
 	#include "PWM_Out_Generating_Option.h"
 	
 	typedef struct stPWM_Param

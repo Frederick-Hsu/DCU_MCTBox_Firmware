@@ -198,15 +198,19 @@ void Set_PwmOutSecondaryChn_Level(BYTE 				bytPwmBoardID,
 		{
 			TAA0_Init();
 			TAA0_ChangeTimerCondition(&FIXED_TIMER_INTERVAL, 1);	// Directly set the timer interval : 1us
-			Calculate_Timer_Interval(stPwmParam.fPWM_Freq_InHz, 	stPwmParam.fPWM_DutyCycle_InPercentage,
-						 &g_uiTAA0_CycleCnt4PwmHigh, 	&g_uiTAA0_CycleCnt4PwmLow);
+			Calculate_Timer_Interval(stPwmParam.fPWM_Freq_InHz, 	
+						 stPwmParam.fPWM_DutyCycle_InPercentage,
+						 &g_uiTAA0_CycleCnt4PwmHigh, 	
+						 &g_uiTAA0_CycleCnt4PwmLow);
 		}
 		else if (ePwmOutNr == PWM_OUT2)
 		{
 			TAA1_Init();
 			TAA1_ChangeTimerCondition(&FIXED_TIMER_INTERVAL, 1);
-			Calculate_Timer_Interval(stPwmParam.fPWM_Freq_InHz, 	stPwmParam.fPWM_DutyCycle_InPercentage,
-						 &g_uiTAA1_CycleCnt4PwmHigh, 	&g_uiTAA1_CycleCnt4PwmLow);
+			Calculate_Timer_Interval(stPwmParam.fPWM_Freq_InHz, 	
+						 stPwmParam.fPWM_DutyCycle_InPercentage,
+						 &g_uiTAA1_CycleCnt4PwmHigh, 	
+						 &g_uiTAA1_CycleCnt4PwmLow);
 		}
 		else
 		{
@@ -269,24 +273,10 @@ void Set_PwmOutSecondaryChn_Level(BYTE 				bytPwmBoardID,
 		if (ePwmOutNr == PWM_OUT1)
 		{
 			PWM_Out1_Stop();
-			#if 0
-			TAA0_Stop();
-			if (g_stPwmOut1Chn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
-				Set_PwmOutPrimaryChn_Level(g_stPwmOut1Chn.iPwmOutChn, LOW);
-			else if (g_stPwmOut1Chn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
-				Set_PwmOutSecondaryChn_Level(g_stPwmOut1Chn.bytPwmOutBoardID, g_stPwmOut1Chn.iPwmOutChn, LOW);
-			#endif
 		}
 		else if (ePwmOutNr == PWM_OUT2)
 		{
 			PWM_Out2_Stop();
-			#if 0
-			TAA1_Stop();
-			if (g_stPwmOut2Chn.ePrimaryOrSecondary == PWM_ATTR_PRIMARY)
-				Set_PwmOutPrimaryChn_Level(g_stPwmOut2Chn.iPwmOutChn, LOW);
-			else if (g_stPwmOut2Chn.ePrimaryOrSecondary == PWM_ATTR_SECONDARY)
-				Set_PwmOutSecondaryChn_Level(g_stPwmOut2Chn.bytPwmOutBoardID, g_stPwmOut2Chn.iPwmOutChn, LOW);
-			#endif
 		}
 		else
 		{
