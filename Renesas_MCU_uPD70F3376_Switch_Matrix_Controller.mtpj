@@ -1023,12 +1023,6 @@
     <Instance Guid="57ddb3da-8fef-41fd-8d4a-3e9a72d732ce">
       <MemoCount>0</MemoCount>
     </Instance>
-    <Instance Guid="0729f7cc-7fdd-46a2-968e-6a72d6ee82ab">
-      <MemoCount>0</MemoCount>
-    </Instance>
-    <Instance Guid="6b18f02b-5b08-443a-a812-819781887d00">
-      <MemoCount>0</MemoCount>
-    </Instance>
   </Class>
   <Class Guid="8fb9c1f6-d351-4d10-8d99-bf5b3015b84c">
     <Instance Guid="00000000-0000-0000-0000-000000000000">

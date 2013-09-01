@@ -138,12 +138,15 @@
 	#elif (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION1)
 		void Set_Config_PWM_Out_Param(enum Pwm_Out_No ePwmOutNr, ST_PWM_PARAM stPwmParam);
 		
-		void Calculate_Timer_Interval(float fARGIN_PWM_Freq_InHz,
-					      float fARGIN_PWM_DutyCycle_InPercentage,
-					      unsigned int *uiARGOUT_pCycleCnt_For_PwmHigh,
-					      unsigned int *uiARGOUT_pCycleCnt_For_PwmLow);
+		void Calculate_Timer_Interval(float 		fARGIN_PWM_Freq_InHz,
+					      float 		fARGIN_PWM_DutyCycle_InPercentage,
+					      unsigned int 	*uiARGOUT_pCycleCnt_For_PwmHigh,
+					      unsigned int 	*uiARGOUT_pCycleCnt_For_PwmLow);
 		
-		void PWM_Out_Start(enum Pwm_Out_No ePwmOutNr, int ePrimaryOrSecondary, int ePwmChn, BYTE bytPwmBoardID);
+		void PWM_Out_Start(enum Pwm_Out_No 	ePwmOutNr, 
+				   int 			ePrimaryOrSecondary, 
+				   int 			ePwmChn, 
+				   BYTE 		bytPwmBoardID);
 		void PWM_Out_Stop(enum Pwm_Out_No ePwmOutNr);
 		void PWM_Out1_Stop(void);
 		void PWM_Out2_Stop(void);
