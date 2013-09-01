@@ -40,7 +40,20 @@
 		"Error code # -022: Digital-OUT channel state error.\n",
 		"Error code # -023: PWM command type error.\n",
 		"Error code # -024: Duplicate PWM output on the same port.\n",
-		"Error code # -025: PWM Out command format error. No space or colon found.\n"
+		"Error code # -025: PWM Out command format error. No space or colon found.\n",
+		"Error code # -026: Attribute string format error.\n",
+		"Error code # -027: The duty cycle format of PWM Out command is wrong. No '%' sign.\n",
+		"Error code # -028: The frequency value of PWM Out is out of range (0, 100000)Hz.\n",
+		"Error code # -029: The duty cycle value of PWM Out is out of range (0%, 100%).\n",
+		"Error code # -030: The PWM Output channel number is wrong.\n",
+		"Error code # -031: No keyword 'OUT1' or 'OUT2' in PWM_Out command.\n",
+		"Error code # -032: No keyword 'PRIM' or 'SECN' in PWM_Out Start command.\n",
+		"Error code # -033: No keyword 'CHNL' in PWM_Out Start command.\n",
+		"Error code # -034: No keyword 'FREQ' in PWM_Out Config command.\n",
+		"Error code # -035: No keyword 'DUTY' in PWM_Out Config command.\n",
+		"Error code # -036: PWM_Out channel is wrong in Primary mode.\n",
+		"Error code # -037: PWM_Out channel is wrong in Secondary mode.\n",
+		"Error code # -038: PWM_Out board id is wrong in Secondary mode.\n"
 	};
 
 

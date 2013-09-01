@@ -20,13 +20,28 @@
 	
 	/*===============================================================*/
 	// Macros : 
+	#define EXPERIMENT_DEBUG_PURPOSE
 	
 	
 	
 	/*===============================================================*/
 	// Global variables :
 	
-	
+	/*===============================================================*/
+	// Types :
+	typedef struct Attribute
+	{
+		char *sAttributeName;
+		char *sAttributeValue;
+	}
+	Attribute, *PAttribute;
+
+	typedef struct AttributeList
+	{
+		struct Attribute Attr;
+		struct AttributeList *pNextNode;
+	}
+	AttributeList, *PAttributeList;
 	
 	/*===============================================================*/
 	// Function prototypes :
@@ -40,6 +55,20 @@
 	int Convert_Str_To_Int(char *sDigitString, long *lDestVal);
 
 	int Convert_Hex_Char_To_Int(char cHexChar);
+
+	int Fetch_SegmentAttributesGroup_From_SeparatorStr(char 		StrWithSeparator[], 
+							   const char 		cSeparator[], 
+							   struct Attribute 	stAttrGroup[]);
+
+	struct Attribute Parsing_Attribute_Segment(char sAttributeSegment[]);
+
+#if defined (EXPERIMENT_DEBUG_PURPOSE)
+	void Experiment_FetchSegmentAttributeGroup(char 		StrWithSeparator[], 
+						   const char 		cSeparator[], 
+						   PAttributeList 	pAttrList);
+
+	void ReleaseAttributeList(PAttributeList pList);
+#endif
 
 
 

@@ -40,10 +40,10 @@ int main(int argc, char *argv[])
                                           // "$SWITch 0x01:12 ON!";
                                           // "$DOUT 0x01:21 HIGH;DOUT 0x01:19 HIGH;DOUT 0x01:04 HIGH;DOUT 0x01:07 HIGH;DOUT 0x01:14 HIGH;DOUT 0x01:21 HIGH!";
                                           // "$DOUT 0x01:XXXXXXX1X0X10XX111X000X1!";
-										  "$PWMO CONF:OUT1:FREQ 10:DUTY 40%:VOLT 5!";
+										  // "$PWMO CONF:OUT1:FREQ 10:DUTY 40%:VOLT 5!";
 										  // "$PWMO START:OUT1:PRIM:CHNL 1!";
 										  // "$PWMO START:OUT2:SECN:BDID 0x01:CHNL 21!";
-										  // "$PWMO STOP:OUT1!";
+										  "$PWMO STOP:OUT1!";
                                           // "$ADC 2:VOLT?!";
                                           // "$SYSTem:ERR?!";
         int iResult = 0;

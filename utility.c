@@ -10,6 +10,8 @@
 
 
 #include "utility.h"
+#include <string.h>
+#include <stdio.h>
 
 
 long power(int iBase, int iPow)
@@ -184,4 +186,114 @@ int Convert_Hex_Char_To_Int(char cHexChar)
 	}
 	return iConvertedValue;
 }
+
+int Fetch_SegmentAttributesGroup_From_SeparatorStr(char 		StrWithSeparator[], 
+						   const char 		cSeparator[], 
+						   struct Attribute 	stAttrGroup[])
+{
+	int iError = 0, iCnt = 0;
+	unsigned int uiLen = strlen(StrWithSeparator),
+		     uiPosOfSeparator = strcspn(StrWithSeparator, cSeparator);
+	char sTemp1AttrSegment[64] = {0}, sTempRestStr[128] = {0}, sTempSwap[128] = {0};
+
+	sprintf(sTempRestStr, "%s", StrWithSeparator);
+	do
+	{
+		uiPosOfSeparator = strcspn(sTempRestStr, cSeparator);
+		memset(sTemp1AttrSegment, 0, sizeof(sTemp1AttrSegment));
+		strncpy(sTemp1AttrSegment, sTempRestStr, uiPosOfSeparator);
+
+		stAttrGroup[iCnt] = Parsing_Attribute_Segment(sTemp1AttrSegment);
+		iCnt++;
+		
+		strncpy(sTempSwap, sTempRestStr+uiPosOfSeparator+1, strlen(sTempRestStr)-uiPosOfSeparator-1);
+		memset(sTempRestStr, 0, sizeof(sTempRestStr));
+		strcpy(sTempRestStr, sTempSwap);
+		memset(sTempSwap, 0, sizeof(sTempSwap));
+	}
+	while (strstr(sTempRestStr, cSeparator) != NULL);
+	memset(sTemp1AttrSegment, 0, sizeof(sTemp1AttrSegment));
+	strcpy(sTemp1AttrSegment, sTempRestStr);
+	stAttrGroup[iCnt] = Parsing_Attribute_Segment(sTemp1AttrSegment);
+
+	return iError;
+}
+
+
+struct Attribute Parsing_Attribute_Segment(char sAttributeSegment[])
+{
+	struct Attribute myAttribute;
+	unsigned int uiLen = strlen(sAttributeSegment),
+		     uiPosOfSeparator_Space = strcspn(sAttributeSegment, " ");
+	char sFrontAttributeName[32] = {0}, sRearAttributeValue[32] = {0};
+
+	if (uiPosOfSeparator_Space == uiLen)	// In this condition, just AttributeName, no AttributeValue
+	{
+		myAttribute.sAttributeName = (char *)malloc(strlen(sAttributeSegment)*sizeof(char));
+		sprintf(myAttribute.sAttributeName, "%s", sAttributeSegment);
+		myAttribute.sAttributeValue = (char *)malloc(1*sizeof(char));
+		sprintf(myAttribute.sAttributeValue, "%s", "");
+	}
+	else
+	{
+		strncpy(sFrontAttributeName, sAttributeSegment, uiPosOfSeparator_Space);
+		strncpy(sRearAttributeValue, 
+			sAttributeSegment+uiPosOfSeparator_Space+1, 
+			strlen(sAttributeSegment)-uiPosOfSeparator_Space-1);
+		
+		myAttribute.sAttributeName = (char *)malloc(strlen(sFrontAttributeName)*sizeof(char));
+		sprintf(myAttribute.sAttributeName, "%s", sFrontAttributeName);
+		myAttribute.sAttributeValue = (char *)malloc(strlen(sRearAttributeValue)*sizeof(char));
+		sprintf(myAttribute.sAttributeValue, "%s", sRearAttributeValue);
+	}
+	return myAttribute;
+}
+
+#if defined (EXPERIMENT_DEBUG_PURPOSE)
+	void Experiment_FetchSegmentAttributeGroup(char 		StrWithSeparator[], 
+						   const char 		cSeparator[],
+						   PAttributeList 	pAttrList)
+	{
+		unsigned int uiLen = strlen(StrWithSeparator),
+			     uiPosOfSeparator = strcspn(StrWithSeparator, cSeparator);
+		char sTemp1AttributeSegment[64] = {0}, sTempRestStr[128] = {0}, sTempSwap[128] = {0};
+		sprintf(sTempRestStr, "%s", StrWithSeparator);
+
+		// pAttrList = (PAttributeList)malloc(sizeof(AttributeList));
+		do
+		{
+			uiPosOfSeparator = strcspn(sTempRestStr, cSeparator);
+			memset(sTemp1AttributeSegment, 0, sizeof(sTemp1AttributeSegment));
+			strncpy(sTemp1AttributeSegment, sTempRestStr, uiPosOfSeparator);
+
+			pAttrList->Attr = Parsing_Attribute_Segment(sTemp1AttributeSegment);
+			pAttrList->pNextNode = (PAttributeList)malloc(sizeof(AttributeList));
+			pAttrList = pAttrList->pNextNode;
+
+			strncpy(sTempSwap, sTempRestStr+uiPosOfSeparator+1, strlen(sTempRestStr)-uiPosOfSeparator-1);
+			memset(sTempRestStr, 0, sizeof(sTempRestStr));
+			strcpy(sTempRestStr, sTempSwap);
+			memset(sTempSwap, 0, sizeof(sTempSwap));
+		}
+		while (strstr(sTempRestStr, cSeparator) != NULL);
+		memset(sTemp1AttributeSegment, 0, sizeof(sTemp1AttributeSegment));
+		strcpy(sTemp1AttributeSegment, sTempRestStr);
+		pAttrList->Attr = Parsing_Attribute_Segment(sTemp1AttributeSegment);
+		pAttrList->pNextNode = NULL;	// Remember to set the last node to be NULL
+		return;
+	}
+
+	void ReleaseAttributeList(PAttributeList pList)
+	{
+		void *pTemp = NULL, *pHead = pList;
+		do
+		{
+			pTemp = (PAttributeList)pList->pNextNode;
+			free(pList);
+			pList = pTemp;
+		}
+		while (pList != NULL);
+		return;
+	}
+#endif
 
