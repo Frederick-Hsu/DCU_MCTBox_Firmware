@@ -408,6 +408,8 @@ int handling_PWMOut_Stop(char *sPWMOutStopMesg)
 		do
 		{
 			pTemp = pAttrGrp->pNextNode;
+			// free(pAttrGrp->Attr.sAttributeName);
+			// free(pAttrGrp->Attr.sAttributeValue);
 			free(pAttrGrp);
 			pAttrGrp = (PAttributeList)pTemp;
 		}
