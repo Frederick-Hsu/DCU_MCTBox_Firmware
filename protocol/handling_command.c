@@ -221,7 +221,7 @@ int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 	 * Remarked by Xu Zan@2013-05-28
 	 */
 	DAC_OutPut_Voltage_For_Debugging(atoi(sDAC_OutputVoltageValue));
-	
+
 	#if 0	// Temporarily disable this actual DAC_Outputing_Voltage block.	Modified by Xu Zan@2013-05-28
 		#if defined (JUST_TESTING_PURPOSE)
 			DAC_Output_Real_Voltage(fOutputVoltage);
@@ -308,12 +308,12 @@ int handling_PWM_cmd(char* sPWM_cmd_Mesg)
 	ToUpperString(sPWM_cmd_Mesg);
 	if (strncmp(sPWM_cmd_Mesg, "PWMO", 4) == 0)
 	{
-		iError = handling_PWMOut_cmd(sPWM_cmd_Mesg);
+`		iError = handling_PWMOut_cmd(sPWM_cmd_Mesg);
 		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 			sprintf(sResponseMesg, "!%s", sPWM_cmd_Mesg);
 			UARTD2_SendData(sResponseMesg, strlen(sResponseMesg));
 		#endif
-	}	
+	}
 	else if (strncmp(sPWM_cmd_Mesg, "PWMI", 4) == 0)
 	{
 		iError = handling_PWMIn_cmd(sPWM_cmd_Mesg);
@@ -323,7 +323,7 @@ int handling_PWM_cmd(char* sPWM_cmd_Mesg)
 		g_iErrorCodeNo = -23;
 		return g_iErrorCodeNo;
 	}
-	
+
 /***************************/
 	return iError;
 }
@@ -331,14 +331,14 @@ int handling_PWM_cmd(char* sPWM_cmd_Mesg)
 int handling_CAN_cmd(char* sCAN_cmd_Mesg)
 {
 	int iResult = 0;
-	
+
 	return iResult;
 }
 
 int handling_LIN_cmd(char* sLIN_cmd_Mesg)
 {
 	int iResult = 0;
-	
+
 	return iResult;
 }
 

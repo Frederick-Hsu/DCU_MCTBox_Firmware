@@ -5,7 +5,7 @@
 		<Option title="FW_Simulation_Testing" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Switch_Relay_Control/;Reference_documentations/;ADC_and_DAC/;DIO/;protocol/;FW_Simulation_Testing/;" />
+		<Option virtualFolders="Switch_Relay_Control/;Reference_documentations/;ADC_and_DAC/;DIO/;protocol/;FW_Simulation_Testing/;PWM/;" />
 		<Build>
 			<Target title="Debug Win32">
 				<Option output="FW_Simulation_Testing" prefix_auto="1" extension_auto="1" />
@@ -46,12 +46,14 @@
 		<Unit filename="../DIO/Digital_OUT.h">
 			<Option virtualFolder="DIO/" />
 		</Unit>
-		<Unit filename="FW_Simulation_Testing_Main.c">
-			<Option compilerVar="CC" />
-			<Option virtualFolder="FW_Simulation_Testing/" />
+		<Unit filename="../PWM/PWM_In.h">
+			<Option virtualFolder="PWM/" />
 		</Unit>
-		<Unit filename="configuration.h">
-			<Option virtualFolder="FW_Simulation_Testing/" />
+		<Unit filename="../PWM/PWM_Out.h">
+			<Option virtualFolder="PWM/" />
+		</Unit>
+		<Unit filename="../PWM/PWM_Out_Generating_Option.h">
+			<Option virtualFolder="PWM/" />
 		</Unit>
 		<Unit filename="../Reference_documentations/Micrcontroller board.pdf">
 			<Option virtualFolder="Reference_documentations/" />
@@ -130,6 +132,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../utility.h" />
+		<Unit filename="FW_Simulation_Testing_Main.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="FW_Simulation_Testing/" />
+		</Unit>
+		<Unit filename="configuration.h">
+			<Option virtualFolder="FW_Simulation_Testing/" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
