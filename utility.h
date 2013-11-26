@@ -21,6 +21,7 @@
 	/*===============================================================*/
 	// Macros : 
 	#define EXPERIMENT_DEBUG_PURPOSE
+	#define ATTRIBUTE_DEFINITION_DIFF
 	
 	
 	
@@ -29,12 +30,21 @@
 	
 	/*===============================================================*/
 	// Types :
-	typedef struct Attribute
-	{
-		char *sAttributeName;
-		char *sAttributeValue;
-	}
-	Attribute, *PAttribute;
+	#if !defined (ATTRIBUTE_DEFINITION_DIFF)
+		typedef struct Attribute
+		{
+			char *sAttributeName;
+			char *sAttributeValue;
+		}
+		Attribute, *PAttribute;
+	#else
+		typedef struct Attribute
+		{
+			char sAttributeName[32];
+			char sAttributeValue[16];
+		}
+		Attribute, *PAttribute;
+	#endif
 
 	typedef struct AttributeList
 	{

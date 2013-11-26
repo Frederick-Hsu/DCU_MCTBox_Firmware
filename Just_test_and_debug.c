@@ -213,7 +213,7 @@
 		// Activate PWM_Out
 		PWM_Out_Start(PWM_ATTR_SECONDARY, PwmOutChn_Secondary11, 0x01);
 	#elif (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION1)
-		ST_PWM_PARAM tPwmParam1 = {20, 40, 5}, tPwmParam2 = {50, 80, 5};
+		ST_PWM_PARAM tPwmParam1 = {10, 40, 5}, tPwmParam2 = {4, 80, 5};
 		/* Configure the PWM_Out1 parameter */
 		Set_Config_PWM_Out_Param(PWM_OUT1, tPwmParam1);
 		/* Activate PWM_Out1 */
@@ -223,6 +223,8 @@
 		PWM_Out_Start(PWM_OUT2, PWM_ATTR_SECONDARY, PwmOutChn_Secondary21, 0x01);
 		/* Stop PWM_Out1 */
 		// PWM_Out_Stop(PWM_OUT1);
+		/* Stop PWM_Out2 */
+		// PWM_Out_Stop(PWM_OUT2);
 	#endif
 	}
 

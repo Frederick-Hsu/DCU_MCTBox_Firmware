@@ -232,7 +232,7 @@ int handling_PWMOut_Stop(char *sPWMOutStopMesg)
 						 char *sARGOUT_PwmOutConfig_Volt)
 	{
 		int iResult = 0;
-	#if defined (EXPERIMENT_DEBUG_PURPOSE)
+	#if !defined (EXPERIMENT_DEBUG_PURPOSE)
 		PAttributeList pAttrGrp = (PAttributeList)malloc(sizeof(AttributeList));
 		void *pHead = pAttrGrp, *pTemp = NULL;
 		Experiment_FetchSegmentAttributeGroup(sARGIN_PwmOutConfig_AttributeGroup, ":", pAttrGrp);
@@ -267,6 +267,8 @@ int handling_PWMOut_Stop(char *sPWMOutStopMesg)
 		do									// Method 2: Absolutely destroy the whole list, including the head pointer
 		{									// His head pointer was assigned to NULL. 
 			pTemp = pAttrGrp->pNextNode;
+			// free(pAttrGrp->Attr.sAttributeName);
+			// free(pAttrGrp->Attr.sAttributeValue);
 			free(pAttrGrp);
 			pAttrGrp = (PAttributeList)pTemp;
 		}
@@ -282,7 +284,7 @@ int handling_PWMOut_Stop(char *sPWMOutStopMesg)
 							      sARGOUT_PwmOutConfig_Volt);
 		#else
 			int iCnt = 0;
-			Attribute t_PwmOutConfigAttrGroup[4] = {NULL};
+			Attribute t_PwmOutConfigAttrGroup[4] = {0};
 			iResult = Fetch_SegmentAttributesGroup_From_SeparatorStr(sARGIN_PwmOutConfig_AttributeGroup, ":", t_PwmOutConfigAttrGroup);
 			for (iCnt=0; iCnt<4; iCnt++)
 			{
@@ -295,7 +297,7 @@ int handling_PWMOut_Stop(char *sPWMOutStopMesg)
 				if (!strncmp(t_PwmOutConfigAttrGroup[iCnt].sAttributeName, "VOLT", 4))
 					sprintf(sARGOUT_PwmOutConfig_Volt, "%s", t_PwmOutConfigAttrGroup[iCnt].sAttributeValue);
 			}
-			/* Here you cannot destroy the variable, because it was assigned in the heap memory,
+			/* Here you cannot destroy the variable, because it was assigned in the stack memory,
 			 * it will be automatically freed after quit the current function.
 			 *
 			 * Please remember that only the memory space assigned at stack need to be freed manually by programmer.
@@ -380,6 +382,7 @@ int handling_PWMOut_Stop(char *sPWMOutStopMesg)
 						char *sARGOUT_PwmOutStart_Chnl)
 	{
 		int iResult = 0;
+	#if 0
 		PAttributeList pAttrGrp = (PAttributeList)malloc(sizeof(AttributeList));
 		void *pHead = pAttrGrp, *pTemp = NULL;
 
@@ -408,10 +411,30 @@ int handling_PWMOut_Stop(char *sPWMOutStopMesg)
 		do
 		{
 			pTemp = pAttrGrp->pNextNode;
+			// free(pAttrGrp->Attr.sAttributeName);
+			// free(pAttrGrp->Attr.sAttributeValue);
 			free(pAttrGrp);
 			pAttrGrp = (PAttributeList)pTemp;
 		}
 		while (pAttrGrp != NULL);
+	#else
+		Attribute myPwmStartAttrGrp[4] = {0};
+		int iCnt = 0;
+		iResult = Fetch_SegmentAttributesGroup_From_SeparatorStr(sARGIN_PwmOutStart_AttributeGroup, ":", myPwmStartAttrGrp);
+		for (iCnt=0; iCnt<4; iCnt++)
+		{
+			if (!strncmp(myPwmStartAttrGrp[iCnt].sAttributeName, "OUT", 3))
+				sprintf(sARGOUT_PwmOutStart_OutN, "%s", myPwmStartAttrGrp[iCnt].sAttributeName);
+			if (!strcmp(myPwmStartAttrGrp[iCnt].sAttributeName, "PRIM"))
+				sprintf(sARGOUT_PwmOutStart_PriSec, "%s", myPwmStartAttrGrp[iCnt].sAttributeName);
+			else if (!strcmp(myPwmStartAttrGrp[iCnt].sAttributeName, "SECN"))
+				sprintf(sARGOUT_PwmOutStart_PriSec, "%s", myPwmStartAttrGrp[iCnt].sAttributeName);
+			if (!strcmp(myPwmStartAttrGrp[iCnt].sAttributeName, "BDID"))
+				sprintf(sARGOUT_PwmOutStart_BoardID, "%s", myPwmStartAttrGrp[iCnt].sAttributeValue);
+			if (!strcmp(myPwmStartAttrGrp[iCnt].sAttributeName, "CHNL"))
+				sprintf(sARGOUT_PwmOutStart_Chnl, "%s", myPwmStartAttrGrp[iCnt].sAttributeValue);
+		}
+	#endif
 		
 		if (0 == strlen(sARGOUT_PwmOutStart_OutN))
 		{

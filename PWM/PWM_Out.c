@@ -187,12 +187,11 @@ void Set_PwmOutSecondaryChn_Level(BYTE 				bytPwmBoardID,
 				 g_stPwmOut2Chn = {PWM_ATTR_SECONDARY, 1, 0x00};
 	
 	// ST_PWMOUT_FSM g_tPwmOutFSM = {PWM_STATE_STOPPED, {PWM_ATTR_PRIMARY, PwmOutChn_Primary0, 0x00}};
+	// const USHORT FIXED_TIMER_INTERVAL = 31;
+	const USHORT FIXED_TIMER_INTERVAL = 9;
 		     
 	void Set_Config_PWM_Out_Param(enum Pwm_Out_No ePwmOutNr, ST_PWM_PARAM stPwmParam)
-	{
-		// const USHORT FIXED_TIMER_INTERVAL = 31;
-		const USHORT FIXED_TIMER_INTERVAL = 9;
-		
+	{		
 		// Do initialization for TAA0 and TAA1 timers
 		if (ePwmOutNr == PWM_OUT1)
 		{
