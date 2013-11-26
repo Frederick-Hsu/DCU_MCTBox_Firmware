@@ -5,7 +5,7 @@
 		<Option title="FW_Simulation_Testing" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Switch_Relay_Control/;Reference_documentations/;ADC_and_DAC/;DIO/;protocol/;FW_Simulation_Testing/;PWM/;" />
+		<Option virtualFolders="PWM/;protocol/;Reference_documentations/;DIO/;ADC_and_DAC/;Switch_Relay_Control/;FW_Simulation_Testing/;" />
 		<Build>
 			<Target title="Debug Win32">
 				<Option output="FW_Simulation_Testing" prefix_auto="1" extension_auto="1" />
@@ -105,6 +105,13 @@
 			<Option virtualFolder="protocol/" />
 		</Unit>
 		<Unit filename="../protocol/handling_DIO_cmd.h">
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_PWM_cmd.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="protocol/" />
+		</Unit>
+		<Unit filename="../protocol/handling_PWM_cmd.h">
 			<Option virtualFolder="protocol/" />
 		</Unit>
 		<Unit filename="../protocol/handling_Switch_Relay_Control_cmd.c">
