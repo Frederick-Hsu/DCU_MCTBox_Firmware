@@ -229,10 +229,15 @@ struct Attribute Parsing_Attribute_Segment(char sAttributeSegment[])
 
 	if (uiPosOfSeparator_Space == uiLen)	// In this condition, just AttributeName, no AttributeValue
 	{
-		myAttribute.sAttributeName = (char *)malloc(strlen(sAttributeSegment)*sizeof(char));
-		sprintf(myAttribute.sAttributeName, "%s", sAttributeSegment);
-		myAttribute.sAttributeValue = (char *)malloc(1*sizeof(char));
-		sprintf(myAttribute.sAttributeValue, "%s", "");
+		#if !defined (ATTRIBUTE_DEFINITION_DIFF)
+			myAttribute.sAttributeName = (char *)malloc(strlen(sAttributeSegment)*sizeof(char));
+			sprintf(myAttribute.sAttributeName, "%s", sAttributeSegment);
+			myAttribute.sAttributeValue = (char *)malloc(1*sizeof(char));
+			sprintf(myAttribute.sAttributeValue, "%s", "");
+		#else
+			sprintf(myAttribute.sAttributeName, "%s", sAttributeSegment);
+			sprintf(myAttribute.sAttributeValue, "%s", "");
+		#endif	/*  ATTRIBUTE_DEFINITION_DIFF  */
 	}
 	else
 	{
@@ -241,10 +246,15 @@ struct Attribute Parsing_Attribute_Segment(char sAttributeSegment[])
 			sAttributeSegment+uiPosOfSeparator_Space+1, 
 			strlen(sAttributeSegment)-uiPosOfSeparator_Space-1);
 		
-		myAttribute.sAttributeName = (char *)malloc(strlen(sFrontAttributeName)*sizeof(char));
-		sprintf(myAttribute.sAttributeName, "%s", sFrontAttributeName);
-		myAttribute.sAttributeValue = (char *)malloc(strlen(sRearAttributeValue)*sizeof(char));
-		sprintf(myAttribute.sAttributeValue, "%s", sRearAttributeValue);
+		#if !defined (ATTRIBUTE_DEFINITION_DIFF)
+			myAttribute.sAttributeName = (char *)malloc(strlen(sFrontAttributeName)*sizeof(char));
+			sprintf(myAttribute.sAttributeName, "%s", sFrontAttributeName);
+			myAttribute.sAttributeValue = (char *)malloc(strlen(sRearAttributeValue)*sizeof(char));
+			sprintf(myAttribute.sAttributeValue, "%s", sRearAttributeValue);
+		#else
+			sprintf(myAttribute.sAttributeName, "%s", sFrontAttributeName);
+			sprintf(myAttribute.sAttributeValue, "%s", sRearAttributeValue);
+		#endif	/*  ATTRIBUTE_DEFINITION_DIFF  */
 	}
 	return myAttribute;
 }
@@ -289,6 +299,8 @@ struct Attribute Parsing_Attribute_Segment(char sAttributeSegment[])
 		do
 		{
 			pTemp = (PAttributeList)pList->pNextNode;
+			// free(pList->Attr.sAttributeName);
+			// free(pList->Attr.sAttributeValue);
 			free(pList);
 			pList = pTemp;
 		}

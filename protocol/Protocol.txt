@@ -167,7 +167,7 @@
 					----------------------------------------------------
 					Option 1
 					$PWMO CONF:OUT1:FREQ 5:DUTY 40%:VOLT 5!
-					$PWMO CONF:OUT2:FREQ 20:DUTY 75%:VOLT 5!
+					$PWMO CONF:OUT2:FREQ 2:DUTY 75%:VOLT 5!
 				
 					$PWMO START:OUT1:PRIM:CHNL 1!
 					$PWMO START:OUT1:SECN:BDID 0x01:CHNL 21!

@@ -18,6 +18,7 @@
 *.opensdf
 *.sdf
 *.old
+*.xcuserstate
 
 FW_Simulation_Testing/UpgradeLog.XML
 FW_Simulation_Testing/FW_Simulation_Testing.sdf
@@ -26,6 +27,7 @@ FW_Simulation_Testing/Release/
 FW_Simulation_Testing/FW_Simulation_Testing
 FW_Simulation_Testing/_UpgradeReport_Files/
 FW_Simulation_Testing/ipch/
+FW_Simulation_Testing/FW_Simulation_Testing.xcodeproj/project.xcworkspace/xcuserdata/
 
 FW_Simulation_Testing/Testing_Macro_Global_Effectivity/Debug/
 FW_Simulation_Testing/Aux_Testing/Debug/
