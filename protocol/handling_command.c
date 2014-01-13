@@ -18,6 +18,7 @@
 #include "handling_ADC_DAC_cmd.h"
 #include "handling_DIO_cmd.h"
 #include "handling_PWM_cmd.h"
+#include "handling_System_cmd.h"
 #include "../utility.h"
 
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
@@ -32,7 +33,7 @@
 
 
 /****************************************************************************/
-// Variables :
+// Global variables :
 extern int g_iErrorCodeNo;
 
 
@@ -345,6 +346,29 @@ int handling_LIN_cmd(char* sLIN_cmd_Mesg)
 int handling_System_cmd(char *sSystem_cmd_Mesg)
 {
 	int iError = 0;
+	
+	char sResponseMesg[256] = {0}, sSystemKeyword[32] = {0};
+	int iPosOfColon = strcspn(sSystem_cmd_Mesg, ":");
+	if (iPosOfColon == strlen(sSystem_cmd_Mesg))
+	{
+		g_iErrorCodeNo = -39;
+		return g_iErrorCodeNo;
+	}
+	
+	ToUpperString(sSystem_cmd_Mesg);
+	strncpy(sSystemKeyword, sSystem_cmd_Mesg+iPosOfColon+1, 3);
+	if (!strncmp(sSystemKeyword, "ERR", 3))
+	{
+		iError = handling_System_Error_cmd(sSystem_cmd_Mesg);
+	}
+	else if (!strncmp(sSystemKeyword, "IDN", 3))
+	{
+		iError = handling_System_IDN_cmd(sSystem_cmd_Mesg);
+	}
+	else if (!strncmp(sSystemKeyword, "VER", 3))
+	{
+		iError = handling_System_Version_cmd(sSystem_cmd_Mesg);
+	}
 
 /***************************/
 	return iError;
