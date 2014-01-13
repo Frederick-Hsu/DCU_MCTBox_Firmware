@@ -177,14 +177,22 @@
 					$PWMO STOP:OUT1!
 					$PWMO STOP:OUT2!
 				PWM In
-					$PWMI CH#!
+					$PWMI CH#?!
 					$PWMI CH#:FREQ 125:DUTY 80%!  (<==== PWM INPUT response)
 				===========================================================================================================
+			
+			CAN catalog :
+			
+				CAN 
 
 		SYSTem :
 			Error catalog :
-				$SYSTem:ERR?!
+				$SYSTem:ERRor?!
+				===> Response : $SYSTem:ErrorMessage!
 				$SYSTem:IDN?!
+				===> Response : $SYSTem:Hello, this is MCTBox. Welcome to call me!
+				$SYSTem:VERsion?!
+				===> Response : $SYSTem:Version: V0.01.1    Build date: 2012-07-27!
 
 
 
