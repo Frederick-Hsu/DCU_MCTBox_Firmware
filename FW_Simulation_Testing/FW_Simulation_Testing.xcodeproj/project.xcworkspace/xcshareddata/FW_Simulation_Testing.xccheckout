@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0754E654-2B0A-4F23-87E8-948BAE6ECB4F</string>
+	<string>123BDAB3-7EA1-4DCA-A9AB-2C390B451C95</string>
 	<key>IDESourceControlProjectName</key>
 	<string>FW_Simulation_Testing</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>29D16C47-B2AC-40AA-B1EA-42B7555C07FF</key>
-		<string>ssh://hse-ot-server1.cn.hella.com/pltester_firmware_developer_group/renesas_mcu_upd70f3376_switch_matrix_controller.git</string>
+		<key>0246ED85-7C49-4A26-A9D4-D3B672B8F808</key>
+		<string>ssh://hse-ot-server1.cn.hella.com/mctbox/renesas_mcu_upd70f3376_switch_matrix_controller.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FW_Simulation_Testing/FW_Simulation_Testing.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>29D16C47-B2AC-40AA-B1EA-42B7555C07FF</key>
+		<key>0246ED85-7C49-4A26-A9D4-D3B672B8F808</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://hse-ot-server1.cn.hella.com/pltester_firmware_developer_group/renesas_mcu_upd70f3376_switch_matrix_controller.git</string>
+	<string>ssh://hse-ot-server1.cn.hella.com/mctbox/renesas_mcu_upd70f3376_switch_matrix_controller.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>29D16C47-B2AC-40AA-B1EA-42B7555C07FF</string>
+	<string>0246ED85-7C49-4A26-A9D4-D3B672B8F808</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>29D16C47-B2AC-40AA-B1EA-42B7555C07FF</string>
+			<string>0246ED85-7C49-4A26-A9D4-D3B672B8F808</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Renesas_MCU_uPD70F3376_Switch_Matrix_Controller</string>
 		</dict>
