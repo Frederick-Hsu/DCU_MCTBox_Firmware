@@ -74,7 +74,9 @@ int handling_System_Error_cmd(char sSystemErrorCmd[])
 	}
 	
 	sprintf(sErrorMesg, "$SYSTem:%s!", sErrorCode[g_iErrorCodeNo * (-1)]);
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	UARTD2_SendData(sErrorMesg, strlen(sErrorMesg));	// Response the error message from COM port.
+#endif
 	
 	/* Clean the error code to 0 (i.e. No error.)
 	 * Please note that current MCTBox firmware system does not support error code queue. 
@@ -98,7 +100,9 @@ int handling_System_IDN_cmd(char sSystemIdnCmd[])
 	}
 	
 	sprintf(sIDN, "$SYSTem:Hello, this is MCTBox. Welcome to call me!");
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	UARTD2_SendData(sIDN, strlen(sIDN));
+#endif
 	
 	return iResult;
 }
@@ -115,7 +119,9 @@ int handling_System_Version_cmd(char sSystemVerCmd[])
 	}
 	
 	sprintf(sVersion, "$SYSTem:%s!", CURRENT_VERSION);
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	UARTD2_SendData(sVersion, strlen(sVersion));
+#endif
 	
 	return iResult;
 }
