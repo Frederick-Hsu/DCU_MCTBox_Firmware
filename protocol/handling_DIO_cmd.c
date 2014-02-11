@@ -156,6 +156,17 @@ int handling_MultiCH_DIN_cmd(char       *ARGIN_DinMultiChCmdMesg,
 	return iError;
 }
 
+int handling_1GroupOfChs_DIN_cmd(char *sARGIN_1GroupDinChsCmdMesg,
+				 char *sARGOUT_1GroupDinChsStateResponseMesg)
+{
+	int iError = 0;
+	char sDin24ChsStates[32] = {0};
+	
+	Read_DIN_1GroupOfCHs_State(sDin24ChsStates);
+	sprintf(sARGOUT_1GroupDinChsStateResponseMesg, "DIN *:State %s", sDin24ChsStates);
+	return iError;
+}
+					 
 int handling_Single_DOUT_CHn_cmd(char *sDoutSingleChCmdUnitMesg)
 {
         int iError = 0;
@@ -196,7 +207,7 @@ int handling_Single_DOUT_CHn_cmd(char *sDoutSingleChCmdUnitMesg)
         {
                 iError = handling_Dout_1AttributeGroup(lDoutBoardID, sAttribute);
                 g_iErrorCodeNo = iError;
-				return iError;
+		return iError;
         }
         strncpy(sChNr, sAttribute, uiPosOfCmdSeparator_Space);
         iError = Convert_Str_To_Int(sChNr, &lChNr);

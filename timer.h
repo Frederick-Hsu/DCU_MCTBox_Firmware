@@ -49,7 +49,7 @@
 #define	TAA_INTERNAL_CLOCK7			0x04	/* fxp1/16 */
 #define	TAA_INTERNAL_CLOCK8			0x05	/* fxp1/32 */
 #define	TAA_INTERNAL_CLOCK9			0x06	/* fxp1/64 */
-#define	TAA_INTERNAL_CLOCK10		0x07	/* fxp1/128 or fxt */
+#define	TAA_INTERNAL_CLOCK10			0x07	/* fxp1/128 or fxt */
 
 /* 
 	TAA control register 1 (TAAnCTL1)

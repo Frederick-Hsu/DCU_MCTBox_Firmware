@@ -263,9 +263,10 @@ __interrupt void MD_INTUD2R(void)
 		if ( (gUartd2RxLen == gUartd2RxCnt) || (UD2RX == '!') )	// Till the end of command string : '!' is the terminate flag char.
 		// if (gUartd2RxLen == gUartd2RxCnt)
 		{
+			UD2RIF = 1;	// Set INTUD2R interrupt flag. 
+			UD2RXE = 0;	// Disable the reception interrupt operation (uartd2)
 			UARTD2_ReceiveEndCallback( );
 			UD2RIF = 0;
-			UD2RXE = 0;
 			UD2RXE = 1;	// Enable the reception operation
 			/*
 			 * After execute handling the command, must call UARTD2_ReceiveData() each cycle,
@@ -286,7 +287,6 @@ __interrupt void MD_INTUD2R(void)
 	else
 	{
 		UD2RIF = 0;
-		UD2RXE = 0;
 		/*
 		 * Must enable the reception operation, wait for next interrupt.
 		 * Each interrupt, MCU just receives only 1 char(i.e. 1 byte)
@@ -377,7 +377,12 @@ void UARTD2_ReceiveEndCallback(void)
 	memset(gRxBuf, 0, sizeof(gRxBuf));	// Clean up the Rx-Buffer.
 
 	iResult = Parse_UART2_Received_Message(sUART2RxMesg);
-	// memset(sUART2RxMesg, 0, 512);
+	
+	/*
+	 * Just for testing MCU response timing performance.	
+	 * Modified by XU ZAN@2014-01-29
+	 */
+	// UARTD2_SendData(sUART2RxMesg, strlen(sUART2RxMesg));	
 	/* End user code. Do not edit comment generated here */
 }
 

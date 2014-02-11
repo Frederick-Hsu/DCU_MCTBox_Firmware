@@ -11,7 +11,9 @@
 #ifndef _HANDLING_SYSTEM_COMMAND_H
 #define _HANDLING_SYSTEM_COMMAND_H
 
-	
+	int handling_System_Error_cmd(char sSystemErrorCmd[]);
+	int handling_System_IDN_cmd(char sSystemIdnCmd[]);
+	int handling_System_Version_cmd(char sSystemVerCmd[]);
 
 #endif	/*  _HANDLING_SYSTEM_COMMAND_H  */
 

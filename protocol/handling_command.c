@@ -10,12 +10,15 @@
 
 /****************************************************************************/
 // Includeds :
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
 #include "handling_DIO_cmd.h"
+#include "handling_PWM_cmd.h"
+#include "handling_System_cmd.h"
 #include "../utility.h"
 
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
@@ -30,7 +33,7 @@
 
 
 /****************************************************************************/
-// Variables :
+// Global variables :
 extern int g_iErrorCodeNo;
 
 
@@ -120,7 +123,6 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 	return 0;
 }
 
-
 int handling_ADC_cmd(char* sADC_cmd_Mesg)
 {
 	int iResult = 0;
@@ -175,7 +177,6 @@ int handling_ADC_cmd(char* sADC_cmd_Mesg)
 	return iResult;
 }
 
-
 int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 {
 	int iResult = 0;
@@ -221,7 +222,7 @@ int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 	 * Remarked by Xu Zan@2013-05-28
 	 */
 	DAC_OutPut_Voltage_For_Debugging(atoi(sDAC_OutputVoltageValue));
-	
+
 	#if 0	// Temporarily disable this actual DAC_Outputing_Voltage block.	Modified by Xu Zan@2013-05-28
 		#if defined (JUST_TESTING_PURPOSE)
 			DAC_Output_Real_Voltage(fOutputVoltage);
@@ -241,7 +242,8 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 
 	unsigned int uiLen = strlen(sDIN_cmd_Mesg),
                              uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
-                             uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
+                             uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?"),
+			     uiPosOfStar = strcspn(sDIN_cmd_Mesg, "*");
 
 	char sDIN_CHnStateResponse[256] = {0}, sDinCmdResponse[256] = {0};
 
@@ -250,7 +252,11 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 		g_iErrorCodeNo = -13;
 		return g_iErrorCodeNo;
 	}
-	if (uiPosOfCmdSeparator_Semicolon != uiLen)
+	if (uiPosOfStar != uiLen)
+	{
+		iError = handling_1GroupOfChs_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	}
+	else if (uiPosOfCmdSeparator_Semicolon != uiLen)
 	{
 	        iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
@@ -271,7 +277,6 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 /***************************/
 	return iError;
 }
-
 
 int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 {
@@ -301,13 +306,79 @@ int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 	return iError;
 }
 
-int handling_System_cmd(char *sSystem_cmd_Mesg)
+int handling_PWM_cmd(char* sPWM_cmd_Mesg)
 {
 	int iError = 0;
+
+	char sResponseMesg[256] = {0};
+	ToUpperString(sPWM_cmd_Mesg);
+	if (strncmp(sPWM_cmd_Mesg, "PWMO", 4) == 0)
+	{
+		iError = handling_PWMOut_cmd(sPWM_cmd_Mesg);
+		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			sprintf(sResponseMesg, "$%s", sPWM_cmd_Mesg);
+			UARTD2_SendData(sResponseMesg, strlen(sResponseMesg));
+		#endif
+	}
+	else if (strncmp(sPWM_cmd_Mesg, "PWMI", 4) == 0)
+	{
+		iError = handling_PWMIn_cmd(sPWM_cmd_Mesg);
+	}
+	else
+	{
+		g_iErrorCodeNo = -23;
+		return g_iErrorCodeNo;
+	}
 
 /***************************/
 	return iError;
 }
+
+int handling_CAN_cmd(char* sCAN_cmd_Mesg)
+{
+	int iResult = 0;
+
+	return iResult;
+}
+
+int handling_LIN_cmd(char* sLIN_cmd_Mesg)
+{
+	int iResult = 0;
+
+	return iResult;
+}
+
+int handling_System_cmd(char *sSystem_cmd_Mesg)
+{
+	int iError = 0;
+	
+	char sResponseMesg[256] = {0}, sSystemKeyword[32] = {0};
+	int iPosOfColon = strcspn(sSystem_cmd_Mesg, ":");
+	if (iPosOfColon == strlen(sSystem_cmd_Mesg))
+	{
+		g_iErrorCodeNo = -39;
+		return g_iErrorCodeNo;
+	}
+	
+	ToUpperString(sSystem_cmd_Mesg);
+	strncpy(sSystemKeyword, sSystem_cmd_Mesg+iPosOfColon+1, 3);
+	if (!strncmp(sSystemKeyword, "ERR", 3))
+	{
+		iError = handling_System_Error_cmd(sSystem_cmd_Mesg);
+	}
+	else if (!strncmp(sSystemKeyword, "IDN", 3))
+	{
+		iError = handling_System_IDN_cmd(sSystem_cmd_Mesg);
+	}
+	else if (!strncmp(sSystemKeyword, "VER", 3))
+	{
+		iError = handling_System_Version_cmd(sSystem_cmd_Mesg);
+	}
+
+/***************************/
+	return iError;
+}
+
 /*
  * END OF FILE  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  */

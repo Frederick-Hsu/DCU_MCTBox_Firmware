@@ -57,10 +57,6 @@
 
 /******************************************************************************/
 // Macros :
-#if !defined (ENABLE_OCDM_DEBUG)
-	#define ENABLE_OCDM_DEBUG
-	// #undef	ENABLE_OCDM_DEBUG
-#endif
 
 #define SIZEOF_HEAP 0x1000
 
@@ -136,7 +132,7 @@ void  main(void)
 	SystemInit();
 	
 	
-	#if !defined (ENABLE_OCDM_DEBUG)
+	#if defined (ENABLE_OCDM_DEBUG)
 		Enable_OCDM();
 	#else
 		Disable_OCDM();
@@ -169,6 +165,7 @@ void  main(void)
 	 */
 	UARTD2_ReceiveData(gRxBuf, sizeof(gRxBuf));
 
+	// Test_PWM_Out();	// Just test the PWM_Out function. Added by Xuzan@2013-07-31
 	
 	/* Start user code. Do not edit comment generated here */
 	while (1) 

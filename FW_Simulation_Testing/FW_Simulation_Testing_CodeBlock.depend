@@ -1,0 +1,126 @@
+# depslib dependency file v1.0
+1385464782 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/FW_Simulation_Testing/FW_Simulation_Testing_Main.c
+	<stdio.h>
+	"../protocol/Parse_UART2_Message.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/Parse_UART2_Message.h
+
+1382619313 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/Parse_UART2_Message.c
+	<string.h>
+	"Parse_UART2_Message.h"
+	"error_code.h"
+	"handling_command.h"
+	"../utility.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/error_code.h
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_command.h
+
+1382619313 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_ADC_DAC_cmd.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"handling_ADC_DAC_cmd.h"
+	"../utility.h"
+	"../ADC_and_DAC/ADC_to_Measure_Voltage_Current.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_ADC_DAC_cmd.h
+
+1385464782 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/utility.h
+	<string.h>
+	<ctype.h>
+	<stdlib.h>
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/ADC_and_DAC/ADC_to_Measure_Voltage_Current.h
+	"ADC_and_DAC.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/ADC_and_DAC/ADC_and_DAC.h
+	"..\macrodriver.h"
+	"../FW_Simulation_Testing/configuration.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/FW_Simulation_Testing/configuration.h
+
+1382619313 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_CAN_cmd.c
+	"Parse_UART2_Message.h"
+
+1382619313 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_DIO_cmd.c
+	<string.h>
+	<stdio.h>
+	"handling_DIO_cmd.h"
+	"../utility.h"
+	"../DIO/Digital_IN.h"
+	"../DIO/Digital_OUT.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_DIO_cmd.h
+	"../macrodriver.h"
+	"../FW_Simulation_Testing/configuration.h"
+
+1382619313 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_Switch_Relay_Control_cmd.c
+	<stdlib.h>
+	<string.h>
+	"handling_Switch_Relay_Control_cmd.h"
+	"../utility.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_Switch_Relay_Control_cmd.h
+	"../Switch_Relay_Control/Switch_Relay_Control.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/Switch_Relay_Control/Switch_Relay_Control.h
+	"../macrodriver.h"
+	"../FW_Simulation_Testing/configuration.h"
+
+1382619313 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_System_cmd.c
+	"handling_System_cmd.h"
+
+1385464782 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_command.c
+	<stdio.h>
+	<string.h>
+	"handling_command.h"
+	"handling_Switch_Relay_Control_cmd.h"
+	"handling_ADC_DAC_cmd.h"
+	"handling_DIO_cmd.h"
+	"handling_PWM_cmd.h"
+	"../utility.h"
+	"../serial.h"
+	"../ADC_and_DAC/ADC_and_DAC.h"
+	<math.h>
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/serial.h
+
+1385464782 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/utility.c
+	"utility.h"
+	<string.h>
+	<stdio.h>
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/DIO/Digital_IN.h
+	"../macrodriver.h"
+	"../FW_Simulation_Testing/configuration.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/macrodriver.h
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_PWM_cmd.h
+	"../PWM/PWM_Out.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/PWM/PWM_Out.h
+	"../macrodriver.h"
+	"../bus.h"
+	"../FW_Simulation_Testing/configuration.h"
+	"PWM_Out_Generating_Option.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/bus.h
+	"macrodriver.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/PWM/PWM_Out_Generating_Option.h
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/DIO/Digital_OUT.h
+	"../Switch_Relay_Control/Switch_Relay_Control.h"
+
+1382619313 /home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_System_cmd.h
+
+1385464782 source:/home/xuzan/Projects/Renesas_MCU_uPD70F3376_Switch_Matrix_Controller/protocol/handling_PWM_cmd.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"handling_PWM_cmd.h"
+	"../utility.h"
+	"../PWM/PWM_Out.h"
+

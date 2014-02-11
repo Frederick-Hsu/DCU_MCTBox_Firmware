@@ -37,18 +37,18 @@
 #define	CAN_STP_PIO_CAN_BASE_ADDR	0x03FEC000
 
 /*  CAN status clear macro */
-#define	CAN_ERR_CLR_STS				(0x0004)	/* CAN error status */
-#define	CAN_ERR_CLR_PRT				(0x0008)	/* CAN protocol error */
-#define	CAN_ERR_CLR_ABL				(0x0010)	/* Arbitration lost */
-#define	CAN_ERR_CLR_WAK				(0x0020)	/* Wakeup */
+#define	CAN_ERR_CLR_STS			(0x0004)	/* CAN error status */
+#define	CAN_ERR_CLR_PRT			(0x0008)	/* CAN protocol error */
+#define	CAN_ERR_CLR_ABL			(0x0010)	/* Arbitration lost */
+#define	CAN_ERR_CLR_WAK			(0x0020)	/* Wakeup */
 
 /*  CAN-ID format mode */
-#define	CAN_CANID_EXT				(0x80000000)
-#define	CAN_CANID_STD_MSK			(0x000007ff)
-#define	CAN_CANID_EXT_MSK			(0x1fffffff)
+#define	CAN_CANID_EXT			(0x80000000)
+#define	CAN_CANID_STD_MSK		(0x000007ff)
+#define	CAN_CANID_EXT_MSK		(0x1fffffff)
 
 /*  [Channel] gcCanChIniUse[] */
-#define	CAN_INICH_USE				(0x80)
+#define	CAN_INICH_USE			(0x80)
 
 /*  [Channel] _cdc_u1g_ch_ini_int[] */
 #define	CAN_INICH_INT_SET_TX		(0x0100)
@@ -74,17 +74,18 @@
 #define	CAN_INIMSG_MSGTYP_MSK4		(0x28)
 #define	CAN_INIMSG_FRMTYP_DAT		(0x00)	/* CnCONFm.RTR */
 #define	CAN_INIMSG_FRMTYP_RMT		(0x40)
-#define	CAN_INIMSG_OVRWRT			(0x80)	/* CnCONFm.OWS */
+#define	CAN_INIMSG_OVRWRT		(0x80)	/* CnCONFm.OWS */
 
 /*  [Message] gcCanBufIniAtr2[] */
-#define	CAN_INIMSG_IE				(0x80)	/* CnCTRLm.IE(*) */
-											/* M_CTRLm.IE(*) */
+#define	CAN_INIMSG_IE			(0x80)	/* CnCTRLm.IE(*) */
+						/* M_CTRLm.IE(*) */
 
 /*
  *		Structure definition
  */
 /*  Baud rate setup information */
-typedef struct CAN_ChBpsInf {
+typedef struct CAN_ChBpsInf 
+{
 	UCHAR	CnGMCS;	/* CnGMCS */
 	UCHAR	CnBRP;	/* CnBRP */
 	USHORT	CnBTR;	/* CnBTR */
@@ -93,54 +94,54 @@ typedef struct CAN_ChBpsInf {
 /*  Programmable I/O register for CAN macro */
 /* aFCAN global register */
 typedef struct CAN_GlbRegType
-{										/*															(offset) */
-	volatile USHORT		GMCTRL;			/* CAN global macro control register						(+ 0x00) */
+{							/*									(offset) */
+	volatile USHORT		GMCTRL;			/* CAN global macro control register					(+ 0x00) */
 	volatile UCHAR		GMCS;			/* CAN global macro clock selection register				(+ 0x02) */
-	volatile UCHAR		DummyGlb1;		/* <<< Dummy >>>											(+ 0x03) */
-	volatile USHORT		DummyGlb2;		/* <<< Dummy >>>											(+ 0x04) */
-	volatile USHORT		GMABT;			/* CAN global macro automatic block transmission register	(+ 0x06) */
-	volatile UCHAR		GMABTD;			/* CAN global macro automatic block transmission delay register(+ 0x08) */
+	volatile UCHAR		DummyGlb1;		/* <<< Dummy >>>							(+ 0x03) */
+	volatile USHORT		DummyGlb2;		/* <<< Dummy >>>							(+ 0x04) */
+	volatile USHORT		GMABT;			/* CAN global macro automatic block transmission register		(+ 0x06) */
+	volatile UCHAR		GMABTD;			/* CAN global macro automatic block transmission delay register		(+ 0x08) */
 } CAN_GlbRegType;
 
 /* aFCAN module register */
 typedef struct CAN_ChRegType
-{										/*														(offset) */
-	volatile USHORT		MASK1L;			/* CAN module mask 1 register							(+ 0x00) */
-	volatile USHORT		MASK1H;			/* CAN module mask 1 register							(+ 0x02) */
-	volatile USHORT		MASK2L;			/* CAN module mask 2 register							(+ 0x04) */
-	volatile USHORT		MASK2H;			/* CAN module mask 2 register							(+ 0x06) */
-	volatile USHORT		MASK3L;			/* CAN module mask 3 register							(+ 0x08) */
-	volatile USHORT		MASK3H;			/* CAN module mask 3 register							(+ 0x0a) */
-	volatile USHORT		MASK4L;			/* CAN module mask 4 register							(+ 0x0c) */
-	volatile USHORT		MASK4H;			/* CAN module mask 4 register							(+ 0x0e) */
-	volatile USHORT		CTRL;			/* CAN module control register							(+ 0x10) */
+{							/*									(offset) */
+	volatile USHORT		MASK1L;			/* CAN module mask 1 register						(+ 0x00) */
+	volatile USHORT		MASK1H;			/* CAN module mask 1 register						(+ 0x02) */
+	volatile USHORT		MASK2L;			/* CAN module mask 2 register						(+ 0x04) */
+	volatile USHORT		MASK2H;			/* CAN module mask 2 register						(+ 0x06) */
+	volatile USHORT		MASK3L;			/* CAN module mask 3 register						(+ 0x08) */
+	volatile USHORT		MASK3H;			/* CAN module mask 3 register						(+ 0x0a) */
+	volatile USHORT		MASK4L;			/* CAN module mask 4 register						(+ 0x0c) */
+	volatile USHORT		MASK4H;			/* CAN module mask 4 register						(+ 0x0e) */
+	volatile USHORT		CTRL;			/* CAN module control register						(+ 0x10) */
 	volatile UCHAR		LEC;			/* CAN module last error code register					(+ 0x12) */
-	volatile UCHAR		INFO;			/* CAN module information register						(+ 0x13) */
-	volatile USHORT		ERC;			/* CAN module error counter								(+ 0x14) */
-	volatile USHORT		IE;				/* CAN module interrupt enable register					(+ 0x16) */
+	volatile UCHAR		INFO;			/* CAN module information register					(+ 0x13) */
+	volatile USHORT		ERC;			/* CAN module error counter						(+ 0x14) */
+	volatile USHORT		IE;			/* CAN module interrupt enable register					(+ 0x16) */
 	volatile USHORT		INTS;			/* CAN module interupt status register					(+ 0x18) */
 	volatile UCHAR		BRP;			/* CAN module bit-rate prescaler register				(+ 0x1a) */
-	volatile UCHAR		DummyCh1;		/* <<< Dummy >>>										(+ 0x1b) */
-	volatile USHORT		BTR;			/* CAN bit-rate register								(+ 0x1c) */
+	volatile UCHAR		DummyCh1;		/* <<< Dummy >>>							(+ 0x1b) */
+	volatile USHORT		BTR;			/* CAN bit-rate register						(+ 0x1c) */
 	volatile UCHAR		LIPT;			/* CAN module last in-pointer register					(+ 0x1e) */
-	volatile UCHAR		DummyCh2;		/* <<< Dummy >>>										(+ 0x1b) */
-	volatile USHORT		RGPT;			/* CAN module receive history list get pointer register	(+ 0x20) */
+	volatile UCHAR		DummyCh2;		/* <<< Dummy >>>							(+ 0x1b) */
+	volatile USHORT		RGPT;			/* CAN module receive history list get pointer register			(+ 0x20) */
 	volatile UCHAR		LOPT;			/* CAN module last out-pointer register					(+ 0x22) */
-	volatile UCHAR		DummyCh3;		/* <<< Dummy >>>										(+ 0x23) */
-	volatile USHORT		TGPT;			/* CAN module transmit history list get pointer register(+ 0x24) */
-	volatile USHORT		TS;				/* CAN module time dtamp register						(+ 0x26) */
+	volatile UCHAR		DummyCh3;		/* <<< Dummy >>>							(+ 0x23) */
+	volatile USHORT		TGPT;			/* CAN module transmit history list get pointer register		(+ 0x24) */
+	volatile USHORT		TS;			/* CAN module time dtamp register					(+ 0x26) */
 } CAN_ChRegType;
 
 /* aFCAN message buffer register */
 typedef struct CAN_MsgRegType
-{										/*												(offset) */
-	volatile UCHAR		MDATA[8];		/* Message data byte registers (8bit)			(+ 0x00) */
-	volatile UCHAR		MDLC;			/* Message data length code register			(+ 0x08) */
-	volatile UCHAR		MCONF;			/* Message configuration register				(+ 0x09) */
-	volatile USHORT		MIDL;			/* Message identifier registers					(+ 0x0a) */
-	volatile USHORT		MIDH;			/* Message identifier registers					(+ 0x0c) */
+{							/*									(offset) */
+	volatile UCHAR		MDATA[8];		/* Message data byte registers (8bit)					(+ 0x00) */
+	volatile UCHAR		MDLC;			/* Message data length code register					(+ 0x08) */
+	volatile UCHAR		MCONF;			/* Message configuration register					(+ 0x09) */
+	volatile USHORT		MIDL;			/* Message identifier registers						(+ 0x0a) */
+	volatile USHORT		MIDH;			/* Message identifier registers						(+ 0x0c) */
 	volatile USHORT		MCTRL;			/* Message control register						(+ 0x0e) */
-	volatile UCHAR		DummyMsg[16];	/* <<< Dummy : You can't delete this member.>>>	(+ 0x10) */
+	volatile UCHAR		DummyMsg[16];		/* <<< Dummy : You can't delete this member.>>>				(+ 0x10) */
 } CAN_MsgRegType;
 
 /* aFCAN global register */
@@ -156,7 +157,7 @@ typedef struct CAN_RegBaseAddr
  *		Configuration file setup information
  */
 /*  [Channel] gcCanChIniUse[] */
-#define	MSK_CH_USE			(CAN_INICH_USE)
+#define	MSK_CH_USE		(CAN_INICH_USE)
 #define	MSK_CH_DRVCHNO		(0x0f)
 
 
@@ -201,7 +202,7 @@ extern const UCHAR				gcCanGlbIniMacro[];
 /* Channel information */
 extern const UCHAR				gcCanChIniUse[];
 extern const USHORT				gcCanChIniInt[];
-extern const CAN_ChBpsInf		gcCanChIniBps[];
+extern const CAN_ChBpsInf			gcCanChIniBps[];
 extern const ULONG				gcCanChIniMask[][CAN_NUM_OF_MASK];
 extern const UCHAR				gcCanChDrvBufNoTop[];
 extern const UCHAR				gcCanChDrvBufNoSize[];
@@ -280,14 +281,14 @@ extern const UCHAR				gcCanChIniMacro[];
  */
 /* aFCAN message buffer register type2 (for CnMDATAxxm) */
 typedef struct CAN_MsgRegType2
-{										/*													(offset) */
+{							/*								(offset) */
 	volatile USHORT		MDATA[4];		/* Message data short registers	(16bit)				(+ 0x00) */
 	volatile UCHAR		MDLC;			/* Message data length code register				(+ 0x08) */
-	volatile UCHAR		MCONF;			/* Message configuration register					(+ 0x09) */
-	volatile USHORT		MIDL;			/* Message identifier registers						(+ 0x0a) */
-	volatile USHORT		MIDH;			/* Message identifier registers						(+ 0x0c) */
-	volatile USHORT		MCTRL;			/* Message control register							(+ 0x0e) */
-	volatile UCHAR		DummyMsg[16];	/* <<< Dummy : You can't delete this member. >>>	(+ 0x10) */
+	volatile UCHAR		MCONF;			/* Message configuration register				(+ 0x09) */
+	volatile USHORT		MIDL;			/* Message identifier registers					(+ 0x0a) */
+	volatile USHORT		MIDH;			/* Message identifier registers					(+ 0x0c) */
+	volatile USHORT		MCTRL;			/* Message control register					(+ 0x0e) */
+	volatile UCHAR		DummyMsg[16];		/* <<< Dummy : You can't delete this member. >>>		(+ 0x10) */
 } CAN_MsgRegType2;
 
 	/* Channel 0 */

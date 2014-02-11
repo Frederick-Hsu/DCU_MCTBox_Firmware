@@ -56,6 +56,7 @@
         #if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
                 void Read_DIN_CHn_State(P_DIN_CHm_STATE pDInCHmState);
                 void Read_DIN_Multi_CHs_State(P_DIN_CHm_STATE pCHiState, ...);
+		void Read_DIN_1GroupOfCHs_State(char *sARGOUT_24ChsStates);
         #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 

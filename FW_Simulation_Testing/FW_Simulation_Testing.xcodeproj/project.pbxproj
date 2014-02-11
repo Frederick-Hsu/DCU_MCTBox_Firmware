@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21CD5AB017FAE70D0087B0D8 /* FW_Simulation_Testing_Main.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5AAF17FAE70D0087B0D8 /* FW_Simulation_Testing_Main.c */; };
+		21CD5AC117FAE76C0087B0D8 /* handling_ADC_DAC_cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5AB317FAE76C0087B0D8 /* handling_ADC_DAC_cmd.c */; };
+		21CD5AC217FAE76C0087B0D8 /* handling_CAN_cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5AB517FAE76C0087B0D8 /* handling_CAN_cmd.c */; };
+		21CD5AC317FAE76C0087B0D8 /* handling_command.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5AB717FAE76C0087B0D8 /* handling_command.c */; };
+		21CD5AC417FAE76C0087B0D8 /* handling_DIO_cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5AB917FAE76C0087B0D8 /* handling_DIO_cmd.c */; };
+		21CD5AC517FAE76C0087B0D8 /* handling_PWM_cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5ABB17FAE76C0087B0D8 /* handling_PWM_cmd.c */; };
+		21CD5AC617FAE76C0087B0D8 /* handling_Switch_Relay_Control_cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5ABD17FAE76C0087B0D8 /* handling_Switch_Relay_Control_cmd.c */; };
+		21CD5AC717FAE76C0087B0D8 /* handling_System_cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5ABF17FAE76C0087B0D8 /* handling_System_cmd.c */; };
+		21CD5AD617FAEAE30087B0D8 /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5AD417FAEAE30087B0D8 /* utility.c */; };
+		21CD5ADC17FAEBA70087B0D8 /* Parse_UART2_Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 21CD5AD817FAEBA70087B0D8 /* Parse_UART2_Message.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		21CD5A9D17FAE6180087B0D8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		21CD5A9F17FAE6180087B0D8 /* FW_Simulation_Testing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FW_Simulation_Testing; sourceTree = BUILT_PRODUCTS_DIR; };
+		21CD5AAE17FAE70D0087B0D8 /* configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = configuration.h; sourceTree = SOURCE_ROOT; };
+		21CD5AAF17FAE70D0087B0D8 /* FW_Simulation_Testing_Main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FW_Simulation_Testing_Main.c; sourceTree = SOURCE_ROOT; };
+		21CD5AB217FAE76C0087B0D8 /* error_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = error_code.h; path = ../protocol/error_code.h; sourceTree = "<group>"; };
+		21CD5AB317FAE76C0087B0D8 /* handling_ADC_DAC_cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handling_ADC_DAC_cmd.c; path = ../protocol/handling_ADC_DAC_cmd.c; sourceTree = "<group>"; };
+		21CD5AB417FAE76C0087B0D8 /* handling_ADC_DAC_cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = handling_ADC_DAC_cmd.h; path = ../protocol/handling_ADC_DAC_cmd.h; sourceTree = "<group>"; };
+		21CD5AB517FAE76C0087B0D8 /* handling_CAN_cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handling_CAN_cmd.c; path = ../protocol/handling_CAN_cmd.c; sourceTree = "<group>"; };
+		21CD5AB617FAE76C0087B0D8 /* handling_CAN_cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = handling_CAN_cmd.h; path = ../protocol/handling_CAN_cmd.h; sourceTree = "<group>"; };
+		21CD5AB717FAE76C0087B0D8 /* handling_command.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handling_command.c; path = ../protocol/handling_command.c; sourceTree = "<group>"; };
+		21CD5AB817FAE76C0087B0D8 /* handling_command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = handling_command.h; path = ../protocol/handling_command.h; sourceTree = "<group>"; };
+		21CD5AB917FAE76C0087B0D8 /* handling_DIO_cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handling_DIO_cmd.c; path = ../protocol/handling_DIO_cmd.c; sourceTree = "<group>"; };
+		21CD5ABA17FAE76C0087B0D8 /* handling_DIO_cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = handling_DIO_cmd.h; path = ../protocol/handling_DIO_cmd.h; sourceTree = "<group>"; };
+		21CD5ABB17FAE76C0087B0D8 /* handling_PWM_cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handling_PWM_cmd.c; path = ../protocol/handling_PWM_cmd.c; sourceTree = "<group>"; };
+		21CD5ABC17FAE76C0087B0D8 /* handling_PWM_cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = handling_PWM_cmd.h; path = ../protocol/handling_PWM_cmd.h; sourceTree = "<group>"; };
+		21CD5ABD17FAE76C0087B0D8 /* handling_Switch_Relay_Control_cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handling_Switch_Relay_Control_cmd.c; path = ../protocol/handling_Switch_Relay_Control_cmd.c; sourceTree = "<group>"; };
+		21CD5ABE17FAE76C0087B0D8 /* handling_Switch_Relay_Control_cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = handling_Switch_Relay_Control_cmd.h; path = ../protocol/handling_Switch_Relay_Control_cmd.h; sourceTree = "<group>"; };
+		21CD5ABF17FAE76C0087B0D8 /* handling_System_cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handling_System_cmd.c; path = ../protocol/handling_System_cmd.c; sourceTree = "<group>"; };
+		21CD5AC017FAE76C0087B0D8 /* handling_System_cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = handling_System_cmd.h; path = ../protocol/handling_System_cmd.h; sourceTree = "<group>"; };
+		21CD5AC917FAE7B80087B0D8 /* ADC_and_DAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADC_and_DAC.h; path = ../ADC_and_DAC/ADC_and_DAC.h; sourceTree = "<group>"; };
+		21CD5ACA17FAE7B80087B0D8 /* ADC_to_Measure_Voltage_Current.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADC_to_Measure_Voltage_Current.h; path = ../ADC_and_DAC/ADC_to_Measure_Voltage_Current.h; sourceTree = "<group>"; };
+		21CD5ACC17FAE8730087B0D8 /* Digital_IN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Digital_IN.h; path = ../DIO/Digital_IN.h; sourceTree = "<group>"; };
+		21CD5ACD17FAE8730087B0D8 /* Digital_OUT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Digital_OUT.h; path = ../DIO/Digital_OUT.h; sourceTree = "<group>"; };
+		21CD5ACF17FAE8A60087B0D8 /* PWM_In.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWM_In.h; path = ../PWM/PWM_In.h; sourceTree = "<group>"; };
+		21CD5AD017FAE8A60087B0D8 /* PWM_Out_Generating_Option.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWM_Out_Generating_Option.h; path = ../PWM/PWM_Out_Generating_Option.h; sourceTree = "<group>"; };
+		21CD5AD117FAE8A60087B0D8 /* PWM_Out.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWM_Out.h; path = ../PWM/PWM_Out.h; sourceTree = "<group>"; };
+		21CD5AD317FAE8E00087B0D8 /* Switch_Relay_Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Switch_Relay_Control.h; path = ../Switch_Relay_Control/Switch_Relay_Control.h; sourceTree = "<group>"; };
+		21CD5AD417FAEAE30087B0D8 /* utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utility.c; path = ../utility.c; sourceTree = "<group>"; };
+		21CD5AD517FAEAE30087B0D8 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utility.h; path = ../utility.h; sourceTree = "<group>"; };
+		21CD5AD717FAEBA70087B0D8 /* How_to_implement_command_message_parsing.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = How_to_implement_command_message_parsing.txt; path = ../protocol/How_to_implement_command_message_parsing.txt; sourceTree = "<group>"; };
+		21CD5AD817FAEBA70087B0D8 /* Parse_UART2_Message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Parse_UART2_Message.c; path = ../protocol/Parse_UART2_Message.c; sourceTree = "<group>"; };
+		21CD5AD917FAEBA70087B0D8 /* Parse_UART2_Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parse_UART2_Message.h; path = ../protocol/Parse_UART2_Message.h; sourceTree = "<group>"; };
+		21CD5ADA17FAEBA70087B0D8 /* Protocol.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Protocol.pdf; path = ../protocol/Protocol.pdf; sourceTree = "<group>"; };
+		21CD5ADB17FAEBA70087B0D8 /* Protocol.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Protocol.txt; path = ../protocol/Protocol.txt; sourceTree = "<group>"; };
+		21CD5ADE17FAF01E0087B0D8 /* IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf"; path = "../Reference_documentations/IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf"; sourceTree = "<group>"; };
+		21CD5ADF17FAF01E0087B0D8 /* Micrcontroller board.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Micrcontroller board.pdf"; path = "../Reference_documentations/Micrcontroller board.pdf"; sourceTree = "<group>"; };
+		21CD5AE017FAF01E0087B0D8 /* NI-Tutorial-3388-en.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "NI-Tutorial-3388-en.pdf"; path = "../Reference_documentations/NI-Tutorial-3388-en.pdf"; sourceTree = "<group>"; };
+		21CD5AE117FAF01E0087B0D8 /* Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf"; path = "../Reference_documentations/Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf"; sourceTree = "<group>"; };
+		21CD5AE217FAF01E0087B0D8 /* Renesas_V850ES_Assembly_Instruction_Set_User_Manual.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Renesas_V850ES_Assembly_Instruction_Set_User_Manual.pdf; path = ../Reference_documentations/Renesas_V850ES_Assembly_Instruction_Set_User_Manual.pdf; sourceTree = "<group>"; };
+		21CD5AE317FAF01E0087B0D8 /* Switch Relay Board.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Switch Relay Board.pdf"; path = "../Reference_documentations/Switch Relay Board.pdf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		21CD5A9C17FAE6180087B0D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21CD5A9617FAE6180087B0D8 = {
+			isa = PBXGroup;
+			children = (
+				21CD5ADD17FAF0080087B0D8 /* Reference_documentations */,
+				21CD5AD417FAEAE30087B0D8 /* utility.c */,
+				21CD5AD517FAEAE30087B0D8 /* utility.h */,
+				21CD5AD217FAE8CC0087B0D8 /* Switch_Relay_Control */,
+				21CD5ACE17FAE8890087B0D8 /* PWM */,
+				21CD5ACB17FAE85D0087B0D8 /* DIO */,
+				21CD5AC817FAE7910087B0D8 /* ADC_and_DAC */,
+				21CD5AB117FAE7250087B0D8 /* protocol */,
+				21CD5AA117FAE6180087B0D8 /* FW_Simulation_Testing */,
+				21CD5AA017FAE6180087B0D8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		21CD5AA017FAE6180087B0D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5A9F17FAE6180087B0D8 /* FW_Simulation_Testing */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		21CD5AA117FAE6180087B0D8 /* FW_Simulation_Testing */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5AAE17FAE70D0087B0D8 /* configuration.h */,
+				21CD5AAF17FAE70D0087B0D8 /* FW_Simulation_Testing_Main.c */,
+			);
+			path = FW_Simulation_Testing;
+			sourceTree = "<group>";
+		};
+		21CD5AB117FAE7250087B0D8 /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5AD717FAEBA70087B0D8 /* How_to_implement_command_message_parsing.txt */,
+				21CD5AD817FAEBA70087B0D8 /* Parse_UART2_Message.c */,
+				21CD5AD917FAEBA70087B0D8 /* Parse_UART2_Message.h */,
+				21CD5ADA17FAEBA70087B0D8 /* Protocol.pdf */,
+				21CD5ADB17FAEBA70087B0D8 /* Protocol.txt */,
+				21CD5AB217FAE76C0087B0D8 /* error_code.h */,
+				21CD5AB317FAE76C0087B0D8 /* handling_ADC_DAC_cmd.c */,
+				21CD5AB417FAE76C0087B0D8 /* handling_ADC_DAC_cmd.h */,
+				21CD5AB517FAE76C0087B0D8 /* handling_CAN_cmd.c */,
+				21CD5AB617FAE76C0087B0D8 /* handling_CAN_cmd.h */,
+				21CD5AB717FAE76C0087B0D8 /* handling_command.c */,
+				21CD5AB817FAE76C0087B0D8 /* handling_command.h */,
+				21CD5AB917FAE76C0087B0D8 /* handling_DIO_cmd.c */,
+				21CD5ABA17FAE76C0087B0D8 /* handling_DIO_cmd.h */,
+				21CD5ABB17FAE76C0087B0D8 /* handling_PWM_cmd.c */,
+				21CD5ABC17FAE76C0087B0D8 /* handling_PWM_cmd.h */,
+				21CD5ABD17FAE76C0087B0D8 /* handling_Switch_Relay_Control_cmd.c */,
+				21CD5ABE17FAE76C0087B0D8 /* handling_Switch_Relay_Control_cmd.h */,
+				21CD5ABF17FAE76C0087B0D8 /* handling_System_cmd.c */,
+				21CD5AC017FAE76C0087B0D8 /* handling_System_cmd.h */,
+			);
+			name = protocol;
+			sourceTree = "<group>";
+		};
+		21CD5AC817FAE7910087B0D8 /* ADC_and_DAC */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5AC917FAE7B80087B0D8 /* ADC_and_DAC.h */,
+				21CD5ACA17FAE7B80087B0D8 /* ADC_to_Measure_Voltage_Current.h */,
+			);
+			name = ADC_and_DAC;
+			sourceTree = "<group>";
+		};
+		21CD5ACB17FAE85D0087B0D8 /* DIO */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5ACC17FAE8730087B0D8 /* Digital_IN.h */,
+				21CD5ACD17FAE8730087B0D8 /* Digital_OUT.h */,
+			);
+			name = DIO;
+			sourceTree = "<group>";
+		};
+		21CD5ACE17FAE8890087B0D8 /* PWM */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5ACF17FAE8A60087B0D8 /* PWM_In.h */,
+				21CD5AD017FAE8A60087B0D8 /* PWM_Out_Generating_Option.h */,
+				21CD5AD117FAE8A60087B0D8 /* PWM_Out.h */,
+			);
+			name = PWM;
+			sourceTree = "<group>";
+		};
+		21CD5AD217FAE8CC0087B0D8 /* Switch_Relay_Control */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5AD317FAE8E00087B0D8 /* Switch_Relay_Control.h */,
+			);
+			name = Switch_Relay_Control;
+			sourceTree = "<group>";
+		};
+		21CD5ADD17FAF0080087B0D8 /* Reference_documentations */ = {
+			isa = PBXGroup;
+			children = (
+				21CD5ADE17FAF01E0087B0D8 /* IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf */,
+				21CD5ADF17FAF01E0087B0D8 /* Micrcontroller board.pdf */,
+				21CD5AE017FAF01E0087B0D8 /* NI-Tutorial-3388-en.pdf */,
+				21CD5AE117FAF01E0087B0D8 /* Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf */,
+				21CD5AE217FAF01E0087B0D8 /* Renesas_V850ES_Assembly_Instruction_Set_User_Manual.pdf */,
+				21CD5AE317FAF01E0087B0D8 /* Switch Relay Board.pdf */,
+			);
+			name = Reference_documentations;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		21CD5A9E17FAE6180087B0D8 /* FW_Simulation_Testing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21CD5AA817FAE6180087B0D8 /* Build configuration list for PBXNativeTarget "FW_Simulation_Testing" */;
+			buildPhases = (
+				21CD5A9B17FAE6180087B0D8 /* Sources */,
+				21CD5A9C17FAE6180087B0D8 /* Frameworks */,
+				21CD5A9D17FAE6180087B0D8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FW_Simulation_Testing;
+			productName = FW_Simulation_Testing;
+			productReference = 21CD5A9F17FAE6180087B0D8 /* FW_Simulation_Testing */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21CD5A9717FAE6180087B0D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "徐 贊";
+			};
+			buildConfigurationList = 21CD5A9A17FAE6180087B0D8 /* Build configuration list for PBXProject "FW_Simulation_Testing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 21CD5A9617FAE6180087B0D8;
+			productRefGroup = 21CD5AA017FAE6180087B0D8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				21CD5A9E17FAE6180087B0D8 /* FW_Simulation_Testing */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21CD5A9B17FAE6180087B0D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21CD5AC617FAE76C0087B0D8 /* handling_Switch_Relay_Control_cmd.c in Sources */,
+				21CD5AC217FAE76C0087B0D8 /* handling_CAN_cmd.c in Sources */,
+				21CD5AC717FAE76C0087B0D8 /* handling_System_cmd.c in Sources */,
+				21CD5AC417FAE76C0087B0D8 /* handling_DIO_cmd.c in Sources */,
+				21CD5AB017FAE70D0087B0D8 /* FW_Simulation_Testing_Main.c in Sources */,
+				21CD5AC317FAE76C0087B0D8 /* handling_command.c in Sources */,
+				21CD5AD617FAEAE30087B0D8 /* utility.c in Sources */,
+				21CD5AC517FAE76C0087B0D8 /* handling_PWM_cmd.c in Sources */,
+				21CD5ADC17FAEBA70087B0D8 /* Parse_UART2_Message.c in Sources */,
+				21CD5AC117FAE76C0087B0D8 /* handling_ADC_DAC_cmd.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		21CD5AA617FAE6180087B0D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		21CD5AA717FAE6180087B0D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		21CD5AA917FAE6180087B0D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		21CD5AAA17FAE6180087B0D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21CD5A9A17FAE6180087B0D8 /* Build configuration list for PBXProject "FW_Simulation_Testing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21CD5AA617FAE6180087B0D8 /* Debug */,
+				21CD5AA717FAE6180087B0D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21CD5AA817FAE6180087B0D8 /* Build configuration list for PBXNativeTarget "FW_Simulation_Testing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21CD5AA917FAE6180087B0D8 /* Debug */,
+				21CD5AAA17FAE6180087B0D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21CD5A9717FAE6180087B0D8 /* Project object */;
+}
