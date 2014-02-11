@@ -87,9 +87,12 @@
     <ClInclude Include="..\protocol\handling_CAN_cmd.h" />
     <ClInclude Include="..\protocol\handling_command.h" />
     <ClInclude Include="..\protocol\handling_DIO_cmd.h" />
+    <ClInclude Include="..\protocol\handling_PWM_cmd.h" />
     <ClInclude Include="..\protocol\handling_Switch_Relay_Control_cmd.h" />
     <ClInclude Include="..\protocol\handling_System_cmd.h" />
     <ClInclude Include="..\protocol\Parse_UART2_Message.h" />
+    <ClInclude Include="..\PWM\PWM_In.h" />
+    <ClInclude Include="..\PWM\PWM_Out.h" />
     <ClInclude Include="..\Switch_Relay_Control\Switch_Relay_Control.h" />
     <ClInclude Include="..\ADC_and_DAC\ADC_and_DAC.h" />
     <ClInclude Include="..\ADC_and_DAC\ADC_to_Measure_Voltage_Current.h" />
@@ -101,6 +104,7 @@
     <ClCompile Include="..\protocol\handling_CAN_cmd.c" />
     <ClCompile Include="..\protocol\handling_command.c" />
     <ClCompile Include="..\protocol\handling_DIO_cmd.c" />
+    <ClCompile Include="..\protocol\handling_PWM_cmd.c" />
     <ClCompile Include="..\protocol\handling_Switch_Relay_Control_cmd.c" />
     <ClCompile Include="..\protocol\handling_System_cmd.c" />
     <ClCompile Include="..\protocol\Parse_UART2_Message.c" />

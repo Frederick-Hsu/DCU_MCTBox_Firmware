@@ -67,6 +67,7 @@
 
 	/*==========================================================================================================*/
 	float DAC_Output_Voltage(BYTE byteDigital_Input);
+	void DAC_OutPut_Voltage_For_Debugging(BYTE byDigit_Input);
 	void DAC_Output_Real_Voltage(float fRealVoltageValue);
 	float DAC_CommonMode_Output(BYTE bDigitalIn);
 

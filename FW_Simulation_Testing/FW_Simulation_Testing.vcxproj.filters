@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\utility.c" />
+    <ClCompile Include="..\protocol\handling_ADC_DAC_cmd.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\handling_CAN_cmd.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\handling_command.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\handling_DIO_cmd.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\handling_Switch_Relay_Control_cmd.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\handling_System_cmd.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\Parse_UART2_Message.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="FW_Simulation_Testing_Main.c">
+      <Filter>FW_Simulation_Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\handling_PWM_cmd.c">
+      <Filter>protocol</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\utility.h" />
+    <ClInclude Include="..\ADC_and_DAC\ADC_and_DAC.h">
+      <Filter>ADC_and_DAC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ADC_and_DAC\ADC_to_Measure_Voltage_Current.h">
+      <Filter>ADC_and_DAC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DIO\Digital_IN.h">
+      <Filter>DIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DIO\Digital_OUT.h">
+      <Filter>DIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\error_code.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\handling_ADC_DAC_cmd.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\handling_CAN_cmd.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\handling_command.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\handling_DIO_cmd.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\handling_Switch_Relay_Control_cmd.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\handling_System_cmd.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\Parse_UART2_Message.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="configuration.h">
+      <Filter>FW_Simulation_Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Switch_Relay_Control\Switch_Relay_Control.h">
+      <Filter>Switch_Relay_Control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\handling_PWM_cmd.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PWM\PWM_In.h">
+      <Filter>PWM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PWM\PWM_Out.h">
+      <Filter>PWM</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\protocol\How_to_implement_command_message_parsing.txt">
+      <Filter>protocol</Filter>
+    </None>
+    <None Include="..\protocol\Protocol.txt">
+      <Filter>protocol</Filter>
+    </None>
+    <None Include="..\Reference_documentations\IEEE-488.2 (GPIB) Software Configuration Application Note --- GPIB Command format.pdf">
+      <Filter>Reference_documentations</Filter>
+    </None>
+    <None Include="..\Reference_documentations\Micrcontroller board.pdf">
+      <Filter>Reference_documentations</Filter>
+    </None>
+    <None Include="..\Reference_documentations\NI-Tutorial-3388-en.pdf">
+      <Filter>Reference_documentations</Filter>
+    </None>
+    <None Include="..\Reference_documentations\Renesas V850ES-Fx3 32-bit Single-Chip Microcontroller Datasheet.pdf">
+      <Filter>Reference_documentations</Filter>
+    </None>
+    <None Include="..\Reference_documentations\Switch Relay Board.pdf">
+      <Filter>Reference_documentations</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{ef2d0237-759f-4d43-ac67-36a8acfbe0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ADC_and_DAC">
+      <UniqueIdentifier>{4ce9d076-1106-445d-b29a-5a8d14135e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DIO">
+      <UniqueIdentifier>{b79ec3d4-e080-4e5a-b1e7-c9b5aa409686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FW_Simulation_Testing">
+      <UniqueIdentifier>{b30074fb-ebb6-4656-a25b-2ddb03386a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Switch_Relay_Control">
+      <UniqueIdentifier>{d59c61a6-6b24-45da-a749-bd354a6705f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Reference_documentations">
+      <UniqueIdentifier>{94f9f65e-fac5-4ef7-8580-fd9ed4cd6d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PWM">
+      <UniqueIdentifier>{4f54a190-9de9-40e0-9412-03eea4b325e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

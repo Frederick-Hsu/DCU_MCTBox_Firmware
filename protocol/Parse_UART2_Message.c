@@ -140,9 +140,9 @@ int Parse_UART2_Received_Message(char *sMesg)
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
-		else if (strncmp(sAction_Catalog, "PWM", 3) == 0)	// Catalog : "PWM output" command
+		else if (strncmp(sAction_Catalog, "PWM", 3) == 0)	// Catalog : "PWM output & input" command
 		{
-			// iResult = handling_PWM_cmd(sTempSubString);
+			iResult = handling_PWM_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}

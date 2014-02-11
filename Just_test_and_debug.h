@@ -31,6 +31,8 @@
 		void Test_1Ch_ADC_Voltage_Measurement(void);
 		
 		void Test_1Ch_DIN_Measurement(void);
+		
+		void Test_PWM_Out(void);
 	
 	#endif	/*    TEST_DEBUG_PURPOSE    */
 	

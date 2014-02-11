@@ -10,12 +10,14 @@
 
 /****************************************************************************/
 // Includeds :
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+
 #include "handling_command.h"
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
 #include "handling_DIO_cmd.h"
+#include "handling_PWM_cmd.h"
 #include "../utility.h"
 
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
@@ -120,7 +122,6 @@ int handling_Switch_Relay_Control_cmd(char* sSwitch_Relay_Ctrl_cmd_Mesg)
 	return 0;
 }
 
-
 int handling_ADC_cmd(char* sADC_cmd_Mesg)
 {
 	int iResult = 0;
@@ -175,21 +176,20 @@ int handling_ADC_cmd(char* sADC_cmd_Mesg)
 	return iResult;
 }
 
-
 int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 {
 	int iResult = 0;
 
 	unsigned int uiLen = strlen(sDAC_cmd_Mesg),
-				 uiPosOfCmdSeparator_Colon = strcspn(sDAC_cmd_Mesg, ":"),
-				 uiPosOfCmdSeparator_Space = strcspn(sDAC_cmd_Mesg, " ");
+			     uiPosOfCmdSeparator_Colon = strcspn(sDAC_cmd_Mesg, ":"),
+			     uiPosOfCmdSeparator_Space = strcspn(sDAC_cmd_Mesg, " ");
 
 	char sDAC_OutputType[16] = {0}, sDAC_OutputVoltageValue[16] = {0};
 	float fOutputVoltage = 0.0000f;
 
 	strncpy(sDAC_OutputType,
-			sDAC_cmd_Mesg+uiPosOfCmdSeparator_Colon+1,
-			uiPosOfCmdSeparator_Space-uiPosOfCmdSeparator_Colon-1);
+		sDAC_cmd_Mesg+uiPosOfCmdSeparator_Colon+1,
+		uiPosOfCmdSeparator_Space-uiPosOfCmdSeparator_Colon-1);
 
 	ToUpperString(sDAC_OutputType);
 	if (strncmp(sDAC_OutputType, "VOLT", 4))
@@ -214,11 +214,21 @@ int handling_DAC_cmd(char* sDAC_cmd_Mesg)
 	 *
 	 */
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-	#if defined (JUST_TESTING_PURPOSE)
-		DAC_Output_Real_Voltage(fOutputVoltage);
-	#else
-		DAC_Output_Voltage(abs(floorf(fOutputVoltage)));
-	#endif	/*  JUST_TESTING_PURPOSE  */
+	/*
+	 * Do experiment to output 256 voltage values, test and verify the DAC voltage linearity.
+	 * Just for debugging purpose.
+	 *
+	 * Remarked by Xu Zan@2013-05-28
+	 */
+	DAC_OutPut_Voltage_For_Debugging(atoi(sDAC_OutputVoltageValue));
+
+	#if 0	// Temporarily disable this actual DAC_Outputing_Voltage block.	Modified by Xu Zan@2013-05-28
+		#if defined (JUST_TESTING_PURPOSE)
+			DAC_Output_Real_Voltage(fOutputVoltage);
+		#else
+			DAC_Output_Voltage(abs(floorf(fOutputVoltage)));
+		#endif	/*  JUST_TESTING_PURPOSE  */
+	#endif
 #endif	/*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 /***************************************/
@@ -262,7 +272,6 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	return iError;
 }
 
-
 int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 {
 	int iError = 0;
@@ -291,6 +300,48 @@ int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)
 	return iError;
 }
 
+int handling_PWM_cmd(char* sPWM_cmd_Mesg)
+{
+	int iError = 0;
+
+	char sResponseMesg[256] = {0};
+	ToUpperString(sPWM_cmd_Mesg);
+	if (strncmp(sPWM_cmd_Mesg, "PWMO", 4) == 0)
+	{
+		iError = handling_PWMOut_cmd(sPWM_cmd_Mesg);
+		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			sprintf(sResponseMesg, "$%s", sPWM_cmd_Mesg);
+			UARTD2_SendData(sResponseMesg, strlen(sResponseMesg));
+		#endif
+	}
+	else if (strncmp(sPWM_cmd_Mesg, "PWMI", 4) == 0)
+	{
+		iError = handling_PWMIn_cmd(sPWM_cmd_Mesg);
+	}
+	else
+	{
+		g_iErrorCodeNo = -23;
+		return g_iErrorCodeNo;
+	}
+
+/***************************/
+	return iError;
+}
+
+int handling_CAN_cmd(char* sCAN_cmd_Mesg)
+{
+	int iResult = 0;
+
+	return iResult;
+}
+
+int handling_LIN_cmd(char* sLIN_cmd_Mesg)
+{
+	int iResult = 0;
+
+	return iResult;
+}
+
 int handling_System_cmd(char *sSystem_cmd_Mesg)
 {
 	int iError = 0;
@@ -298,6 +349,7 @@ int handling_System_cmd(char *sSystem_cmd_Mesg)
 /***************************/
 	return iError;
 }
+
 /*
  * END OF FILE  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  */

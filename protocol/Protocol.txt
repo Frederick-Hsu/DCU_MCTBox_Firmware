@@ -152,13 +152,34 @@
 				===========================================================================================================
 
 			PWM catalog :
-				$ACTIon:PWM CH#:Freq DutyCycle!
-
+				
+				PWM Out 
+					----------------------------------------------------
+					Option 2
+					$PWMO CONF:FREQ 10:DUTY 40%:VOLT 5!
+					$PWMO CONF:FREQ 20:DUTY 25%:VOLT 5!
+				
+					$PWMO START:PRIM:CHNL 1!
+					$PWMO START:SECN:BDID 0x01:CHNL 21!
+					
+					$PWMO STOP!
+					
+					----------------------------------------------------
+					Option 1
+					$PWMO CONF:OUT1:FREQ 5:DUTY 40%:VOLT 5!
+					$PWMO CONF:OUT2:FREQ 2:DUTY 75%:VOLT 5!
+				
+					$PWMO START:OUT1:PRIM:CHNL 1!
+					$PWMO START:OUT1:SECN:BDID 0x01:CHNL 21!
+					$PWMO START:OUT2:PRIM:CHNL 1!
+					$PWMO START:OUT2:SECN:BDID 0x01:CHNL 7!
+					
+					$PWMO STOP:OUT1!
+					$PWMO STOP:OUT2!
+				PWM In
+					$PWMI CH#!
+					$PWMI CH#:FREQ 125:DUTY 80%!  (<==== PWM INPUT response)
 				===========================================================================================================
-				$PWM CH#:Freq DutyCycle!
-				===========================================================================================================
-
-
 
 		SYSTem :
 			Error catalog :

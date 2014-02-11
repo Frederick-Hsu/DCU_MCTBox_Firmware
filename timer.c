@@ -34,6 +34,7 @@
 /* Start user code for include definition. Do not edit comment generated here */
 /* End user code for include definition. Do not edit comment generated here */
 #include "user_define.h"
+#include "PWM/PWM_Out_Generating_Option.h"
 
 /*
 *******************************************************************************
@@ -73,7 +74,12 @@ void TAA0_Init(void)
 
 	ISEL20 = 0;	/* selection of TAA0 counter clock = fXP1 */
 	/* Interval timer mode setting */
-	TAA0CTL0 = TAA_INTERNAL_CLOCK0;
+#if (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION2)
+	TAA0CTL0 = TAA_INTERNAL_CLOCK10;	/* Use fXP1/128, 128-divided frequency, T=128/32M = 4us, Modified by Xuzan@2013-08-01 */
+#elif (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION1)
+	// TAA0CTL0 = TAA_INTERNAL_CLOCK0;		/* Use fXP1, T = 1/32M = 1/32us */
+	TAA0CTL0 = TAA_INTERNAL_CLOCK8;
+#endif
 	TAA0CTL1 = TAA_MODE_INTERVAL;
 	TAA0CCR0 = TAA0_CCR0_VALUE;
 	TAA0CCR1 = 0xffff;
@@ -189,7 +195,12 @@ void TAA1_Init(void)
 
 	ISEL21 = 0;	/* selection of TAA1 counter clock = fXP1 */
 	/* Interval timer mode setting */
-	TAA1CTL0 = TAA_INTERNAL_CLOCK0;
+#if (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION2)
+	TAA1CTL0 = TAA_INTERNAL_CLOCK10;
+#elif (PWM_OUT_GENERATE_OPTION == PWM_OUT_GENRATE_OPTION1)
+	// TAA1CTL0 = TAA_INTERNAL_CLOCK0;
+	TAA1CTL0 = TAA_INTERNAL_CLOCK8;
+#endif
 	TAA1CTL1 = TAA_MODE_INTERVAL;
 	TAA1CCR0 = TAA1_CCR0_VALUE;
 	TAA1CCR1 = 0xffff;
