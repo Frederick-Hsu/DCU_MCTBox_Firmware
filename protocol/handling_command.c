@@ -242,7 +242,8 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 
 	unsigned int uiLen = strlen(sDIN_cmd_Mesg),
                              uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
-                             uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?");
+                             uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?"),
+			     uiPosOfStar = strcspn(sDIN_cmd_Mesg, "*");
 
 	char sDIN_CHnStateResponse[256] = {0}, sDinCmdResponse[256] = {0};
 
@@ -251,7 +252,11 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 		g_iErrorCodeNo = -13;
 		return g_iErrorCodeNo;
 	}
-	if (uiPosOfCmdSeparator_Semicolon != uiLen)
+	if (uiPosOfStar != uiLen)
+	{
+		iError = handling_1GroupOfChs_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+	}
+	else if (uiPosOfCmdSeparator_Semicolon != uiLen)
 	{
 	        iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
