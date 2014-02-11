@@ -162,7 +162,9 @@ int handling_1GroupOfChs_DIN_cmd(char *sARGIN_1GroupDinChsCmdMesg,
 	int iError = 0;
 	char sDin24ChsStates[32] = {0};
 	
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	Read_DIN_1GroupOfCHs_State(sDin24ChsStates);
+#endif
 	sprintf(sARGOUT_1GroupDinChsStateResponseMesg, "DIN *:State %s", sDin24ChsStates);
 	return iError;
 }
