@@ -57,10 +57,6 @@
 
 /******************************************************************************/
 // Macros :
-#if !defined (ENABLE_OCDM_DEBUG)
-	#define ENABLE_OCDM_DEBUG
-	// #undef	ENABLE_OCDM_DEBUG
-#endif
 
 #define SIZEOF_HEAP 0x1000
 
@@ -136,7 +132,7 @@ void  main(void)
 	SystemInit();
 	
 	
-	#if !defined (ENABLE_OCDM_DEBUG)
+	#if defined (ENABLE_OCDM_DEBUG)
 		Enable_OCDM();
 	#else
 		Disable_OCDM();
