@@ -26,6 +26,9 @@
 
 	int handling_MultiCH_DIN_cmd(char       *ARGIN_DinMultiChCmdMesg,
                                      char       *ARGOUT_DinMultiChStateResponseMesg);
+				     
+	int handling_1GroupOfChs_DIN_cmd(char *sARGIN_1GroupDinChsCmdMesg,
+					 char *sARGOUT_1GroupDinChsStateResponseMesg);
 
         int handling_Single_DOUT_CHn_cmd(char   *sDoutSingleChCmdUnitMesg);
 
