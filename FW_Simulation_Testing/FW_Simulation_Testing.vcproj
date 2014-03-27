@@ -323,6 +323,10 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
+		<File
 			RelativePath="..\utility.c"
 			>
 		</File>

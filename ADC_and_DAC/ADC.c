@@ -212,7 +212,13 @@ void Calculate_Analog_Input_Value_for_1Ch(E_ADC_CH 	eADC_CHn,
 
 	// fTempValue = iADCValue*fADC_Ref_Voltage/power(2, 16);
 	// fTempValue = ((float)(iADCValue-65))/326.66;
-	fTempValue = ((float)(iADCValue-28))/1810.16;
+	
+	/* This formula is an experience formula, his gain coefficient(1/1810.16) and offset(-28) 
+	 * are experimented and calculated by Henry.
+	 *
+	 * Remarked by XU ZAN@2014-02-20
+	 */
+	fTempValue = ((float)(iADCValue-28))/1810.16;	
 
 	// fAnalogInputValue = &fTempValue;
 	memcpy(fAnalogInputValue, &fTempValue, sizeof(float));
@@ -225,15 +231,26 @@ void Calculate_Analog_Input_Value_for_8Chs(float fAnalogInputValues8Chs[])
 	int i = 0;
 
 	int iTempADCValue[8] = {0x0000};
-	float fTempValue[8] = {0.0000f};
-	float fTempVoltage[8] = {0.000f};
+	// float fTempValue[8] = {0.0000f};
+	// float fTempVoltage[8] = {0.000f};
 
 	ADC_Get_8CHs_AINValue(iTempADCValue);
 
 	for (i=0; i<8; i++)
 	{
-		// fTempVoltage[i] = iTempADCValue[i]*fADC_Ref_Voltage/power(2, 16);
-		fAnalogInputValues8Chs[i] = iTempADCValue[i]*fADC_Ref_Voltage/power(2, 16);
+		/* The below calculation formula is wrong.
+		 * Because the impacts of offset@zero_voltage and gain were ignored. 
+		 * 
+		 * Remarked by XU ZAN@2014-02-20
+		 */
+		// fAnalogInputValues8Chs[i] = (iTempADCValue[i]>>16)*fADC_Ref_Voltage;
+		
+		/* Correctly, it should follow this formula :
+		 * fTempValue = ((float)(iADCValue-28))/1810.16;	
+		 *
+		 * Corrected by XU ZAN@2014-02-20
+		 */
+		fAnalogInputValues8Chs[i] = ((float)(iTempADCValue[i]-28))/1810.16;
 		// memcpy(fAnalogInputValues8Chs+i*sizeof(float), fTempVoltage+i*sizeof(float), sizeof(float));
 	}
 

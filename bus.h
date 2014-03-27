@@ -190,14 +190,14 @@
 	DWORD Read_DataBus_State_from_DB23_to_DB00(void);
 	
 	
-	DWORD Read_Digital_In_Bus_Value();
+	DWORD Read_Digital_In_Bus_Value(void);
 	
-	void Set_DataBus_to_Initial_Default_State_After_Power_ON();
+	void Set_DataBus_to_Initial_Default_State_After_Power_ON(void);
 	
-	void Set_AddressBus_to_Initial_Default_State_After_Power_ON();
+	void Set_AddressBus_to_Initial_Default_State_After_Power_ON(void);
 	
-	void Set_ControlBus_to_Initial_Default_State_After_Power_ON();
-	void Set_Initial_Default_State_After_Power_ON();
+	void Set_ControlBus_to_Initial_Default_State_After_Power_ON(void);
+	void Set_Initial_Default_State_After_Power_ON(void);
 	
 	
 	/*****************************************************************/

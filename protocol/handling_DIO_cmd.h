@@ -15,7 +15,7 @@
 #ifndef _HANDLING_DIO_CMD_H
 #define _HANDLING_DIO_CMD_H
 
-        #if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+	#if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 		#include "../macrodriver.h"
 	#else
 		#include "../FW_Simulation_Testing/configuration.h"

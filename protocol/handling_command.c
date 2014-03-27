@@ -240,10 +240,10 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 {
 	int iError = 0;
 
-	unsigned int uiLen = strlen(sDIN_cmd_Mesg),
-                             uiPosOfCmdSeparator_Semicolon = strcspn(sDIN_cmd_Mesg, ";"),
-                             uiPosOfCmdSeparator_Qmark = strcspn(sDIN_cmd_Mesg, "?"),
-			     uiPosOfStar = strcspn(sDIN_cmd_Mesg, "*");
+	unsigned int uiLen 				= strlen(sDIN_cmd_Mesg),
+		     uiPosOfCmdSeparator_Semicolon 	= strcspn(sDIN_cmd_Mesg, ";"),
+		     uiPosOfCmdSeparator_Qmark 		= strcspn(sDIN_cmd_Mesg, "?"),
+		     uiPosOfStar 			= strcspn(sDIN_cmd_Mesg, "*");
 
 	char sDIN_CHnStateResponse[256] = {0}, sDinCmdResponse[256] = {0};
 

@@ -1058,7 +1058,7 @@
       <BatchBuildFlag1>False</BatchBuildFlag1>
       <BuildMode2>UgBlAGwAZQBhAHMAZQAgAEIAdQBpAGwAZAA=</BuildMode2>
       <BatchBuildFlag2>False</BatchBuildFlag2>
-      <CurrentBuildMode>DefaultBuild</CurrentBuildMode>
+      <CurrentBuildMode>Release Build</CurrentBuildMode>
       <SourceItemGuid0>18e7cb7c-d368-4732-ad42-74a9ffb3ec51</SourceItemGuid0>
       <SourceItemType0>LinkDirectiveSource</SourceItemType0>
       <SourceItemGuid1>e40efbfe-0ee6-4342-a4b8-435c6a6a30f2</SourceItemGuid1>
@@ -3025,7 +3025,7 @@ DIO
       <DebuggerProperty-EssentialProperty-OnChipDebugPort-DckClock>Use10MHz</DebuggerProperty-EssentialProperty-OnChipDebugPort-DckClock>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-Length>1</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-Length>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-DebuggerGuid />
-      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>DefaultBuild\romp.out</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
+      <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>Release Build\romp.out</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileName>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>LoadModuleFile</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-FileType>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>0</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-Offset>
       <DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-StartAddress>0</DebuggerProperty-DownloadProperty-DebugInformation-DownloadFiles-DownloadItem0-StartAddress>
