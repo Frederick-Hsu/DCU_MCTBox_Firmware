@@ -524,7 +524,7 @@ void Write_All_DataBus(unsigned int uiDBValue)
 	Set_DataBus_from_DB23_to_DB16(btHighByteValue);
 }
 
-DWORD Read_Digital_In_Bus_Value()
+DWORD Read_Digital_In_Bus_Value(void)
 {
 	DWORD dwDigitalInValue = 0x00000000;
 	
@@ -589,7 +589,7 @@ DWORD Read_Digital_In_Bus_Value()
 }
 
 
-void Set_DataBus_to_Initial_Default_State_After_Power_ON()
+void Set_DataBus_to_Initial_Default_State_After_Power_ON(void)
 {
 	/*
 	 * Considering the connection (ON) / disconnection (OFF) state transition, all switches and
@@ -604,7 +604,7 @@ void Set_DataBus_to_Initial_Default_State_After_Power_ON()
 	 Set_DataBus_from_DB23_to_DB16(0x00);
 }
 
-void Set_AddressBus_to_Initial_Default_State_After_Power_ON()
+void Set_AddressBus_to_Initial_Default_State_After_Power_ON(void)
 {
 	/*
 	 * Set Address Bus[7..0] to default : 0xFF
@@ -615,7 +615,7 @@ void Set_AddressBus_to_Initial_Default_State_After_Power_ON()
 	CS0 = HIGH;	// CS0 pin = P99
 }
 
-void Set_ControlBus_to_Initial_Default_State_After_Power_ON()
+void Set_ControlBus_to_Initial_Default_State_After_Power_ON(void)
 {
 	/* This function need to determine the state of each control port.
 	 * Need to discuss with Henry Xing, under-discussion, wait for implementation later.
@@ -640,7 +640,7 @@ void Set_ControlBus_to_Initial_Default_State_After_Power_ON()
 	#endif
 }
 
-void Set_Initial_Default_State_After_Power_ON()
+void Set_Initial_Default_State_After_Power_ON(void)
 {
 	Set_DataBus_to_Initial_Default_State_After_Power_ON();
 	Set_AddressBus_to_Initial_Default_State_After_Power_ON();
