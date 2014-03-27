@@ -100,3 +100,61 @@
 			((dwDinBusValue & 0x00000001)   ));
 		return;
 	}
+	
+	int Read_DinBoard_CHn_State(BYTE ucDinBoardID, DIGITAL_IN_CHm eDinChn)
+	{
+		int iState = 0;
+		DWORD dw24PortsState = 0x00000000;
+		
+		CS1 = LOW;	// Enable chip(U4) 74ALS520
+		Write_Address_Bus(ucDinBoardID);
+		dw24PortsState = Read_DataBus_State_from_DB23_to_DB00();
+		
+		iState = (((0x00000001 << eDinChn) & dw24PortsState) >> eDinChn);
+		
+		CS1 = HIGH;	// Remember to disable chip(U4)
+		
+		return iState;
+	}
+	
+	void Read_DinBoard_24Chs_State(BYTE ucDinBoardID, char *sARGOUT_24ChsStates)
+	{
+		DWORD dw24PortsState = 0x00000000;
+		
+		CS1 = LOW;
+		Write_Address_Bus(ucDinBoardID);
+		dw24PortsState = Read_DataBus_State_from_DB23_to_DB00();
+		CS1 = HIGH;
+		
+		sprintf(sARGOUT_24ChsStates, "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",
+			((dw24PortsState & 0x00800000)>>23),
+			((dw24PortsState & 0x00400000)>>22),
+			((dw24PortsState & 0x00200000)>>21),
+			((dw24PortsState & 0x00100000)>>20),
+			((dw24PortsState & 0x00080000)>>19),
+			((dw24PortsState & 0x00040000)>>18),
+			((dw24PortsState & 0x00020000)>>17),
+			((dw24PortsState & 0x00010000)>>16),
+			((dw24PortsState & 0x00008000)>>15),
+			((dw24PortsState & 0x00004000)>>14),
+			((dw24PortsState & 0x00002000)>>13),
+			((dw24PortsState & 0x00001000)>>12),
+			((dw24PortsState & 0x00000800)>>11),
+			((dw24PortsState & 0x00000400)>>10),
+			((dw24PortsState & 0x00000200)>>9 ),
+			((dw24PortsState & 0x00000100)>>8 ),
+			((dw24PortsState & 0x00000080)>>7 ),
+			((dw24PortsState & 0x00000040)>>6 ),
+			((dw24PortsState & 0x00000020)>>5 ),
+			((dw24PortsState & 0x00000010)>>4 ),
+			((dw24PortsState & 0x00000008)>>3 ),
+			((dw24PortsState & 0x00000004)>>2 ),
+			((dw24PortsState & 0x00000002)>>1 ),
+			((dw24PortsState & 0x00000001)    ));
+	}
+	
+	
+/*
+ * END OF FILE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ */
+ 
