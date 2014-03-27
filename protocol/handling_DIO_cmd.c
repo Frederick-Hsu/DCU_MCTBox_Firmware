@@ -42,8 +42,10 @@ int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg,
                      uiPosOfCmdSeparator_Space = strcspn(sARGIN_DinSingleChCmdMesg, " "),
                      uiPosOfCmdSeparator_Qmark = strcspn(sARGIN_DinSingleChCmdMesg, "?");
 
-        char sDinCHn[8] = {0}, sDinState[16] = {0};
-        long  lDinCHn = 25;
+        char sDinCHn[8] = {0}, sDinState[16] = {0}, sDinBoardID[16] = {0};
+        long lDinCHn = 25, lDinBoardID = 0x00;
+		char *cColonSubStr = NULL;
+		int iDinBoardCHnState = 0;
 
         DIN_CHm_STATE stCurrentDinCh = {25, 5};
 
@@ -55,36 +57,57 @@ int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg,
                 return g_iErrorCodeNo;
         }
 
-        strncpy(sDinCHn, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Space+1, uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1);
-        strncpy(sDinState, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Colon+1, uiPosOfCmdSeparator_Qmark-uiPosOfCmdSeparator_Colon-1);
-        Convert_Str_To_Int(sDinCHn, &lDinCHn);
-        ToUpperString(sDinState);
+	if (strstr(sARGIN_DinSingleChCmdMesg, ":STA"))
+	{
+	        strncpy(sDinCHn, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Space+1, uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1);
+	        strncpy(sDinState, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Colon+1, uiPosOfCmdSeparator_Qmark-uiPosOfCmdSeparator_Colon-1);
+	        Convert_Str_To_Int(sDinCHn, &lDinCHn);
+	        ToUpperString(sDinState);
 
-        if ((lDinCHn>24) || (lDinCHn<0))
-        {
-                g_iErrorCodeNo = -16;
-                return g_iErrorCodeNo;
-        }
-        if (strncmp(sDinState, "STATE", 5))
-        {
-                g_iErrorCodeNo = -17;
-                return g_iErrorCodeNo;
-        }
+	        if ((lDinCHn>24) || (lDinCHn<0))
+	        {
+	                g_iErrorCodeNo = -16;
+	                return g_iErrorCodeNo;
+	        }
+	        if (strncmp(sDinState, "STATE", 5))
+	        {
+	                g_iErrorCodeNo = -17;
+	                return g_iErrorCodeNo;
+	        }
 
-        stCurrentDinCh.eCHm = lDinCHn-1;
-        #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-        Read_DIN_CHn_State(&stCurrentDinCh);
-        #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+	        stCurrentDinCh.eCHm = lDinCHn-1;
+	        #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+	        	Read_DIN_CHn_State(&stCurrentDinCh);
+	        #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
-        if (stCurrentDinCh.eCHm_State == HIGH)
-        {
-                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State HIGH", lDinCHn);
-        }
-        else if (stCurrentDinCh.eCHm_State == LOW)
-        {
-                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State LOW", lDinCHn);
-        }
+	        if (stCurrentDinCh.eCHm_State == HIGH)
+	        {
+	                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State HIGH", lDinCHn);
+	        }
+	        else if (stCurrentDinCh.eCHm_State == LOW)
+	        {
+	                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State LOW", lDinCHn);
+	        }
+	}
+	else if (strstr(sARGIN_DinSingleChCmdMesg, " STA"))
+	{
+		cColonSubStr = strstr(sARGIN_DinSingleChCmdMesg, ":");
+		
+		strncpy(sDinBoardID, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Space+1, uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1);
+		Convert_Str_To_Int(sDinBoardID, &lDinBoardID);
 
+		strncpy(sDinCHn, cColonSubStr+1, strcspn(cColonSubStr, " ")-1);
+		Convert_Str_To_Int(sDinCHn, &lDinCHn);
+
+		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			iDinBoardCHnState = Read_DinBoard_CHn_State(lDinBoardID, lDinCHn-1);	// Channel # starting from 1 to 24
+		#endif
+		sprintf(sARGOUT_DinSingleChStateResponseMesg, 
+				"DIN 0x%02X:%ld %s", 
+				lDinBoardID, 
+				lDinCHn, 
+				iDinBoardCHnState==1?"HIGH":"LOW");
+	}
 /*******************************/
 	return iError;
 }
@@ -159,12 +182,29 @@ int handling_MultiCH_DIN_cmd(char       *ARGIN_DinMultiChCmdMesg,
 int handling_1GroupOfChs_DIN_cmd(char *sARGIN_1GroupDinChsCmdMesg,
 				 char *sARGOUT_1GroupDinChsStateResponseMesg)
 {
-	int iError = 0;
-	char sDin24ChsStates[32] = {0};
+	char sDin24ChsStates[32] = {0}, sDinBoardID[16] = {0};
+	long lDinBoardID = 0x00;
+	unsigned int uiPosOfSpace = strcspn(sARGIN_1GroupDinChsCmdMesg, " "),
+		     uiPosOfColon = strcspn(sARGIN_1GroupDinChsCmdMesg, ":");
 	
-	Read_DIN_1GroupOfCHs_State(sDin24ChsStates);
-	sprintf(sARGOUT_1GroupDinChsStateResponseMesg, "DIN *:State %s", sDin24ChsStates);
-	return iError;
+	if (strstr(sARGIN_1GroupDinChsCmdMesg, "*:"))
+	{
+		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			Read_DIN_1GroupOfCHs_State(sDin24ChsStates);
+		#endif
+		sprintf(sARGOUT_1GroupDinChsStateResponseMesg, "DIN *:State %s", sDin24ChsStates);
+	}
+	else if (strstr(sARGIN_1GroupDinChsCmdMesg, ":*"))
+	{
+		strncpy(sDinBoardID, sARGIN_1GroupDinChsCmdMesg+uiPosOfSpace+1, uiPosOfColon-uiPosOfSpace-1);
+		Convert_Str_To_Int(sDinBoardID, &lDinBoardID);
+		
+		#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+			Read_DinBoard_24Chs_State((BYTE)lDinBoardID, sDin24ChsStates);
+		#endif
+		sprintf(sARGOUT_1GroupDinChsStateResponseMesg, "DIN 0x%02X:* %s", lDinBoardID, sDin24ChsStates);
+	}
+	return 0;
 }
 					 
 int handling_Single_DOUT_CHn_cmd(char *sDoutSingleChCmdUnitMesg)
