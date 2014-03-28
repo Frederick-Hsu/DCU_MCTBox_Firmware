@@ -38,56 +38,56 @@ int handling_SingleCH_DIN_cmd(char	*sARGIN_DinSingleChCmdMesg,
 	int iError = 0;
 
 	unsigned int uiLen = strlen(sARGIN_DinSingleChCmdMesg),
-                     uiPosOfCmdSeparator_Colon = strcspn(sARGIN_DinSingleChCmdMesg, ":"),
-                     uiPosOfCmdSeparator_Space = strcspn(sARGIN_DinSingleChCmdMesg, " "),
-                     uiPosOfCmdSeparator_Qmark = strcspn(sARGIN_DinSingleChCmdMesg, "?");
+                 uiPosOfCmdSeparator_Colon = strcspn(sARGIN_DinSingleChCmdMesg, ":"),
+                 uiPosOfCmdSeparator_Space = strcspn(sARGIN_DinSingleChCmdMesg, " "),
+                 uiPosOfCmdSeparator_Qmark = strcspn(sARGIN_DinSingleChCmdMesg, "?");
 
-        char sDinCHn[8] = {0}, sDinState[16] = {0}, sDinBoardID[16] = {0};
-        long lDinCHn = 25, lDinBoardID = 0x00;
-		char *cColonSubStr = NULL;
-		int iDinBoardCHnState = 0;
+    char sDinCHn[8] = {0}, sDinState[16] = {0}, sDinBoardID[16] = {0};
+    long lDinCHn = 25, lDinBoardID = 0x00;
+	char *cColonSubStr = NULL;
+	int iDinBoardCHnState = 0;
 
-        DIN_CHm_STATE stCurrentDinCh = {25, 5};
+    DIN_CHm_STATE stCurrentDinCh = {25, 5};
 
-        if ((uiPosOfCmdSeparator_Qmark == uiLen) ||
-            (uiPosOfCmdSeparator_Colon == uiLen) ||
-            (uiPosOfCmdSeparator_Space == uiLen) )
-        {
-                g_iErrorCodeNo = -18;
-                return g_iErrorCodeNo;
-        }
+    if ((uiPosOfCmdSeparator_Qmark == uiLen) ||
+        (uiPosOfCmdSeparator_Colon == uiLen) ||
+        (uiPosOfCmdSeparator_Space == uiLen) )
+    {
+        g_iErrorCodeNo = -18;
+        return g_iErrorCodeNo;
+    }
 
 	if (strstr(sARGIN_DinSingleChCmdMesg, ":STA"))
 	{
-	        strncpy(sDinCHn, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Space+1, uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1);
-	        strncpy(sDinState, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Colon+1, uiPosOfCmdSeparator_Qmark-uiPosOfCmdSeparator_Colon-1);
-	        Convert_Str_To_Int(sDinCHn, &lDinCHn);
-	        ToUpperString(sDinState);
+        strncpy(sDinCHn, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Space+1, uiPosOfCmdSeparator_Colon-uiPosOfCmdSeparator_Space-1);
+        strncpy(sDinState, sARGIN_DinSingleChCmdMesg+uiPosOfCmdSeparator_Colon+1, uiPosOfCmdSeparator_Qmark-uiPosOfCmdSeparator_Colon-1);
+        Convert_Str_To_Int(sDinCHn, &lDinCHn);
+        ToUpperString(sDinState);
 
-	        if ((lDinCHn>24) || (lDinCHn<0))
-	        {
-	                g_iErrorCodeNo = -16;
-	                return g_iErrorCodeNo;
-	        }
-	        if (strncmp(sDinState, "STATE", 5))
-	        {
-	                g_iErrorCodeNo = -17;
-	                return g_iErrorCodeNo;
-	        }
+        if ((lDinCHn>24) || (lDinCHn<0))
+        {
+			g_iErrorCodeNo = -16;
+			return g_iErrorCodeNo;
+        }
+        if (strncmp(sDinState, "STATE", 5))
+        {
+			g_iErrorCodeNo = -17;
+			return g_iErrorCodeNo;
+        }
 
-	        stCurrentDinCh.eCHm = lDinCHn-1;
-	        #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-	        	Read_DIN_CHn_State(&stCurrentDinCh);
-	        #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
+        stCurrentDinCh.eCHm = lDinCHn-1;
+        #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+        	Read_DIN_CHn_State(&stCurrentDinCh);
+        #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
-	        if (stCurrentDinCh.eCHm_State == HIGH)
-	        {
-	                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State HIGH", lDinCHn);
-	        }
-	        else if (stCurrentDinCh.eCHm_State == LOW)
-	        {
-	                sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State LOW", lDinCHn);
-	        }
+        if (stCurrentDinCh.eCHm_State == HIGH)
+        {
+			sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State HIGH", lDinCHn);
+        }
+        else if (stCurrentDinCh.eCHm_State == LOW)
+        {
+			sprintf(sARGOUT_DinSingleChStateResponseMesg, "DIN %ld:State LOW", lDinCHn);
+        }
 	}
 	else if (strstr(sARGIN_DinSingleChCmdMesg, " STA"))
 	{

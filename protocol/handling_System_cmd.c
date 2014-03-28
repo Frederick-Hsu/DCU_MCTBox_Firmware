@@ -59,7 +59,11 @@ extern int g_iErrorCodeNo;
 		"Error code # -036: PWM_Out channel is wrong in Primary mode",
 		"Error code # -037: PWM_Out channel is wrong in Secondary mode",
 		"Error code # -038: PWM_Out board id is wrong in Secondary mode",
-		"Error code # -039: Command syntax of System catalogue is wrong. No ':'"
+		"Error code # -039: Command syntax of System catalogue is wrong. No ':'",
+		"Error code # -040: FIN command format error. No ':'",
+		"Error code # -041: FIN board ID error",
+		"Error code # -042: FIN channel number error",
+		"Error code # -043: FIN command format error. No ' STATe'"
 	};
 /****************************************************************************/
 
