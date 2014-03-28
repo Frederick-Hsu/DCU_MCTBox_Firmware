@@ -44,7 +44,6 @@
 #include "Project.h"
 
 #include "bus.h"
-#include "ADC_and_DAC.h"
 
 
 /*========================================================*/
@@ -170,20 +169,7 @@ void  main(void)
 	/* Start user code. Do not edit comment generated here */
 	while (1) 
 	{
-		#if defined (TEST_DEBUG_PURPOSE)
-			// Test_MCU_Chip_System();
-			// Print_ADC_Values_8Channels();
-			// Test_1Ch_DIN_Measurement();
-			// Test_1Ch_ADC_Voltage_Measurement();
-		#endif	/* End   TEST_DEBUG_PURPOSE    */
-		
-		#if 0
-		for (i=0; i<100; i++)
-		{
-			NOP();
-		}
-		#endif
-		
+		NOP();
 	}
 	/* End user code. Do not edit comment generated here */
 }

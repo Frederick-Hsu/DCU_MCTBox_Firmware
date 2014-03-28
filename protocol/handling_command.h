@@ -21,6 +21,8 @@
 	int handling_DAC_cmd(char* sDAC_cmd_Mesg);
 
 	int handling_DIN_cmd(char* sDIN_cmd_Mesg);
+	
+	int handling_FIN_cmd(char *sFIN_cmd_Mesg);
 
 	int handling_DOUT_cmd(char* sDOUT_cmd_Mesg);
 

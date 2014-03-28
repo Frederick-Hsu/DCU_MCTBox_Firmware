@@ -236,7 +236,7 @@ int handling_8CHVoltageMeasurement(char *ARGOUT_8ChVoltageMeasureResponse)
 	#endif
 #if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 	#if (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_FLOAT)
-		Measure_8CHs_Voltage_Values(10.00, f8ChVoltages);
+		Measure_8CHs_Voltage_Values(1.00, f8ChVoltages);
 	#elif (ADC_OUTPUT_FORMAT == ADC_OUTPUT_FORMAT_INTEGER)
 		ADC_Get_8CHs_AINValue(i8ChADCValue);
 	#endif

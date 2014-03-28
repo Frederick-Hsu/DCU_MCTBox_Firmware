@@ -59,7 +59,11 @@ extern int g_iErrorCodeNo;
 		"Error code # -036: PWM_Out channel is wrong in Primary mode",
 		"Error code # -037: PWM_Out channel is wrong in Secondary mode",
 		"Error code # -038: PWM_Out board id is wrong in Secondary mode",
-		"Error code # -039: Command syntax of System catalogue is wrong. No ':'"
+		"Error code # -039: Command syntax of System catalogue is wrong. No ':'",
+		"Error code # -040: FIN command format error. No ':'",
+		"Error code # -041: FIN board ID error",
+		"Error code # -042: FIN channel number error",
+		"Error code # -043: FIN command format error. No ' STATe'"
 	};
 /****************************************************************************/
 
@@ -74,7 +78,9 @@ int handling_System_Error_cmd(char sSystemErrorCmd[])
 	}
 	
 	sprintf(sErrorMesg, "$SYSTem:%s!", sErrorCode[g_iErrorCodeNo * (-1)]);
-	UARTD2_SendData(sErrorMesg, strlen(sErrorMesg));	// Response the error message from COM port.
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		UARTD2_SendData(sErrorMesg, strlen(sErrorMesg));	// Response the error message from COM port.
+	#endif
 	
 	/* Clean the error code to 0 (i.e. No error.)
 	 * Please note that current MCTBox firmware system does not support error code queue. 
@@ -98,7 +104,9 @@ int handling_System_IDN_cmd(char sSystemIdnCmd[])
 	}
 	
 	sprintf(sIDN, "$SYSTem:Hello, this is MCTBox. Welcome to call me!");
-	UARTD2_SendData(sIDN, strlen(sIDN));
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		UARTD2_SendData(sIDN, strlen(sIDN));
+	#endif
 	
 	return iResult;
 }
@@ -115,7 +123,9 @@ int handling_System_Version_cmd(char sSystemVerCmd[])
 	}
 	
 	sprintf(sVersion, "$SYSTem:%s!", CURRENT_VERSION);
-	UARTD2_SendData(sVersion, strlen(sVersion));
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		UARTD2_SendData(sVersion, strlen(sVersion));
+	#endif
 	
 	return iResult;
 }

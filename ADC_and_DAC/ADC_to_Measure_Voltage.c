@@ -71,6 +71,11 @@ void Measure_8CHs_Voltage_Values(float 	fUniformScalingCoefficient,
 	
 	for (i=0; i<8; i++)
 	{
+		/*
+		 * The below calculation formula is wrong. Disable them.
+		 *
+		 * Modified by XU ZAN@2014-02-20
+		 *
 		#if (SCALING_COEFFICIENT == SCALING_COEFFICIENT_FIXED_BY_REXT)
 	
 			f8CHsVoltageValues[i] = fTemp8CHsVoltage[i] * g_fScalingCoefficient_FixedByRext;
@@ -80,6 +85,8 @@ void Measure_8CHs_Voltage_Values(float 	fUniformScalingCoefficient,
 			f8CHsVoltageValues[i] = fTemp8CHsVoltage[i] * fUniformScalingCoefficient;
 	
 		#endif
+		 */
+		f8CHsVoltageValues[i] = fTemp8CHsVoltage[i] ;
 	}
 	return;
 }
