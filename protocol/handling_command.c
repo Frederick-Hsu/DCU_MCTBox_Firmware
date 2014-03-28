@@ -255,7 +255,9 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	}
 	if (uiPosOfStar != uiLen)
 	{
+#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
 		iError = handling_1GroupOfChs_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+#endif
 	}
 	else if (uiPosOfCmdSeparator_Semicolon != uiLen)
 	{

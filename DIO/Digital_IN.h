@@ -54,16 +54,15 @@
 	DIN_CHm_STATE, *P_DIN_CHm_STATE;
 
         #if !defined(FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
-                void Read_DIN_CHn_State(P_DIN_CHm_STATE pDInCHmState);
-                void Read_DIN_Multi_CHs_State(P_DIN_CHm_STATE pCHiState, ...);
-		void Read_DIN_1GroupOfCHs_State(char *sARGOUT_24ChsStates);
 		
-		int Read_DinBoard_CHn_State(BYTE ucDinBoardID, DIGITAL_IN_CHm eDinChn);
-		void Read_DinBoard_24Chs_State(BYTE ucDinBoardID, char *sARGOUT_24ChsStates);
-		
-        #endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
-
-
+			void Read_DIN_CHn_State(P_DIN_CHm_STATE pDInCHmState);
+			void Read_DIN_Multi_CHs_State(P_DIN_CHm_STATE pCHiState, ...);
+			void Read_DIN_1GroupOfCHs_State(char *sARGOUT_24ChsStates);
+			
+			int Read_DinBoard_CHn_State(BYTE ucDinBoardID, DIGITAL_IN_CHm eDinChn);
+			void Read_DinBoard_24Chs_State(BYTE ucDinBoardID, char *sARGOUT_24ChsStates);			
+        
+		#endif  /*  FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO  */
 
 
 #endif	/*    _DIGITAL_IN_H    */
