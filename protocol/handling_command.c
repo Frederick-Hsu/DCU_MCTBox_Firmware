@@ -17,6 +17,7 @@
 #include "handling_Switch_Relay_Control_cmd.h"
 #include "handling_ADC_DAC_cmd.h"
 #include "handling_DIO_cmd.h"
+#include "handling_FIN_cmd.h"
 #include "handling_PWM_cmd.h"
 #include "handling_System_cmd.h"
 #include "../utility.h"
@@ -240,10 +241,10 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 {
 	int iError = 0;
 
-	unsigned int uiLen 				= strlen(sDIN_cmd_Mesg),
-		     uiPosOfCmdSeparator_Semicolon 	= strcspn(sDIN_cmd_Mesg, ";"),
-		     uiPosOfCmdSeparator_Qmark 		= strcspn(sDIN_cmd_Mesg, "?"),
-		     uiPosOfStar 			= strcspn(sDIN_cmd_Mesg, "*");
+	unsigned int uiLen 							= strlen(sDIN_cmd_Mesg),
+		     	 uiPosOfCmdSeparator_Semicolon 	= strcspn(sDIN_cmd_Mesg, ";"),
+		     	 uiPosOfCmdSeparator_Qmark 		= strcspn(sDIN_cmd_Mesg, "?"),
+		     	 uiPosOfStar 					= strcspn(sDIN_cmd_Mesg, "*");
 
 	char sDIN_CHnStateResponse[256] = {0}, sDinCmdResponse[256] = {0};
 
@@ -258,11 +259,11 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 	}
 	else if (uiPosOfCmdSeparator_Semicolon != uiLen)
 	{
-	        iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+		iError = handling_MultiCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
 	else
 	{
-	        iError = handling_SingleCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
+		iError = handling_SingleCH_DIN_cmd(sDIN_cmd_Mesg, sDIN_CHnStateResponse);
 	}
 	if (iError)
 	{
@@ -276,6 +277,39 @@ int handling_DIN_cmd(char* sDIN_cmd_Mesg)
 
 /***************************/
 	return iError;
+}
+
+int handling_FIN_cmd(char *sFIN_cmd_Mesg)
+{
+	int iError = 0;
+	unsigned int uiLen 		  = strlen(sFIN_cmd_Mesg),
+				 uiPosOfColon = strcspn(sFIN_cmd_Mesg, ":"),
+				 uiPosOfQmark = strcspn(sFIN_cmd_Mesg, "?"),
+				 uiPosOfStar  = strcspn(sFIN_cmd_Mesg, "*");
+	char sFIN_CHnStateResponse[128] = {0}, sFINCmdResponse[128] = {0};
+	
+	if (uiPosOfQmark == uiLen)
+	{
+		g_iErrorCodeNo = -13;
+		return g_iErrorCodeNo;
+	}
+	if (uiPosOfStar != uiLen)
+		iError = handling_1GroupOfChs_FIN_cmd(sFIN_cmd_Mesg, sFIN_CHnStateResponse);
+	else
+		iError = handling_SingleCH_FIN_cmd(sFIN_cmd_Mesg, sFIN_CHnStateResponse);
+	if (iError)
+	{
+		g_iErrorCodeNo = iError;
+		return iError;
+	}
+	sprintf(sFINCmdResponse, "$%s!", sFIN_CHnStateResponse);
+	
+	#if !defined (FW_SIMULATION_TESTING_BASED_ON_VISUAL_STUDIO)
+		UARTD2_SendData(sFINCmdResponse, strlen(sFINCmdResponse));
+	#endif
+	
+/***************************/
+	return iError;	
 }
 
 int handling_DOUT_cmd(char* sDOUT_cmd_Mesg)

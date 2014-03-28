@@ -46,8 +46,11 @@ int main(int argc, char *argv[])
 										  // "$PWMO STOP:OUT1!";
                                           // "$ADC 2:VOLT?!";
                                           // "$SYSTem:ERR?!";
-										  "$DIN 0x02:12 STATe?!";
+										  // "$FIN 0x02:* STATe?!";
+										  "$FIN 0x02:12 STATe?!";
+										  // "$DIN 0x02:12 STATe?!";
 										  // "$DIN 0x02:* STATe?!";
+
         int iResult = 0;
 
 	iResult = Parse_UART2_Received_Message(sSimulationTestingCmdMesg);

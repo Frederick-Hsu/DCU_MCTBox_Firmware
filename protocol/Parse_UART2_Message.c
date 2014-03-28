@@ -118,6 +118,12 @@ int Parse_UART2_Received_Message(char *sMesg)
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
+		else if (strncmp(sAction_Catalog, "FIN", 3)==0)
+		{
+			iResult = handling_FIN_cmd(sTempSubString);
+			g_iErrorCodeNo = iResult;
+			return iResult;
+		}
 		else if (strncmp(sAction_Catalog, "DOUT", 4) == 0)	// Catalog : "Digital OUT" command
 		{
 			iResult = handling_DOUT_cmd(sTempSubString);
