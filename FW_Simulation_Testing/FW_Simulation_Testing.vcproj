@@ -198,6 +198,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\protocol\handling_FIN_cmd.c"
+				>
+			</File>
+			<File
+				RelativePath="..\protocol\handling_FIN_cmd.h"
+				>
+			</File>
+			<File
 				RelativePath="..\protocol\handling_PWM_cmd.c"
 				>
 			</File>
