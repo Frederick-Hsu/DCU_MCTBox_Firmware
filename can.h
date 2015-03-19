@@ -202,7 +202,7 @@ extern const UCHAR				gcCanGlbIniMacro[];
 /* Channel information */
 extern const UCHAR				gcCanChIniUse[];
 extern const USHORT				gcCanChIniInt[];
-extern const CAN_ChBpsInf			gcCanChIniBps[];
+extern const CAN_ChBpsInf		gcCanChIniBps[];
 extern const ULONG				gcCanChIniMask[][CAN_NUM_OF_MASK];
 extern const UCHAR				gcCanChDrvBufNoTop[];
 extern const UCHAR				gcCanChDrvBufNoSize[];

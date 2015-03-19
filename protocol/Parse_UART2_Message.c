@@ -136,7 +136,7 @@ int Parse_UART2_Received_Message(char *sMesg)
 		}
 		else if (strncmp(sAction_Catalog, "CAN", 3) == 0)	// Catalog : "CAN bus telegram" command
 		{
-			// iResult = handling_CAN_cmd(sTempSubString);
+			iResult = handling_CAN_cmd(sTempSubString);
 			g_iErrorCodeNo = iResult;
 			return iResult;
 		}
