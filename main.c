@@ -121,14 +121,18 @@ void  main(void)
 	ret = _rcopy(&_S_romp, -1);
 	pgHeapMemoryAddr = __sysheap;
 	
-	#if 0
-	for (i=0; i<50000; i++)
+	#if 1
+	for (i=0; i<1000000; i++)
 	{
 		NOP();
 	}
 	#endif
 	/* First of all, do system initialization */
 	SystemInit();
+	
+	#if defined (TEST_DEBUG_PURPOSE)
+		SetInitialState_TurnOffAllSwitches();
+	#endif	/* End   TEST_DEBUG_PURPOSE    */
 	
 	
 	#if defined (ENABLE_OCDM_DEBUG)
@@ -137,11 +141,7 @@ void  main(void)
 		Disable_OCDM();
 	#endif	
 	
-	#if defined (TEST_DEBUG_PURPOSE)
-		SetInitialState_TurnOffAllSwitches();
-		
-		SetInitialState_TurnOffAllSwitches();
-	#endif	/* End   TEST_DEBUG_PURPOSE    */
+	
 	
 	UARTD2_Start();		// Open the COM port, communicating with PC.
 	/*
@@ -166,9 +166,11 @@ void  main(void)
 
 	// Test_PWM_Out();	// Just test the PWM_Out function. Added by Xuzan@2013-07-31
 	
+	
 	/* Start user code. Do not edit comment generated here */
 	while (1) 
 	{
+		// Test_1Ch_ADC_Voltage_Measurement();
 		NOP();
 	}
 	/* End user code. Do not edit comment generated here */

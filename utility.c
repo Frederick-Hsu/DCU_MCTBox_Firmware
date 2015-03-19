@@ -173,9 +173,9 @@ int Convert_Hex_Char_To_Int(char cHexChar)
 	return iConvertedValue;
 }
 
-int Fetch_SegmentAttributesGroup_From_SeparatorStr(char 		StrWithSeparator[], 
-						   const char 		cSeparator[], 
-						   struct Attribute 	stAttrGroup[])
+int Fetch_SegmentAttributesGroup_From_SeparatorStr(char 				StrWithSeparator[], 
+						   						   const char 			cSeparator[], 
+												   struct Attribute 	stAttrGroup[])
 {
 	int iError = 0, iCnt = 0;
 	unsigned int uiLen = strlen(StrWithSeparator),
@@ -246,9 +246,9 @@ struct Attribute Parsing_Attribute_Segment(char sAttributeSegment[])
 }
 
 #if defined (EXPERIMENT_DEBUG_PURPOSE)
-	void Experiment_FetchSegmentAttributeGroup(char 		StrWithSeparator[], 
-						   const char 		cSeparator[],
-						   PAttributeList 	pAttrList)
+	void Experiment_FetchSegmentAttributeGroup(char 			StrWithSeparator[],
+											   const char 		cSeparator[],
+											   PAttributeList 	pAttrList)
 	{
 		unsigned int uiLen = strlen(StrWithSeparator),
 			     uiPosOfSeparator = strcspn(StrWithSeparator, cSeparator);
