@@ -29,6 +29,7 @@
 
 	void SetInitialState_TurnOffAllSwitches(void)
 	{
+		int i = 0;
 		CS0 = LOW;
 		RW = HIGH;
 		
@@ -38,16 +39,26 @@
 		ENDA = HIGH;
 		ENAD = LOW;
 		
-		Write_Address_Bus(0x01);
-		Write_All_DataBus(0x00000000);
+		for (i=0x00; i<=0xFF; i++)
+		{
+			Write_Address_Bus(i);
+			Write_All_DataBus(0x00000000);
+		}
 		
 		/*
 		 * At last, you should disable the Address selector chip 74ALS520.
 		 * In order to keep the current state of switches.
 		 */
-		NOP();
-		NOP();
-		NOP();
+		for (i=0; i<100; i++)
+		{
+			NOP();
+			NOP();
+			NOP();
+			NOP();
+			NOP();
+			NOP();
+			NOP();
+		}
 		CS0 = HIGH;
 		
 		return;
@@ -166,7 +177,7 @@
 	
 	void Test_1Ch_ADC_Voltage_Measurement(void)
 	{
-		int iADC_CHn = 0;
+		int iADC_CHn = 1;
 		int iAdcCntValue = 0;
 		float fVoltage = 0.0000f;
 		
