@@ -11,7 +11,7 @@ File name       : Reame
 Purpose         : To describe this project.
 Author          : XU ZAN
 Creation date   : Sat.	Oct. 20, 2012
-Copyright(C)    2010 --- 2012    Hella (Shanghai) Electronics Co., Ltd.
+Copyright(C)    2010 --- 2015
 All rights reserved.
 *******************************************************************************
 
@@ -41,10 +41,8 @@ Project description	    :
     (8).  DAC driving, to output the DC voltage(on demand) to DUT circuit;
     (9).  PWM waveform output,  PWM stimulus output to DUT circuit;
 
-	
-Project develop leader  : Henry Xing
-Hardware designer       : Henry Xing,   Neil Wu
-Software developer      : Xu Zan
+
+Software developer      : Frédérick Hsu
 
 /*============================================================================*/
 
