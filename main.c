@@ -186,7 +186,6 @@ void  main(void)
 	
 	while (1) 
 	{
-		// Test_1Ch_ADC_Voltage_Measurement();
 		NOP();
 	}
 	/* End user code. Do not edit comment generated here */
