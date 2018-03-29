@@ -373,6 +373,23 @@ int handling_PWM_cmd(char* sPWM_cmd_Mesg)
 int handling_CAN_cmd(char* sCAN_cmd_Mesg)
 {
 	int iResult = 0;
+	
+	ToUpperString(sCAN_cmd_Mesg);
+	if (strncmp(sCAN_cmd_Mesg, "CAN SET", 7) == 0)
+	{
+		iResult = handling_CANWrite_cmd(sCAN_cmd_Mesg);
+	}
+    /*
+	else if (strncmp(sCAN_cmd_Mesg, "CAN GET", 7) == 0)
+	{
+		iResult = handling_CANRead_cmd(sCAN_cmd_Mesg);
+	}
+     */
+	else
+	{
+		g_iErrorCodeNo = -44;
+		return g_iErrorCodeNo;
+	}
 
 	return iResult;
 }

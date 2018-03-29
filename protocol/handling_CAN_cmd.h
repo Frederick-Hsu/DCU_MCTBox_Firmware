@@ -12,6 +12,10 @@
 #ifndef HANDLING_CAN_CMD_H
 #define HANDLING_CAN_CMD_H
 
+	int handling_CANWrite_cmd(char *sARGIN_CanWriteMesg);
+	int handling_CANRead_cmd(char *sARGIN_CanReadMesg);
+	
+	int Parse_CAN_Data(char sRawCanData[], unsigned char *sParsedCanData);
 
 #endif	/*  HANDLING_CAN_CMD_H  */
 
