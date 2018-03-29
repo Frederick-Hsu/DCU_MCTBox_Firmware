@@ -19,6 +19,7 @@
 *.sdf
 *.old
 *.xcuserstate
+*.jpg
 
 FW_Simulation_Testing/UpgradeLog.XML
 FW_Simulation_Testing/FW_Simulation_Testing.sdf
