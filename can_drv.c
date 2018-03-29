@@ -734,6 +734,7 @@ MD_STATUS CanMsgSetDat(SCHAR chno, UCHAR bufno, UCHAR* p_data)
 MD_STATUS CanMsgSetIdDatDlc(SCHAR chno, UCHAR bufno, ULONG canid, UCHAR* p_data, SCHAR dlc)
 {
 	MD_STATUS status = MD_OK;
+	USHORT dataid;
 
 	/* Check channel No Max/Min */
 	if ((chno < 0) || (chno >= CAN_NUM_OF_CH)) 
@@ -785,8 +786,11 @@ MD_STATUS CanMsgSetIdDatDlc(SCHAR chno, UCHAR bufno, ULONG canid, UCHAR* p_data,
 				else
 				{
 					/* Set CAN id */
-					pMsgRegTypeBuf->MIDH = (USHORT)((canid & MSK_CANIDH) >> 16);
-					pMsgRegTypeBuf->MIDL = (USHORT)(canid & MSK_CANIDL);
+//					pMsgRegTypeBuf->MIDH = (USHORT)((canid & MSK_CANIDH) >> 16);
+//					pMsgRegTypeBuf->MIDL = (USHORT)(canid & MSK_CANIDL);
+					dataid = (USHORT)(canid << 2);
+					pMsgRegTypeBuf->MIDH = dataid;
+					pMsgRegTypeBuf->MIDL = 0x0000;
 
 					{
 						SCHAR	dlc_msk;

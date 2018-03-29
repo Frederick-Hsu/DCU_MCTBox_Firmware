@@ -105,6 +105,24 @@ __interrupt void MD_INTC0TRX(void)
 __interrupt void MD_INTC0REC(void)
 {
 	/* Start user code. Do not edit comment generated here */
+	USHORT canid = 0;
+	UCHAR candata[8] = {0x00};
+	SCHAR len = 0;
+    UCHAR canTelegram[64] = {0x00};
+    UCHAR canMesg[17] = {0x00};
+    int index = 0;
+    UCHAR mesg[3] = {0x00};
+    
+	CAN0_MsgGetIdDataDlc(6, &canid, candata, &len);
+	canid = canid & 0x000007FF;
+    
+    for (index = 0; index < len; index++)
+    {
+        sprintf(mesg, "%02X", candata[index]);
+        strcat(canMesg, mesg);
+    }
+    sprintf(canTelegram, "$CAN GET:0x%04X 0x%s!", canid, canMesg);
+    UARTD2_SendData(canTelegram, strlen(canTelegram));
 	/* End user code. Do not edit comment generated here */
 }
 

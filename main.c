@@ -112,6 +112,9 @@ void  main(void)
 */
 {
 	long i = 0, j = 0;
+	UCHAR canData1[]={0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x31};
+	UCHAR canData2[]={0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x32};
+	UCHAR canData3[]={0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x33};	
 	
 	/*
 	 * Heap memory initialization at the beginnig of program.
@@ -168,6 +171,19 @@ void  main(void)
 	
 	
 	/* Start user code. Do not edit comment generated here */
+	
+	PM4.1=0;
+	PM4.2=0;
+	P4.1 = 1;
+	P4.2 = 1;
+	CAN0_Enable();
+	CAN0_SetNormalMode();
+	C0MASK1H = 0x1fff;
+	C0MASK1L = 0xffff;
+	
+	CAN0_MsgSetIdDataDlc(1, 0x0002, canData1, 8);
+	CAN0_MsgTxReq(1);
+	
 	while (1) 
 	{
 		// Test_1Ch_ADC_Voltage_Measurement();

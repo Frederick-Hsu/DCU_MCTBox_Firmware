@@ -68,7 +68,7 @@ const CAN_RegBaseAddr	gcCanRegBaseAddr[CAN_NUM_OF_CH] = {
  /* Information of CAN macro (Global) */
 const UCHAR		gcCanGlbIniMacro[CAN_NUM_OF_CH] = {
 	/* Channel 0 */
-	0x06,
+	0x00,
 	/* Channel 1 */
 	0x00
 };
@@ -119,7 +119,7 @@ const CAN_ChBpsInf		gcCanChIniBps[CAN_NUM_OF_USED_CH] = {
 		/* CnBRP */
 		0x01,
 		/* CnBTR */
-		0x330A
+		0x0706
 	}
 };
 /* Information of mask setting */
@@ -147,7 +147,7 @@ const UCHAR		gcCanChDrvBufNoTop[CAN_NUM_OF_USED_CH] = {
 /* Management number of CAN message buffer (each channel) */
 const UCHAR		gcCanChDrvBufNoSize[CAN_NUM_OF_USED_CH] = {
 	/* Channel 0 */
-	3
+	2
 };
 
 /* Total number of CAN message buffer (each channel) */
@@ -161,47 +161,39 @@ const UCHAR		gcCanChNumOfCanBuf[CAN_NUM_OF_USED_CH] = {
  */
 
 /* Total number of using CAN message buffer */
-#define	CAN_NUM_OF_DRVBUF	3
+#define	CAN_NUM_OF_DRVBUF	2
 
 /* Information of CAN message buffer initial attribute1(Send/Receive, Frame type, overwrite) */
 const UCHAR		gcCanBufIniAtr1[CAN_NUM_OF_DRVBUF] = {
 	/*- CAN message buffer management number = 0 */
 	CAN_INIMSG_ADDRTYP_USE | CAN_INIMSG_MSGTYP_TX | CAN_INIMSG_FRMTYP_DAT,
 	/*- CAN message buffer management number = 1 */
-	CAN_INIMSG_ADDRTYP_USE | CAN_INIMSG_MSGTYP_RX | CAN_INIMSG_FRMTYP_DAT | CAN_INIMSG_OVRWRT,
-	/*- CAN message buffer management number = 2 */
-	CAN_INIMSG_ADDRTYP_USE | CAN_INIMSG_MSGTYP_RX | CAN_INIMSG_FRMTYP_DAT | CAN_INIMSG_OVRWRT
+	CAN_INIMSG_ADDRTYP_USE | CAN_INIMSG_MSGTYP_MSK1 | CAN_INIMSG_FRMTYP_DAT | CAN_INIMSG_OVRWRT
 };
 
 /* Information of CAN message buffer initial attribute2(DLC, CAN channel No., Interrupt) */
 const UCHAR		gcCanBufIniAtr2[CAN_NUM_OF_DRVBUF] = {
 	/*- CAN message buffer management number = 0 */
-	0x08 | 0x00,
+	0x08 | 0x00 | CAN_INIMSG_IE,
 	/*- CAN message buffer management number = 1 */
-	0x00 | 0x00 | CAN_INIMSG_IE,
-	/*- CAN message buffer management number = 2 */
-	0x00 | 0x00
+	0x00 | 0x00 | CAN_INIMSG_IE
 };
 
 /* Information of CAN message buffer number */
 const UCHAR		gcCanBufIniBufno[CAN_NUM_OF_DRVBUF] = {
 /* Channel 0 */
 	/*- CAN message buffer management number = 0 */
-	17,
+	1,
 	/*- CAN message buffer management number = 1 */
-	8,
-	/*- CAN message buffer management number = 2 */
-	31
+	6
 };
 
 /* Information of CAN-ID setting */
 const ULONG		gcCanBufIniCanId[CAN_NUM_OF_DRVBUF] = {
 	/*- CAN message buffer management number = 0 */
-	0x0000000,
+	0x0040000,
 	/*- CAN message buffer management number = 1 */
-	0x2240000,
-	/*- CAN message buffer management number = 2 */
-	0x0000000
+	0x0180000
 };
 /* Start user code for global definition. Do not edit comment generated here */
 /* End user code for global definition. Do not edit comment generated here */
@@ -236,17 +228,9 @@ void CAN0_Init(void)
 	C0WUPIC |= 0x07;
 	C0WUPMK = 0;	/* INTC0WUP enable */
 
-	/* Set INTC0ERR lowest priority */
-	C0ERRIC |= 0x07;
-	C0ERRMK = 0;	/* INTC0ERR enable */
-
 	/* Set INTC0REC lowest priority */
 	C0RECIC |= 0x07;
 	C0RECMK = 0;	/* INTC0REC enable */
-
-	/* Set INTC0TRX lowest priority */
-	C0TRXIC |= 0x07;
-	C0TRXMK = 0;	/* INTC0TRX enable */
 	ISEL25 = 0;	/* select fXP1 as CAN0 clock */
 
 	/* CAN0 CRXD0_P34 pin set */
